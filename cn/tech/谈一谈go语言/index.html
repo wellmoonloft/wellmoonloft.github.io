@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo,Typora,政治" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <title>谈一谈Go语言 | 井说杂谈</title>
+  <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/images/jing-min.jpeg">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/images/jing-min.jpeg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/fancy-min-3.5.2.css" rel="stylesheet">
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancy-min-3.5.2.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R4XRTRGM56');
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="井说杂谈" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/images/jing-min.jpeg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">技术</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/tags/"><a href="/tags/">标签</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  <!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">谈一谈Go语言</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2019-03-12 13:36:57
+      </span>
+      <span class="post-count">约4.1k字</span>
+      <span class="post-count">约14分钟</span>        
+      <span class="post-tags">
+        <i class="iconfont icon-tags" title="标签"></i>
+        <span class="span--tag"><a href="/tags/Golang/" title="Golang"><b>#</b> Golang</a></span>
+      </span>
+      </div>
+      <div class="markdown-body"><h2 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h2><p>连续吃了两个月的非布，以为自己躲过了尿酸急剧下降的融晶痛，没想到该来的还是回来，膝盖滑膜四个点集体溶解诱发滑膜炎，卧床在家。今天终于能坐起来了，就来谈一谈Golang，国内习惯叫Go语言。</p>
+<blockquote>
+<p>本语言的名字是 Go ；“golang”来自于其 web 站点网址（go.com 在当时已是一个迪士尼 web 站点地址。），并不是该语言的正确名字。</p>
+</blockquote>
+<p>Go语言号称是“<strong>21世纪</strong>的<strong>C语言</strong>”还是有一定道理的，首先看看Go语言的三个大神级的核心开发人员 Rob Pike，Robert Griesemer 和 Ken Thompson 设计出了Go语言，其语言定位为系统编程语言。</p>
+<blockquote>
+<p>Rob Pike，一直以肯大爷为自己的导师的非主流程序员，曾在1980年参加奥运会射箭项目获得银牌，又上过电视参加大卫莱特曼的电视节目《Late Night with David Letterman》，参与开发Unix，又和肯大爷一起开发了UTF-8，在数据结构学方面是全世界工程师的导师，同时他是一个所谓的“全栈工程师”，从操作系统到编译器，又从文本编辑器写到UI界面，再同时，他的老婆（Renee French一名知名的插画师）亲自设计了Go语言的吉祥物Gordon。</p>
+<p>写到这里不得不思考国内的教育与国外的教育，固定的思维要求你一生择一事，而国外的大神都是多领域发展的，到底…哪个对？有些迷茫。</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/03/29/CtF32DYbcGhXP7Z.png"></p>
+<blockquote>
+<p>Robert Griesemer，Google的工程师，和Rob Pike一起开发Sawzall语言，同时同时参与开发Google’s V8 JS引擎和Chubby。</p>
+</blockquote>
+<blockquote>
+<p>Ken Thompson，肯大爷早在1983年就获得了图灵奖，Unix的开发者之一，同时开发了B语言以及C语言，你知道，一般简历很短的人说明他实在太牛逼了。</p>
+</blockquote>
+<h2 id="Go语言的产生"><a href="#Go语言的产生" class="headerlink" title="Go语言的产生"></a>Go语言的产生</h2><p>据Rob Pike在旧金山的演讲稿中所述，在2007年的时候Rob Pike为了Google庞大的C++程序做一些比较琐碎但是核心的工作，由于C++的厚重导致在Google庞大的分布式编译集群上都需要花45分钟。</p>
+<p>Rob Pike认为，<strong>C++的特性太多了，简化这门语言必是一门更大的成就</strong>，于是Rob Pike和Robert Griesemer讨论，进行C++的优化，他们找到肯大爷，并且说服他一起做一些事情，他们要创造一门新的开发语言，不想再使用C++了。</p>
+<p>Rob Pike在开车回家的路上一直在思考，于是他给肯大爷和Robert Griesemer写了一封邮件描述了Go的命名和方法：</p>
+<p><img src="https://i.loli.net/2021/03/29/Vi5EyNr6An3qPhU.png"></p>
+<blockquote>
+<p><strong>Robert：以C语言为原型</strong>，修补部分明显的缺陷，去掉垃圾功能，添加一些缺失的功能。<br><strong>Rob：命名为“Go”</strong>，好处有很多，这名字非常简短，容易拼写。工具可以叫做：goc、gol、goa。如果有可交互的调试器/解释器也可以简单地叫它“Go”，后缀名用 .go。<br><strong>Robert：定义空接口语法：interface{}。</strong>所有接口都通过这个实现，因此可以用它代替void*。</p>
+</blockquote>
+<p>在演讲稿中Rob Pike也提到，虽然Go语言是以C为原型，以C++为目标设计，但是并没有太多C++程序员转为Go语言开发，实际上大部分Go程序员都是从Python和Ruby转过来的，其中却少有C++程序员，他认为可能Go和C++的设计里面相差太大，C++希望所有解决方案都能很容易得到，这种思考方式和Go的运转方式并不一样。零成本不是目标，至少零CPU成本不是。<strong>Go的目标是解放程序员。</strong></p>
+<p>Go并没有包罗万象，你不要期待它什么都有，你也无法精确地控制每一个细节。例如：Go没有RAII，但是你可以使用一个垃圾清理器做替代，虽然你甚至无法使用内存释放函数。</p>
+<p>你可以从Go中得到很多易于理解但是强大的工具集来组合出问题的解决方案。它跟别的语言比起来也许没有那么快或者精致，但肯定写起来更简单、读起来更容易，也更易于理解，也许还更安全。</p>
+<p>从另一个角度看，Go肯定更加简化：</p>
+<p>Python和Ruby程序员转向Go是因为他们不需要学更多的关心却可以获得更好的性能，甚至还可以使用并发特性。</p>
+<p><strong>C++程序员不愿意转向Go是因为他们竭尽全力只为了对自己的程序的完全掌控，并不希望这样改变。对于他们，软件并不仅是完成工作，而是做好工作。而对于使用脚本语言的人来讲，重点在实现和创造，这就是为什么。</strong></p>
+<h2 id="Go语言的优势"><a href="#Go语言的优势" class="headerlink" title="Go语言的优势"></a>Go语言的优势</h2><p>首先说Go 语言是充分利用现代硬件性能又兼顾开发效率而设计的一种全新语言， 是一种跨平台（Mac OS、Windows、Linux 等）<strong>静态编译型语言</strong>。同时兼顾C++的强大性能和脚本语言的开发效率，根据Go语言的使用者调查发现，目前世界上使用Go语言最多的地区居然是中国，可能也跟中国市场越来越大有关系。</p>
+<p>Go语言生来就是做大型项目的，当前 Go 语言主要应用于<strong>后端服务的开发</strong>，未来随着 Go 项目的完善，在<strong>系统、游戏、UI界面、AI、物联网等领域</strong>，都将被广泛使用。越来越多的人使用Go语言替代脚本语言，同时在游戏服务器方面使用Go语言替代沉重的C++。由于Go语言与生俱来的<strong>高并发特性</strong>，关于<strong>区块链</strong>的研究大多都是使用Go语言，就好像研究爬虫大部分在使用Python一样。</p>
+<p>对我一个万年Java狗而言，近期在WEB开发上遇到瓶颈，虽然Spring Boot2+Spring Cloud+Docker解决了我快速开发快速部署的难题，但是，由于公司信息化成本缩水严重（每个非互联网公司的信息部都会遇到的问题）、<strong>现有设备陈旧、系统不可扩展、信息孤岛严重等等问题</strong>，导致我必须寻找一个<strong>最大限度压榨硬件设备</strong>、同时<strong>轻量化</strong>的语言<strong>进行系统重构</strong>。</p>
+<p>这时候Go语言跳了出来，为什么一门系统语言不能拿来做WEB应用呢？因为脚本语言及微服务的发展，越来越多的轻量模块+restful API进行前后台分离，那么<strong>开发支持rest的API不就是Go的天然优势领域</strong>吗？至于前后台的数据交换方面，Go语言的模版引擎也不比主流的freemarker要差。</p>
+<p>阿里云的云栖社区上面有一个讨论，比较了Go语言和Java对系统的消耗，可以看下图的结果。</p>
+<p><img src="https://i.loli.net/2021/03/29/gx1Xn3CrMcLGApd.png"></p>
+<p>Go的优势很多，我只是对比Java，实际上Go基于C语言并融合了各类语言优秀的特性，同时进行了极大程度的简化。我们来看几个特性Java和Go的对比来说明：</p>
+<h3 id="启动速度"><a href="#启动速度" class="headerlink" title="启动速度"></a>启动速度</h3><p>这个理论上并不是在比语言，而是web容器。Go语言由于是直接打包成二进制可执行文件，它的启动是系统层面的启动，和业内的容器来比根本不需要数据支撑，用肉眼就能看出来。</p>
+<h3 id="多线程与协程"><a href="#多线程与协程" class="headerlink" title="多线程与协程"></a>多线程与协程</h3><p>由于现代硬件CPU的性能溢出，并发编程的意义不言而喻。当然，很多语言都支持多线程、多进程编程，但遗憾的是，实现和控制起来并不是那么令人感觉轻松和愉悦。Go语言不同的是，语言级别支持协程(goroutine)并发（协程又称微线程，比线程更轻量、开销更小，性能更高），操作起来非常简单，语言级别提供关键字（go）用于启动协程，并且在同一台机器上可以启动成千上万个协程。</p>
+<p><strong>Java开线程</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    String arg;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread</span> <span class="params">(String a)</span></span>&#123;</span><br><span class="line">        arg = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> MyThread(<span class="string">&quot;Thread1&quot;</span>)).start();</span><br><span class="line">        <span class="comment">//Thread2...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Go开协程</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">run</span> <span class="params">(arg <span class="keyword">string</span>)</span></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">go</span> run(<span class="string">&quot;Goroutine1&quot;</span>)</span><br><span class="line">    <span class="comment">//Thread2...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="消息通信"><a href="#消息通信" class="headerlink" title="消息通信"></a>消息通信</h3><p>Go语言全新的消息通通信组件（姑且叫做组件吧）叫做Channel（<strong>这个真的读拆哪哦，不读奢奈哦</strong>），在GO语言中，使用基于消息传递的通信方式（而不是大多数语言所使用的基于共享内存的通信方式）进行协程间通信，并且将消息管道(channel)作为基本的数据类型，使用类型关键字(chan)进行定义，并发操作时线程安全。这点在语言的实现上，也具有革命性。</p>
+<p>同时Channel并不仅仅只是用于简单的消息通信，还可以引申出很多非常实用，而实现起来又非常方便的功能。比如，实现通过chan类型实现redis连接池、TCP连接池、限流等等，而这些在其它语言中实现起来并不轻松，但GO语言可以轻易做到。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    pool := <span class="built_in">make</span>(<span class="keyword">chan</span> redis.Conn, <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> i:= <span class="number">0</span>; i&lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        pool&lt;-redis.Detail(...)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="去掉万恶的try…catch"><a href="#去掉万恶的try…catch" class="headerlink" title="去掉万恶的try…catch"></a>去掉万恶的try…catch</h3><p>但凡是用Java开发的人，莫不吐槽万恶的try…catch，恶心、臃肿、但又不得不写。Go语言将错误类型(error)作为基本的数据类型，并且在语言级别不再支持try…catch的用法，这应该算是一个非常大胆的革命性创举，也难怪很多人吐槽GO语言不伦不类。但是跳出传统的观念，GO的开发者认为在编程过程中，要保证程序的健壮性和稳定性，对异常的精确化处理是非常重要的，只有在每一个逻辑处理完成后，明确的告知上层调用，是否有异常，并由上层调用明确、及时的对异常进行处理，这样才可以高程度的保证程序的健壮性和稳定性。下面这个例子出现了几个特性：</p>
+<ul>
+<li>指针</li>
+<li>error作为返回值输出</li>
+<li>动态参数</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tx *Tx)</span> <span class="title">Query</span><span class="params">(query <span class="keyword">string</span>, ...inferface&#123;&#125;)</span> <span class="params">(*Rows, error)</span></span>&#123;</span><br><span class="line">    retrun tx.QueryContext(..., query, arys...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="函数拥有多个返回值"><a href="#函数拥有多个返回值" class="headerlink" title="函数拥有多个返回值"></a>函数拥有多个返回值</h3><p>在Java里面我们写函数要进行<code>return</code>的时候，如果涉及到多个值，往往需要封装到Map里面，这一点上Go借鉴了Python等语言，支持多个返回值，同时由于加入匿名函数，让整个调用过程妙不可言。下面这个例子出现了几个特性：</p>
+<ul>
+<li>多个返回值</li>
+<li>简化等待变量类型声明</li>
+<li>返回值直接进行变量声明</li>
+<li>简化的变量声明和赋值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetServerInfo</span> <span class="params">()</span> <span class="params">(svrIp, svrName, svrDNS <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;svrIp&quot;</span>, <span class="string">&quot;svrName&quot;</span>, <span class="string">&quot;svrDNS&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">svrIp, svrName, svrDNS := GetServerInfo()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="高性能的HTTPServer"><a href="#高性能的HTTPServer" class="headerlink" title="高性能的HTTPServer"></a>高性能的HTTPServer</h3><p>作为出现在互联网时代的服务端语言，面向用户服务的能力必不可少。GO在语言级别自带HTTP/TCP/UDP高性能服务器，基于协程并发，为业务开发提供最直接有效的能力支持。要在GO语言中实现一个高性能的HTTP Server，只需要几行代码即可完成，非常简单，启动速度秒杀其他WEB容器，同时维护成本极低，没有任何外部依赖。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span>&#123;</span><br><span class="line">        io.WriteString(w, <span class="string">&quot;Hello, World.&quot;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    http.ListenAndServe(<span class="string">&quot;:8080&quot;</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="强制编程规范"><a href="#强制编程规范" class="headerlink" title="强制编程规范"></a>强制编程规范</h3><p>GO语言的编程规范强制集成在语言中，比如明确规定花括号摆放位置，强制要求一行一句，不允许导入没有使用的包，不允许定义没有使用的变量，提供gofmt工具强制格式化代码等等。</p>
+<p>这一点对于一些程序猿来讲非常不满，有人发表GO语言的N条罪状，里面就不乏对编程规范的指责。但是对我而言或是从工程管理的角度，任何一个开发团队都会对特定语言制定特定的编程规范，特别像Google这样的公司，更是如此。GO的设计者们认为，与其将规范写在文档里，还不如强制集成在语言里，这样更直接，更有利用团队协作和工程管理。</p>
+<p>岁数大了就不喜欢各式各样的飘逸写法，与其遵守一个公开的文档，不如直接给我报错来得直接，举个例子，在Go语言里面如果你<code>import</code>某个包，或者声明了某个变量，<strong>但是在后续没有使用，Go在编译时会直接报错</strong>，挺好的。</p>
+<p><img src="https://i.loli.net/2021/03/29/12y87LUNrR5iSzd.png"></p>
+<h2 id="Mac-OS中安装和使用Go语言"><a href="#Mac-OS中安装和使用Go语言" class="headerlink" title="Mac OS中安装和使用Go语言"></a>Mac OS中安装和使用Go语言</h2><h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>在Mac OS中安装Go语言非常简单，直接去<a target="_blank" rel="noopener" href="https://golang.org/dl/">官网下载pkg包</a>就可以了，不过呢，由于一些众所周知的原因，这个网站经常的无法访问。但是下载地址倒是没有被墙，这里我放出最新v1.12版的<a target="_blank" rel="noopener" href="https://dl.google.com/go/go1.12.darwin-amd64.pkg">下载地址</a></p>
+<p>这里安装完毕是自动把环境变量配好的，不需要在额外修改配置文件了（除了GOBIN），此时已经可以进行Go的开发了，不过如果需要使用beego之类的第三方框架，在构建的时候还需要额外配置GOBIN的路径，使用<code>go version</code>查看当前版本，使用<code>go env</code>查看当前配置信息</p>
+<p><img src="https://i.loli.net/2021/03/29/twHXximDvWzR59o.png"></p>
+<h3 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h3><ol>
+<li><p>打开终端，<code>cd ~</code>进入主目录</p>
+</li>
+<li><p><code>ls -all</code>查看所有文件，看是否存在<code>.bash_profile</code>文件</p>
+</li>
+<li><p>如果不存在，则执行<code>touch .bash_profile</code>新建</p>
+</li>
+<li><p>如果存在，则执行<code>vi .bash_profile</code>打开进行编辑</p>
+</li>
+</ol>
+<p>在文件中添加如下参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export GOPATH&#x3D;&#x2F;Users&#x2F;xxxxx&#x2F;Go</span><br><span class="line">export GOBIN&#x3D;$GOPATH&#x2F;bin</span><br><span class="line">export PATH&#x3D;$PATH:$GOBIN</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>保存编辑，然后在执行<code>source ~/.bash_profile</code>，完成环境变量的配置</li>
+<li><code>go env</code>查看配置成功后的环境变量</li>
+</ol>
+<p><strong>PS：</strong>我的Mac OS环境配置完如果需要重启后仍然生效，必须重新执行<code>source ~/.bash_profile</code>，后来发现由于把终端变得好看点安装了zsh，所以系统默认加载的是<code> ~/.zshrc</code>文件，所以配置完环境变量之后，还需要在在<code>~/.zshrc</code>文件最后，增加一行<code>source ~/.bash_profile</code>这样就没问题了。</p>
+<h3 id="IDE的选择"><a href="#IDE的选择" class="headerlink" title="IDE的选择"></a>IDE的选择</h3><p>你会发现很多网上的文章，包括某些教程里面都一直在强调，Go语言是一门系统语言，所以在进行编程的时候要用记事本，要用vim，这样才更加专业。我不知道这些论点是否正确，我相信一定是真的有大神在用vim进行Go语言的编程，但是对于我来讲，选择一门便捷的编辑器是最快能实现项目的唯一渠道。</p>
+<p>支持Go语言的编辑器有很多，LiteIDE、VS Code、Sublime、Eclipse、Vim、GoLand等等，但是对于我需要进行WEB开发来讲，多种语言的高亮和提示是很重要的要求，对～没错，来怼我不专业吧。试用了Goland之后，有一些WEB模版不支持高亮，因此又转回了IDEA，其实应该这样说：</p>
+<p>如果你单纯用Go语言<strong>进行系统级的编程</strong>，那么可以<strong>选择LiteIDE、Vim</strong>；</p>
+<p>但是如果你像我一样使用Go语言<strong>进行WEB编程的话</strong>，建议你<strong>选择Eclipse和IDEA</strong>；</p>
+<h4 id="IDEA支持Go"><a href="#IDEA支持Go" class="headerlink" title="IDEA支持Go"></a>IDEA支持Go</h4><p>关于IDEA的安装和PJ这里就不再赘述，让IDEA支持Go语言非常简单，只需安装这两个插件即可</p>
+<p><strong>Go-对Go语言的支持以及设置</strong></p>
+<p><strong>Go Template-对Go语言的模版引擎的支持</strong></p>
+<p><img src="https://i.loli.net/2021/03/29/3sfkzRqDmyLGK7U.png"></p>
+<p>安装完毕后，就可以在<strong>Languages&amp;Frameworks</strong>里面进行相关配置，也可以直接创建Go项目了。</p>
+</div>
+      <div class="prev-or-next"></div>
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A5%94%E5%AD%90"><span class="toc-text">楔子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BA%A7%E7%94%9F"><span class="toc-text">Go语言的产生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">Go语言的优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6"><span class="toc-text">启动速度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%8D%8F%E7%A8%8B"><span class="toc-text">多线程与协程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1"><span class="toc-text">消息通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E6%8E%89%E4%B8%87%E6%81%B6%E7%9A%84try%E2%80%A6catch"><span class="toc-text">去掉万恶的try…catch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8B%A5%E6%9C%89%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">函数拥有多个返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84HTTPServer"><span class="toc-text">高性能的HTTPServer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83"><span class="toc-text">强制编程规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac-OS%E4%B8%AD%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8Go%E8%AF%AD%E8%A8%80"><span class="toc-text">Mac OS中安装和使用Go语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="toc-text">环境变量配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDE%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">IDE的选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IDEA%E6%94%AF%E6%8C%81Go"><span class="toc-text">IDEA支持Go</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="vcomments"></div>
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'mHgw3YbXtcTnEXgLbopbas3D-gzGzoHsz',
+      appKey: '9VXFCLVhgmg2HtPaPDS6RMWj',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2022</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee/en/">EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/search.js"></script>
+  </div>
+</body>
+</html>

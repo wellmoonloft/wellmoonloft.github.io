@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo,Typora,政治" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <title>谈一谈Docker应用 | 井说杂谈</title>
+  <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/images/jing-min.jpeg">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/images/jing-min.jpeg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/fancy-min-3.5.2.css" rel="stylesheet">
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancy-min-3.5.2.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R4XRTRGM56');
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="井说杂谈" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/images/jing-min.jpeg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">技术</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/tags/"><a href="/tags/">标签</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  <!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">谈一谈Docker应用</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2019-02-26 00:25:22
+      </span>
+      <span class="post-count">约3.9k字</span>
+      <span class="post-count">约14分钟</span>        
+      <span class="post-tags">
+        <i class="iconfont icon-tags" title="标签"></i>
+        <span class="span--tag"><a href="/tags/Docker/" title="Docker"><b>#</b> Docker</a></span>
+      </span>
+      </div>
+      <div class="markdown-body"><h2 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h2><p>第一次听说Docker这个名词是2014年左右，当时研究并不深入，而且在非互联网公司里面对新技术的引入和应用往往是滞后的（并不是不创新，而是处于安全及稳定性的考虑）。当时只是知道Docker最简单的说明是<strong>应用及虚拟化</strong>，国内的应用更是少之又少，镜像仓库也远没有现在这样成熟。</p>
+<p>不过我想推广缓慢的主要原因可能在于其他两个原因：</p>
+<ol>
+<li>当年企业级应用变更主流的讨论是<strong>SOA（面向服务的架构）</strong>，实际场景中大家都在研究<strong>Dubbo</strong>，微服务的概念虽然已经有了，拆分边界和应用案例并不清晰</li>
+<li><strong>Spring全家桶</strong>的入口<strong>Spring Boot</strong>刚刚面世，更不用说<strong>Spring Cloud</strong>了</li>
+</ol>
+<p>时过进迁，重新捡起技术之后发现<strong>Spring Boot 2.X</strong>已经强大到一逼，而<a target="_blank" rel="noopener" href="https://spring.io/">Spring的官网</a>已经非常明确而自豪的对外宣布，<strong>Java web</strong>工程未来的开发趋势，就是下面这张图<code>Build Anything | Coordinate Anything | Connect Everything</code>：</p>
+<p><img src="https://i.loli.net/2021/03/29/ZLe2r6KSB5CcGFj.png"></p>
+<p>未来已来，代码构建器除了简单的增删改查以外，通过模版引擎的应用，已经可以做到表单的配置和自动生成，<strong>机器人自动完成架构搭建和业务实现的时代还远吗？</strong>也许未来80%的开发人员都要下岗，谁知道呢？</p>
+<p>有点扯远了，说回Docker，我想理论知识尽量少说，百度上到处都是，而且还有各式各样的视频教程，这里单纯说一说Docker的应用以及最最最常用的命令。</p>
+<h2 id="Docker是什么"><a href="#Docker是什么" class="headerlink" title="Docker是什么"></a>Docker是什么</h2><p>这一段是从Docker官网抄的：</p>
+<blockquote>
+<p>Docker 使用 Google 公司推出的 <a target="_blank" rel="noopener" href="https://golang.org/">Go 语言</a> 进行开发实现，基于 Linux 内核的 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Cgroups">cgroup</a>，<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Linux_namespaces">namespace</a>，以及  <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Aufs">AUFS</a> 类的 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Union_mount">Union FS</a> 等技术，对进程进行封装隔离，属于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Operating-system-level_virtualization">操作系统层面的虚拟化技术</a>。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。最初实现是基于 <a target="_blank" rel="noopener" href="https://linuxcontainers.org/lxc/introduction/">LXC</a>，从 0.7 版本以后开始去除 LXC，转而使用自行开发的 <a target="_blank" rel="noopener" href="https://github.com/docker/libcontainer">libcontainer</a>，从 1.11 开始，则进一步演进为使用 <a target="_blank" rel="noopener" href="https://github.com/opencontainers/runc">runC</a> 和 <a target="_blank" rel="noopener" href="https://github.com/containerd/containerd">containerd</a>。</p>
+<p>Docker 在容器的基础上，进行了进一步的封装，从文件系统、网络互联到进程隔离等等，极大的简化了容器的创建和维护。使得 Docker 技术比虚拟机技术更为轻便、快捷。</p>
+</blockquote>
+<p>太复杂看不懂是不是？简单举例子说明，以往软件公司发布产品到客户方进行部署上线是什么样的流程？</p>
+<ol>
+<li>开发人员完成开发，打包提交测试</li>
+<li>测试人员搭测试环境进行测试，如果出现Bug则返回开发</li>
+<li>开发人员进行Bug验证，如果能够重现则修改Bug并重新提交测试</li>
+<li><strong>开发人员如果无法重现则需要跟测试人员沟通，确认排查环境因素（一般这个周期会很恐怖）</strong></li>
+<li>测试完毕后，开发人员进行打包发版，提交给现场实施人员</li>
+<li>实施人员拿到包<strong>进行UAT环境部署</strong>，部署后提交用户测试，如果出现Bug则返回给实施人员</li>
+<li>实施人员需要检查：用户操作<strong>、部署流程、UAT环境等因素</strong>，如果如不能解决，则返回给开发人员进行验证</li>
+<li>开发人员进行验证，如果能够重现则修改Bug，<strong>并重复步骤4、5、6</strong></li>
+<li>实施人员部署到生产环境，并进行最终测试，<strong>如果出现Bug则重复步骤7、8</strong></li>
+</ol>
+<p>可以看出，在整个软件上线的生命周期中，环境部署和环境不一致会造成很大的问题，Docker就完美的解决了这个问题，如果整个流程使用Docker的话，那么流程会大大简化，比如：</p>
+<ol>
+<li>开发人员完成开发，<strong>打成Docker镜像</strong>提交测试</li>
+<li>测试人员<strong>启动镜像</strong>进行测试，如果出现Bug则返回开发</li>
+<li>开发人员进行Bug验证，如果能够重现则修改Bug并重新提交测试（有了Docker之后，如果开发人员按照测试步骤进行操作，99%可以重现问题）</li>
+<li>测试完毕后，开发人员<strong>打成Docker镜像</strong>提交给现场实施人员</li>
+<li>实施人员<strong>启动镜像</strong>，用户进行UAT测试，如果出现Bug则返回给实施人员</li>
+<li>实施人员需要检查：用户操作（有了Docker之后，99%的问题是用户操作不当，或者是测试人员的测试用例覆盖不足），如果如不能解决，则返回给开发人员进行验证</li>
+<li>开发人员进行验证，如果能够重现则修改Bug，<strong>并重复步骤4、5、6</strong></li>
+<li>实施人员<strong>启动镜像</strong>，并进行最终测试，<strong>如果出现Bug则重复步骤7、8</strong></li>
+</ol>
+<p><strong>Docker对外的口号就是：一次打包，到处运行，且运行环境完全一致。</strong>当你完成开发后，你把Tomcat、Java环境和web应用打包成一个镜像进行封装，那么这个镜像可以到处复制，只要装有Docker的机器都可以提取镜像并<strong>直接运行和你打包的环境相同的一个应用，数据库、中间件、Web应用这些统统可以打成镜像。</strong></p>
+<p><strong>更为重要的一点，和传统虚拟机相比：</strong></p>
+<ol>
+<li>Docker的启动是秒级的</li>
+<li>Docker的磁盘使用是MB</li>
+<li>Docker的性能接近原生</li>
+<li>Docker的单机支持上千个容器</li>
+</ol>
+<p><img src="https://i.loli.net/2021/03/29/28bycMVKvPBLrga.png"></p>
+<h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><h4 id="在Mac-OS下安装Docker"><a href="#在Mac-OS下安装Docker" class="headerlink" title="在Mac OS下安装Docker"></a>在Mac OS下安装Docker</h4><p>在Mac OS下安装Docker异常简单，在<a target="_blank" rel="noopener" href="https://hub.docker.com/editions/community/docker-ce-desktop-mac">官网注册后</a>直接点击<code>Get Docker</code>下载安装文件即可。不过因为一些众所周知的原因，要想优雅的抽取镜像，还需要配置Registry mirrors</p>
+<p><code>https://registry.docker-cn.com</code></p>
+<h3 id="在CentOS下安装Docker"><a href="#在CentOS下安装Docker" class="headerlink" title="在CentOS下安装Docker"></a>在CentOS下安装Docker</h3><p>在CentOS下安装Docker同样简单，不过需要先判断内核版本，Docker 要求 CentOS 系统的内核版本高于 3.10 </p>
+<ol>
+<li>首先检查内核版本</li>
+</ol>
+<p>​    <code>uname -r</code></p>
+<ol start="2">
+<li><p>下载并安装，这里需要注意，在2017年3月之后，docker 在原来的基础上分为两个分支版本: Docker CE 和 Docker EE。Docker CE 即社区免费版，Docker EE 即企业版，强调安全，但需付费使用。</p>
+<p><strong>安装一些必要的系统工具， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的：</strong></p>
+<p><code>sudo yum install -y yum-utils device-mapper-persistent-data lvm2</code></p>
+<p><strong>因为一些总所周知的原因，需要设置国内的yum源:</strong></p>
+<p><code>sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</code></p>
+<p><strong>更新 yum 缓存：</strong></p>
+<p><code>sudo yum makecache fast</code></p>
+<p><strong>安装Docker：</strong></p>
+<p><code>sudo yum -y install docker-ce</code></p>
+<p><strong>启动 Docker 服务:</strong></p>
+<p><code>sudo systemctl start docker</code></p>
+</li>
+</ol>
+<h3 id="在Windows下安装Docker"><a href="#在Windows下安装Docker" class="headerlink" title="在Windows下安装Docker"></a>在Windows下安装Docker</h3><p>呵，呵呵，呵呵呵，呵呵呵，呵呵呵呵，呵呵呵呵呵</p>
+<h2 id="Docker的使用"><a href="#Docker的使用" class="headerlink" title="Docker的使用"></a>Docker的使用</h2><p>如果只是正常使用的话，需要了解的命令非常有限，最常用的就是下面五个</p>
+<h3 id="列出镜像列表"><a href="#列出镜像列表" class="headerlink" title="列出镜像列表"></a>列出镜像列表</h3><p>使用 <code>docker images</code> 来列出本地主机上的镜像</p>
+<p><img src="https://i.loli.net/2021/03/29/DXoevxYg5nIzsHV.png"></p>
+<h3 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h3><p>使用 <code>docker search [镜像名]</code> 命令来搜索镜像，比如搜索我打包的镜像</p>
+<p><img src="https://i.loli.net/2021/03/29/3COMXcNdfpHwqxP.png"></p>
+<p>搜索的时候可以<strong>直接搜索镜像名</strong>，也可以<strong>搜索作者名/镜像名</strong>，他会按STARS的数量进行排序，OFFICIAL说明是官方的镜像</p>
+<h3 id="获取一个新的镜像"><a href="#获取一个新的镜像" class="headerlink" title="获取一个新的镜像"></a>获取一个新的镜像</h3><p>使用<code> docker pull [镜像名]</code> 命令来获取镜像</p>
+<p><img src="https://i.loli.net/2021/03/29/pOnhMcTeA14EBWm.png"></p>
+<p>如果不带版本号，就会自动下载最新版本的镜像，或者如果你特别明确的知道镜像的名称，可以直接使用<code> docker run [镜像名]</code> 本次仓库没有这个镜像就会自动去pull</p>
+<h3 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h3><p>使用 <code>docker image rm [IMAGE ID]</code> 命令来删除镜像，比如删除上面获取的镜像</p>
+<p><img src="https://i.loli.net/2021/03/29/hcvfObHwu1yk5CV.png"></p>
+<h3 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h3><p>使用<code> docker run [镜像名]</code> 命令来启动镜像，<strong>这里不推荐直接使用</strong>，因为一般来说启动时需要配置宿主机和镜像之间的端口映射、磁盘映射，建议用<strong>Dockerfile</strong>来运行，放到Docker构建里面一起说</p>
+<h3 id="查看镜像运行状态"><a href="#查看镜像运行状态" class="headerlink" title="查看镜像运行状态"></a>查看镜像运行状态</h3><p>使用<code> docker stats</code> 命令来查看镜像运行状态</p>
+<p><img src="https://i.loli.net/2021/03/29/e8GLdaxsJ32AwFI.png"></p>
+<p>我这台云服务器是2C4G的，可以看出<strong>容器的运行非常精细化</strong>，毕竟穷啊！</p>
+<h2 id="Docker的构建"><a href="#Docker的构建" class="headerlink" title="Docker的构建"></a>Docker的构建</h2><h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><p>还是一句话，Dockerfile可以把它理解成一个Windows上的BAT文件（但实际上还是有区别的），可以看成是一组顺序执行的dockerfile配置语句，不过既然说Docker构建，还需要简单说一下Docker的构成，理论知识不说了，这样来理解，<strong>Docker的构成就像洋葱一样</strong>，一层包一层，核心是原始容器，它可以是空的，也可以是基本的Java环境，就像下面的图一样</p>
+<p><img src="https://i.loli.net/2021/03/29/PKHUgSfC1LsriIu.png"></p>
+<p>这样就引出了Dockerfile的第一个命令</p>
+<p><code>FROM</code>，指定基础镜像，比如可以写成<code>FROM java:8 </code>，这就是指定了基础镜像为java，且tag为8的版本，对应jdk为1.8</p>
+<p><code>EXPOSE</code>，指定镜像端口号，比如可以写成<code>EXPOSE 8080</code>，说明这个镜像对外的端口为8080</p>
+<p><code>VOLUME</code>，指定数据持久化的文件夹，<strong>这里应该高亮来说，docker镜像运行是像redis一样的，一旦镜像停止，里面发生的任何数据变化是不会保存的！！！因此需要指定一个文件夹，这个文件夹映射到宿主机上去，所有需要保存的数据都应该放在这个文件夹里面！！！</strong>这里可以写成<code>VOLUME /tmp</code>，因为Spring Boot使用的内嵌Tomcat容器的默认工作目录为/tmp</p>
+<p><code>ADD</code>，把指定路径的内容放到镜像的指定路径中，这个主要用于把打包的web文件扔到镜像的web容器里面，比如这句话<code>ADD jmall-admin.jar /app.jar</code>它会把我打包好的Spring Boot文件扔到容器的根目录里面并且重命名为app.jar</p>
+<p><code>RUN</code>，这个很容易理解，就是执行<strong>docker命令</strong>，对应上面的<code>docker run</code></p>
+<p><code>ENTRYPOINT</code>，指定镜像的默认入口，比如<code>ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]</code>，这个特别眼熟吧<code>java -jar /app.jar</code></p>
+<p>到这里，一个Dockerfile命令就写完了，大概长这个样子：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">FROM</span> <span class="string">java:8</span></span><br><span class="line"><span class="attr">EXPOSE</span> <span class="string">8080</span></span><br><span class="line"></span><br><span class="line"><span class="attr">VOLUME</span> <span class="string">/tmp</span></span><br><span class="line"><span class="attr">ADD</span> <span class="string">jmall-admin.jar /app.jar</span></span><br><span class="line"><span class="attr">RUN</span> <span class="string">bash -c &#x27;touch /app.jar&#x27;</span></span><br><span class="line"><span class="attr">ENTRYPOINT</span> <span class="string">[&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用Dockerfile"><a href="#使用Dockerfile" class="headerlink" title="使用Dockerfile"></a>使用Dockerfile</h3><p>使用Dockerfile非常简单，最省事的方法就是直接进入到Dockerfile同一层级的目录中直接运行命令<code>docker build</code>，创建完毕的镜像会直接放到你的本地仓库，可以使用<code>docker images</code>命令来查看</p>
+<p><img src="https://i.loli.net/2021/03/29/PoO5EUuRQJvCplS.png"></p>
+<h3 id="提交你的镜像"><a href="#提交你的镜像" class="headerlink" title="提交你的镜像"></a>提交你的镜像</h3><p>做好了镜像可以直接把镜像文件提交到私服或者docker hub上面去给其他人分享了，提交镜像也很简单，我是直接用IDEA进行的提交，如果在服务器上的话也可以用命令</p>
+<p>首先登陆docker hub</p>
+<p><code>docker login</code></p>
+<p>回车后会让你输入用户名和密码</p>
+<p>看到<code>Login Succeeded</code>的时候就可以进行提交了，<code>docker push wellmoonloft/jmall</code>这里需要注意，前面你的名字，要跟你登陆的用户名一致，并且，<strong>由于众所周知的原因…提交过程非常漫长</strong>，所以还是强烈的建议用工具提交吧，至少还有个进度条可以看。</p>
+<h3 id="把镜像保存成文件复制给别人"><a href="#把镜像保存成文件复制给别人" class="headerlink" title="把镜像保存成文件复制给别人"></a>把镜像保存成文件复制给别人</h3><p>有时候我们打包的镜像属于内部系统，不方便push到公网上，或者我们公司没有私服的情况下，要把镜像交给别人就需要保存成一个tar文件复制给别人，镜像保存也很简单，执行命令<code>docker save -o [要保存成的文件名] [要保存的镜像文件或者IMAGE ID]</code>，完成后会在你执行命令的路径下有一个tar包，这个包可以直接复制给别人用，需要注意的是如果是Cent OS或者Mac OS，注意路径的授权</p>
+<p><img src="https://i.loli.net/2021/03/29/ByGAtqai1nsXkrU.png"></p>
+<h3 id="把镜像导入本地仓库"><a href="#把镜像导入本地仓库" class="headerlink" title="把镜像导入本地仓库"></a>把镜像导入本地仓库</h3><p>收到别人给你的镜像tar文件不能直接使用，需要把它导入你本地的仓库，也很简单，执行命令<code>docker load &lt; [文件名]</code>，对应上面的文件就应该这样写<code>docker load &lt; jmall.tar</code></p>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><p>如果只是运行一个简单的单体应用，到这里就足够了，但是在生产中往往是多个应用一起合作完成一个系统的搭建，如果再加上负载均衡，可能要同时启动或者停止多个镜像，并且统一管理，在Docker里面有一个很好用的机制叫做Docker Compose来解决这个问题，这里需要引入两个熟悉的名词。</p>
+<ul>
+<li>服务 (<code>service</code>)：单一的容器镜像，可以是一个数据库、一个Web应用</li>
+<li>项目 (<code>project</code>)：由一组关联的应用容器（<code>service</code>）组成的一个完整业务单元</li>
+</ul>
+<p>不说概念，看实例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;2&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jmall-admin:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jmall/admin</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:8080&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">spring.profiles.active=dev</span></span><br><span class="line">  <span class="attr">jmall-db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jmall/mysql</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3306:3306&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>version: &#39;2&#39;</code>这个不是随便乱写的，这个版本是主机上安装的Docker Compose版本 </p>
+<p><code>services</code>是固定写法，说明下面的都是一个个的镜像</p>
+<p><code>jmall-admin</code>service的名字，对应下面<code>image</code>里面的镜像名</p>
+<p><code>ports</code>，在构建镜像的时候指定了镜像端口为8080，但是实际上直接<code>run</code>镜像的时候是无法访问的，因为<strong>并没有把镜像抛出的端口跟宿主机端口进行映射</strong>，这里就是把宿主机的8080跟镜像中的8080进行映射，当然如果不用Docker Compose也可以直接<code>docker run -p 8080:8080</code>进行映射</p>
+<p><code>environment</code>是强制变更Spring Boot配置文件的内容，这里我写的是指定开发环境</p>
+<h3 id="使用Docker-Compose"><a href="#使用Docker-Compose" class="headerlink" title="使用Docker Compose"></a>使用Docker Compose</h3><p>使用Dokcer Compose也很简单，进入Dokcer Compose同级路径，使用命令<code>docker-compose up</code>即可</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>技术进步真心是无止境的，而且是相互关联非常紧密的，微服务如果没有Spring Boot、没有Docker、没有Dubbo、没有Zookeeper、没有Redis这些技术，想要全面推广真的很难，通过传统的产品+服务的形式很难存活，市场逼迫技术进行开源，中国开源界也越来越成熟了，<strong>开源不等于免费</strong>，而是<strong>相互学习、相互扶持，共同寻找落地案例、最佳实践、这才是良性的循环。</strong></p>
+<p>技术的未来一定不是封闭的，而是技术组合+封装服务的方式。</p>
+<p>Gitee的出现，现在越来越多优秀的国产开源产品，如JFinal、xxl-sso、jeesite这些或是独立开发、或是小团队开发的产品越来越多了。</p>
+<p>而大厂也在拥抱开源，不用说贡献各种国服、推出Dubbo等各式各样开源产品的国内大神、业界良心的阿里，各种被吐槽政策推动技术，但至少还有一个echarts还能看的出是互联网公司的百度，再勉强搭上一个对各式各样的收费方式研究到头发丝的腾讯。</p>
+<p>能赶上这个时代，真心太美好了。</p>
+</div>
+      <div class="prev-or-next"></div>
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A5%94%E5%AD%90"><span class="toc-text">楔子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">Docker是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="toc-text">安装Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8Mac-OS%E4%B8%8B%E5%AE%89%E8%A3%85Docker"><span class="toc-text">在Mac OS下安装Docker</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8CentOS%E4%B8%8B%E5%AE%89%E8%A3%85Docker"><span class="toc-text">在CentOS下安装Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Windows%E4%B8%8B%E5%AE%89%E8%A3%85Docker"><span class="toc-text">在Windows下安装Docker</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">Docker的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E9%95%9C%E5%83%8F%E5%88%97%E8%A1%A8"><span class="toc-text">列出镜像列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E9%95%9C%E5%83%8F"><span class="toc-text">查找镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F"><span class="toc-text">获取一个新的镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F"><span class="toc-text">删除镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E9%95%9C%E5%83%8F"><span class="toc-text">运行镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%95%9C%E5%83%8F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="toc-text">查看镜像运行状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="toc-text">Docker的构建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dockerfile"><span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Dockerfile"><span class="toc-text">使用Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E4%BD%A0%E7%9A%84%E9%95%9C%E5%83%8F"><span class="toc-text">提交你的镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E9%95%9C%E5%83%8F%E4%BF%9D%E5%AD%98%E6%88%90%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E7%BB%99%E5%88%AB%E4%BA%BA"><span class="toc-text">把镜像保存成文件复制给别人</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E9%95%9C%E5%83%8F%E5%AF%BC%E5%85%A5%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">把镜像导入本地仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-Compose"><span class="toc-text">Docker Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Docker-Compose"><span class="toc-text">使用Docker Compose</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83"><span class="toc-text">思考</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="vcomments"></div>
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'mHgw3YbXtcTnEXgLbopbas3D-gzGzoHsz',
+      appKey: '9VXFCLVhgmg2HtPaPDS6RMWj',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2022</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee/en/">EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/search.js"></script>
+  </div>
+</body>
+</html>

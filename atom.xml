@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>井说杂谈</title>
+  <icon>https://www.igerm.ee/icon.png</icon>
+  <subtitle>内涵胖子 拒绝减肥</subtitle>
+  <link href="https://www.igerm.ee/atom.xml" rel="self"/>
+  
+  <link href="https://www.igerm.ee/"/>
+  <updated>2022-04-14T15:15:55.923Z</updated>
+  <id>https://www.igerm.ee/</id>
+  
+  <author>
+    <name>井月轩</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我不放弃</title>
+    <link href="https://www.igerm.ee/cn/essay/%E6%88%91%E4%B8%8D%E6%94%BE%E5%BC%83/"/>
+    <id>https://www.igerm.ee/cn/essay/%E6%88%91%E4%B8%8D%E6%94%BE%E5%BC%83/</id>
+    <published>2022-02-23T17:23:54.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;歌曲：曾经我也想过一了百了&quot;&gt;&lt;a href=&quot;#歌曲：曾经我也想过一了百了&quot; class=&quot;headerlink&quot; title=&quot;歌曲：曾经我也想过一了百了&quot;&gt;&lt;/a&gt;歌曲：&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="essay" scheme="https://www.igerm.ee/categories/essay/"/>
+    
+    
+    <category term="铁链女" scheme="https://www.igerm.ee/tags/%E9%93%81%E9%93%BE%E5%A5%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>完美的Hexo多语言解决方案</title>
+    <link href="https://www.igerm.ee/cn/tech/%E5%AE%8C%E7%BE%8E%E7%9A%84Hexo%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>https://www.igerm.ee/cn/tech/%E5%AE%8C%E7%BE%8E%E7%9A%84Hexo%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2021-04-07T06:35:51.000Z</published>
+    <updated>2022-04-14T15:15:55.927Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;方案优点&quot;&gt;&lt;a href=&quot;#方案优点&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://www.igerm.ee/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Hexo" scheme="https://www.igerm.ee/tags/Hexo/"/>
+    
+    <category term="多语言" scheme="https://www.igerm.ee/tags/%E5%A4%9A%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo使用GitHub Action进行自动部署</title>
+    <link href="https://www.igerm.ee/cn/tech/Hexo%E4%BD%BF%E7%94%A8GitHub%20Action%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/"/>
+    <id>https://www.igerm.ee/cn/tech/Hexo%E4%BD%BF%E7%94%A8GitHub%20Action%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</id>
+    <published>2021-04-07T05:45:51.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Hexo搭好已经8天了，使用起来越来越安逸，修改的东西也基本告一段落。&lt;/p&gt;
+&lt;p&gt;今天为了想要实现比较完美的多语言（包括文章），因此还要折腾一番，方案已经思考完毕，今天先将Hexo发布交给Github</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://www.igerm.ee/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Hexo" scheme="https://www.igerm.ee/tags/Hexo/"/>
+    
+    <category term="GitHub Action" scheme="https://www.igerm.ee/tags/GitHub-Action/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo全文搜索地址错误</title>
+    <link href="https://www.igerm.ee/cn/tech/Hexo%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%9C%B0%E5%9D%80%E9%94%99%E8%AF%AF/"/>
+    <id>https://www.igerm.ee/cn/tech/Hexo%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%9C%B0%E5%9D%80%E9%94%99%E8%AF%AF/</id>
+    <published>2021-04-05T12:05:51.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Hexo搭好已经6天了，正常使用感觉非常好，今天发现了一个问题，在使用全文搜索的时候，如果你当前的页面不是首页，那么搜索出来的地址是错误的。&lt;/p&gt;
+&lt;p&gt;跟踪了一下错误地址，发现是额外增加了当前地址造成的。&lt;/p&gt;
+&lt;p&gt;用我的网站举例，比如说当前的地址是：&lt;code&gt;h</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://www.igerm.ee/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Hexo" scheme="https://www.igerm.ee/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo的美化、优化以及Lighthouse极致追分</title>
+    <link href="https://www.igerm.ee/cn/tech/Hexo%E7%BE%8E%E5%8C%96%E4%BC%98%E5%8C%96%E6%9E%81%E8%87%B4%E8%BF%BD%E5%88%86/"/>
+    <id>https://www.igerm.ee/cn/tech/Hexo%E7%BE%8E%E5%8C%96%E4%BC%98%E5%8C%96%E6%9E%81%E8%87%B4%E8%BF%BD%E5%88%86/</id>
+    <published>2021-04-04T02:28:42.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;之前写过一篇 &lt;a href=&quot;https://www.igerm.ee/cn/tech/Hexo-Github-Page/&quot;&gt;利用Hexo、GitHub</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://www.igerm.ee/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Hexo" scheme="https://www.igerm.ee/tags/Hexo/"/>
+    
+    <category term="Lighthouse" scheme="https://www.igerm.ee/tags/Lighthouse/"/>
+    
+    <category term="CDN" scheme="https://www.igerm.ee/tags/CDN/"/>
+    
+    <category term="jsdelivr" scheme="https://www.igerm.ee/tags/jsdelivr/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用Hexo、GitHub Page、Typora写文章</title>
+    <link href="https://www.igerm.ee/cn/tech/Hexo-Github-Page/"/>
+    <id>https://www.igerm.ee/cn/tech/Hexo-Github-Page/</id>
+    <published>2021-03-30T08:28:42.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;之前分享过一篇利用 &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://www.igerm.ee/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Hexo" scheme="https://www.igerm.ee/tags/Hexo/"/>
+    
+    <category term="Typora" scheme="https://www.igerm.ee/tags/Typora/"/>
+    
+    <category term="GitHub Pages" scheme="https://www.igerm.ee/tags/GitHub-Pages/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>peerberry来自东欧的投资平台</title>
+    <link href="https://www.igerm.ee/cn/experience/peerberry%E6%9D%A5%E8%87%AA%E4%B8%9C%E6%AC%A7%E7%9A%84%E6%8A%95%E8%B5%84%E5%B9%B3%E5%8F%B0/"/>
+    <id>https://www.igerm.ee/cn/experience/peerberry%E6%9D%A5%E8%87%AA%E4%B8%9C%E6%AC%A7%E7%9A%84%E6%8A%95%E8%B5%84%E5%B9%B3%E5%8F%B0/</id>
+    <published>2021-03-20T16:01:23.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;今天想要分享一个用了将近两年的p2p投资平台，它承诺超过10%的年化收益，就我的经验来讲，每年超过11%。此外，它还提供了资金奖励，激活的投资在一万/两万五/四万欧元，会额外增加0.5%/0.75%/1%的收益加成。&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="分享" scheme="https://www.igerm.ee/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="投资" scheme="https://www.igerm.ee/tags/%E6%8A%95%E8%B5%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>商业地产的困境</title>
+    <link href="https://www.igerm.ee/cn/tech/%E5%95%86%E4%B8%9A%E5%9C%B0%E4%BA%A7%E7%9A%84%E5%9B%B0%E5%A2%83/"/>
+    <id>https://www.igerm.ee/cn/tech/%E5%95%86%E4%B8%9A%E5%9C%B0%E4%BA%A7%E7%9A%84%E5%9B%B0%E5%A2%83/</id>
+    <published>2021-02-18T14:58:54.000Z</published>
+    <updated>2022-04-14T15:15:55.927Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;商业地产与互联网平台&quot;&gt;&lt;a href=&quot;#商业地产与互联网平台&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://www.igerm.ee/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="商业地产" scheme="https://www.igerm.ee/tags/%E5%95%86%E4%B8%9A%E5%9C%B0%E4%BA%A7/"/>
+    
+    <category term="信息化" scheme="https://www.igerm.ee/tags/%E4%BF%A1%E6%81%AF%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>她的他</title>
+    <link href="https://www.igerm.ee/cn/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/%E5%A5%B9%E7%9A%84%E4%BB%96/"/>
+    <id>https://www.igerm.ee/cn/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/%E5%A5%B9%E7%9A%84%E4%BB%96/</id>
+    <published>2020-09-30T13:04:54.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉！犹来无止！&quot;&gt;&lt;a href=&quot;#陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉！犹来无止！&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="novel" scheme="https://www.igerm.ee/categories/novel/"/>
+    
+    <category term="瞻望父兮" scheme="https://www.igerm.ee/categories/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我的她</title>
+    <link href="https://www.igerm.ee/cn/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/%E6%88%91%E7%9A%84%E5%A5%B9/"/>
+    <id>https://www.igerm.ee/cn/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/%E6%88%91%E7%9A%84%E5%A5%B9/</id>
+    <published>2020-09-30T12:44:31.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉！犹来无止！&quot;&gt;&lt;a href=&quot;#陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉！犹来无止！&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="novel" scheme="https://www.igerm.ee/categories/novel/"/>
+    
+    <category term="瞻望父兮" scheme="https://www.igerm.ee/categories/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我的他</title>
+    <link href="https://www.igerm.ee/cn/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/%E6%88%91%E7%9A%84%E4%BB%96/"/>
+    <id>https://www.igerm.ee/cn/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/%E6%88%91%E7%9A%84%E4%BB%96/</id>
+    <published>2020-09-29T12:34:24.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉！犹来无止！&quot;&gt;&lt;a href=&quot;#陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉！犹来无止！&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="novel" scheme="https://www.igerm.ee/categories/novel/"/>
+    
+    <category term="瞻望父兮" scheme="https://www.igerm.ee/categories/novel/%E7%9E%BB%E6%9C%9B%E7%88%B6%E5%85%AE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>程序员眼中的太极八卦</title>
+    <link href="https://www.igerm.ee/cn/experience/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%85%AB%E5%8D%A6/"/>
+    <id>https://www.igerm.ee/cn/experience/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%85%AB%E5%8D%A6/</id>
+    <published>2020-09-21T12:29:54.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;二进制&quot;&gt;&lt;a href=&quot;#二进制&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="分享" scheme="https://www.igerm.ee/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>胆小鬼博弈</title>
+    <link href="https://www.igerm.ee/cn/experience/%E8%83%86%E5%B0%8F%E9%AC%BC%E5%8D%9A%E5%BC%88/"/>
+    <id>https://www.igerm.ee/cn/experience/%E8%83%86%E5%B0%8F%E9%AC%BC%E5%8D%9A%E5%BC%88/</id>
+    <published>2020-09-19T23:53:54.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;胆小鬼博弈&lt;/strong&gt;（chicken</summary>
+        
+      
+    
+    
+    
+    <category term="分享" scheme="https://www.igerm.ee/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>醒</title>
+    <link href="https://www.igerm.ee/cn/novel/%E6%A2%A6%E4%B8%AD%E4%B9%8B%E6%83%85/%E9%86%92/"/>
+    <id>https://www.igerm.ee/cn/novel/%E6%A2%A6%E4%B8%AD%E4%B9%8B%E6%83%85/%E9%86%92/</id>
+    <published>2020-09-17T15:40:54.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;他惊讶的摘掉眼镜&lt;br&gt;眼前是一个陌生的女人&lt;br&gt;他立刻松手频频道歉&lt;/p&gt;
+&lt;p&gt;那女人笑了笑&lt;br&gt;说这是剧本的一部分&lt;br&gt;然后递给他一个牛皮纸袋&lt;/p&gt;
+&lt;p&gt;打开之后是一份英文的合同&lt;br&gt;密密麻麻20多页&lt;/p&gt;
+&lt;p&gt;合同结束期2030年&lt;br&gt;或者数字永生</summary>
+        
+      
+    
+    
+    
+    <category term="novel" scheme="https://www.igerm.ee/categories/novel/"/>
+    
+    <category term="梦中之情" scheme="https://www.igerm.ee/categories/novel/%E6%A2%A6%E4%B8%AD%E4%B9%8B%E6%83%85/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>梦</title>
+    <link href="https://www.igerm.ee/cn/novel/%E6%A2%A6%E4%B8%AD%E4%B9%8B%E6%83%85/%E6%A2%A6/"/>
+    <id>https://www.igerm.ee/cn/novel/%E6%A2%A6%E4%B8%AD%E4%B9%8B%E6%83%85/%E6%A2%A6/</id>
+    <published>2020-09-17T15:23:34.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;他突然接到一个快递&lt;br&gt;打开之后是一副AR眼镜一对蓝牙耳机和一张纸条&lt;br&gt;请在4月15日下午三点整到张自忠路21号后戴上眼镜和耳机&lt;/p&gt;
+&lt;p&gt;他提前5分钟赶到了那里&lt;br&gt;他知道这是什么地方&lt;br&gt;也知道快递是谁寄给他的&lt;br&gt;只不过现在这个地方已经不是外贸店了&lt;b</summary>
+        
+      
+    
+    
+    
+    <category term="novel" scheme="https://www.igerm.ee/categories/novel/"/>
+    
+    <category term="梦中之情" scheme="https://www.igerm.ee/categories/novel/%E6%A2%A6%E4%B8%AD%E4%B9%8B%E6%83%85/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>进化论与神创论</title>
+    <link href="https://www.igerm.ee/cn/experience/%E5%8E%9F%E7%95%8C%E4%B8%8E%E5%A4%A7%E5%8D%83%E4%B8%96%E7%95%8C/"/>
+    <id>https://www.igerm.ee/cn/experience/%E5%8E%9F%E7%95%8C%E4%B8%8E%E5%A4%A7%E5%8D%83%E4%B8%96%E7%95%8C/</id>
+    <published>2020-09-15T14:14:54.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;虚拟与现实、多维空间、量子纠缠、平行宇宙、进化论与神创论&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;为什么整个太阳系当中只有地球有生命？为什么显微镜下的世界看上去就像宇宙一样？为什么光速是永远不变的？为什么会产生量子纠缠？我对这些问题也有一些浅显的</summary>
+        
+      
+    
+    
+    
+    <category term="分享" scheme="https://www.igerm.ee/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="进化论" scheme="https://www.igerm.ee/tags/%E8%BF%9B%E5%8C%96%E8%AE%BA/"/>
+    
+    <category term="神创论" scheme="https://www.igerm.ee/tags/%E7%A5%9E%E5%88%9B%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谈一谈痛风</title>
+    <link href="https://www.igerm.ee/cn/experience/%E8%B0%88%E4%B8%80%E8%B0%88%E7%97%9B%E9%A3%8E/"/>
+    <id>https://www.igerm.ee/cn/experience/%E8%B0%88%E4%B8%80%E8%B0%88%E7%97%9B%E9%A3%8E/</id>
+    <published>2019-03-14T15:57:23.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;楔子&quot;&gt;&lt;a href=&quot;#楔子&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="分享" scheme="https://www.igerm.ee/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="痛风" scheme="https://www.igerm.ee/tags/%E7%97%9B%E9%A3%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谈一谈Go语言</title>
+    <link href="https://www.igerm.ee/cn/tech/%E8%B0%88%E4%B8%80%E8%B0%88go%E8%AF%AD%E8%A8%80/"/>
+    <id>https://www.igerm.ee/cn/tech/%E8%B0%88%E4%B8%80%E8%B0%88go%E8%AF%AD%E8%A8%80/</id>
+    <published>2019-03-12T05:36:57.000Z</published>
+    <updated>2022-04-14T15:15:55.927Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;楔子&quot;&gt;&lt;a href=&quot;#楔子&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://www.igerm.ee/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Golang" scheme="https://www.igerm.ee/tags/Golang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>中国女人成就了中国的快速发展</title>
+    <link href="https://www.igerm.ee/cn/experience/%E8%B0%88%E4%B8%80%E8%B0%88%E4%B8%AD%E5%9B%BD%E5%A5%B3%E6%80%A7/"/>
+    <id>https://www.igerm.ee/cn/experience/%E8%B0%88%E4%B8%80%E8%B0%88%E4%B8%AD%E5%9B%BD%E5%A5%B3%E6%80%A7/</id>
+    <published>2019-03-07T12:16:23.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;中国越来越强大了，尤其是大大提出中国梦之后，主流媒体纷纷跟进。无论西方世界如何诋毁中国，通过数据来看，中国的强大正是14亿中国人的辛勤劳动拼出来的。&lt;/p&gt;
+&lt;p&gt;早在2010年，美国国家统计局就发布了一组关于世界各国劳动参与率的数据，中国赫然位列世界第一，劳动总量世界第一</summary>
+        
+      
+    
+    
+    
+    <category term="分享" scheme="https://www.igerm.ee/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>谈一谈山海经</title>
+    <link href="https://www.igerm.ee/cn/experience/%E8%B0%88%E4%B8%80%E8%B0%88%E5%B1%B1%E6%B5%B7%E7%BB%8F/"/>
+    <id>https://www.igerm.ee/cn/experience/%E8%B0%88%E4%B8%80%E8%B0%88%E5%B1%B1%E6%B5%B7%E7%BB%8F/</id>
+    <published>2019-03-05T14:15:54.000Z</published>
+    <updated>2022-04-14T15:15:55.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;楔子&quot;&gt;&lt;a href=&quot;#楔子&quot; class=&quot;headerlink&quot; title=&quot;楔子&quot;&gt;&lt;/a&gt;楔子&lt;/h2&gt;&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="分享" scheme="https://www.igerm.ee/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="山海经" scheme="https://www.igerm.ee/tags/%E5%B1%B1%E6%B5%B7%E7%BB%8F/"/>
+    
+  </entry>
+  
+</feed>
