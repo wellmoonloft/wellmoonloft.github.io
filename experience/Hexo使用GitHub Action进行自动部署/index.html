@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>Hexo使用GitHub Action进行自动部署 | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">Hexo使用GitHub Action进行自动部署</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2021-04-07 13:45
+      </span>
+      <span class="post-pubtime">
+        <i class="iconfont icon-updatetime" title="更新时间"></i> 2022-11-30 10:23
+      </span>
+      <span class="post-count">≈ 1.3k字</span>
+      <span class="post-count">≈ 5分钟</span>
+    </div>
+    <div class="markdown-body"><blockquote>
+<p><strong>2022.11.30更新，node-version版本升级了，用12在管理后台会提示升级，虽然可以正常使用，不过代码里面checkout@v2改成v3、setup-node@v1改成v3、node-version改成16就可以了</strong></p>
+</blockquote>
+<p>Hexo搭好已经8天了，使用起来越来越安逸，修改的东西也基本告一段落。</p>
+<p>今天为了想要实现比较完美的多语言（包括文章），因此还要折腾一番，方案已经思考完毕，今天先将Hexo发布交给Github Action，为了多语言方案做准备。</p>
+<p>首先假设Hexo已经安装完毕，该折腾的都折腾的差不多了，那么现在开始配置自动部署</p>
+<p><a href="https://www.igerm.ee/experience/Hexo-Github-Page/">如何安装Hexo并部署到GitHub Pages在这里</a></p>
+<p>首先既然使用Hexo，我相信你已经有了一个用于部署Hexo Github Pages的仓库了，现在我们需要再建一个仓库，用于存放Hexo的原始文件，就是你本地Hexo的根目录里面的文件，这一步直接使用<code>VSCode</code>可以直接<code>share</code>项目到Github上</p>
+<h3 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h3><p>这一步也许使用Hexo的人都已经做过了，只是我之前一直使用vscode因此一直没有做这一步，现在为了自动部署，在这里生成新的密钥来专门自动部署Hexo</p>
+<p>以下为 macOS 下的操作，Linux 下操作方法相同，Windows 10 用户可以在市场中安装 Ubuntu 以后执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;Hexo Deploy Key&quot; -f github-deploy-key -N &quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这会在当前目录生成两个文件：</p>
+<ul>
+<li>github-deploy-key —— 私钥</li>
+<li>github-deploy-key.pub —— 公钥</li>
+</ul>
+<h3 id="GitHub-配置秘钥"><a href="#GitHub-配置秘钥" class="headerlink" title="GitHub 配置秘钥"></a>GitHub 配置秘钥</h3><p>这里把<code>私钥</code>放到存放 Hexo 原始文件的代码仓库里面，用于触发 Actions 时使用。</p>
+<p>把<code>公钥</code>放到 GitHub Pages 对应的代码仓库里面，用于 Hexo 部署时的写入工作。</p>
+<h3 id="配置私钥"><a href="#配置私钥" class="headerlink" title="配置私钥"></a>配置私钥</h3><p>首先在 GitHub 上打开保存 Hexo 的仓库，访问 <code>Settings -&gt; Secrets</code>，然后选择 <code>New repository secret</code></p>
+<p><img src="https://s2.loli.net/2022/12/30/iu8s2EZx6hmLRY7.png" alt="image-20210407125805861"></p>
+<p>名字部分填写：<code>HEXO_DEPLOY_KEY</code>，注意大小写，这个后面的 GitHub Actions Workflow 要用到，<strong>一定不能写错。</strong></p>
+<h3 id="添加公钥"><a href="#添加公钥" class="headerlink" title="添加公钥"></a>添加公钥</h3><p>接下来我们需要访问存放网页的仓库，也就是 Hexo 部署以后的仓库，比如：<code>yourname.github.io</code> 这种，访问 <code>Settings -&gt; Deploy keys</code> ,然后按 <code>Add deploy key</code> 来添加一个新的公钥：</p>
+<p><img src="https://s2.loli.net/2022/12/30/sInQUzm9vT5JAla.png" alt="image-20210407130033885"></p>
+<p>在 <code>Title</code> 中输入：<code>HEXO_DEPLOY_PUB</code> 字样，当然也可以填写其它自定义的名字。</p>
+<p>在 <code>Key</code> 中粘贴 <code>github-deploy-key.pub</code> 文件的内容。</p>
+<blockquote>
+<p>注意：一定要勾选 <code>Allow write access</code> 来打开写权限，否则无法写入会导致部署失败。</p>
+</blockquote>
+<h3 id="创建-Workflow"><a href="#创建-Workflow" class="headerlink" title="创建 Workflow"></a>创建 Workflow</h3><p>首先在 Hexo 的仓库中创建一个新文件：<code>.github/workflows/deploy.yml</code>，文件名可以自己取，但是一定要放在 <code>.github/workflows</code> 目录中，文件的内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Hexo</span> <span class="string">Deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line"></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-18.04</span></span><br><span class="line">    <span class="attr">if:</span> <span class="string">github.event.repository.owner.id</span> <span class="string">==</span> <span class="string">github.event.sender.id</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">source</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">ref:</span> <span class="string">master</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">Node.js</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&#x27;12&#x27;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">Hexo</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">ACTION_DEPLOY_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_DEPLOY_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$ACTION_DEPLOY_KEY&quot; &gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          chmod 700 ~/.ssh</span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          git config --global user.email &quot;john@doe.com&quot;</span></span><br><span class="line"><span class="string">          git config --global user.name &quot;John Doe&quot;</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g</span></span><br><span class="line"><span class="string">          npm install</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean</span></span><br><span class="line"><span class="string">          hexo deploy</span></span><br></pre></td></tr></table></figure>
+
+<p>简单解释一下，当我们推送内容到远程 <code>master</code> 分支的时候，就会触发这个 Workflow。</p>
+<p>使用 <code>ubuntu-latest</code> 作为 <code>hexo deploy</code> 的系统。</p>
+<p>首先执行<code>actions/checkout@v2</code>  迁出源代码（这也是别人写好的代码），然后设置使用最新的 Node.js v12 LTS 作为 node 解释器。</p>
+<p>接下来就是创建 SSH 相关的配置文件，注意 <code>secrets.HEXO_DEPLOY_KEY</code> 就是对应我们之前设置的私钥，所以名字一定不要搞错。</p>
+<p><code>git config</code> 相关的名字和邮件地址替换成自己使用的就好了。</p>
+<p>最后就是安装 Hexo CLI，各个依赖模块和部署了。</p>
+<h4 id="建议加载依赖包在本地完成"><a href="#建议加载依赖包在本地完成" class="headerlink" title="建议加载依赖包在本地完成"></a>建议加载依赖包在本地完成</h4><p>这里需要注意的是，我建议你采用我的方式，就是去掉<code>npm install</code>在本地运行<code>npm install</code>,（注意：<code>npm install hexo-cli -g</code>需要保留）然后将依赖包全都<code>push</code>到仓库里面，这样做有两个好处：</p>
+<p>1、 频繁更新的时候，节省下载依赖包的时间（想一想如果你只更新某个文件，那完全没必要重新下载一遍依赖包嘛）</p>
+<p>2、由于我有特殊需求，<a href="https://www.igerm.ee/cn/experience/Hexo%E7%BE%8E%E5%8C%96%E4%BC%98%E5%8C%96%E6%9E%81%E8%87%B4%E8%BF%BD%E5%88%86/">需要在分页的时候去掉某个分类的文章</a>，因此我修改了<code>hexo-generator-index</code>这个包的代码，如果重新下载，那么我修改的部分也就没办法实现了</p>
+<p>配置完毕之后尝试push代码，然后就可以在仓库的<code>Actions</code>里面查看运行情况</p>
+<p><img src="https://s2.loli.net/2022/12/30/WQBlS1v67aPtMTV.png" alt="image-20210407133226277"></p>
+<h3 id="坑一、将deploy配置仓库地址改为git方式"><a href="#坑一、将deploy配置仓库地址改为git方式" class="headerlink" title="坑一、将deploy配置仓库地址改为git方式"></a>坑一、将deploy配置仓库地址改为git方式</h3><p>确认 <code>_config.yml</code> 文件中有类似如下的 <code>GitHub Pages</code> 配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:wellmoonloft/en.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：如果使用http的方式，在后面发布的时候会有问题</p>
+</blockquote>
+<h3 id="坑二、切记不要将自动部署配置文件里面的时区删除"><a href="#坑二、切记不要将自动部署配置文件里面的时区删除" class="headerlink" title="坑二、切记不要将自动部署配置文件里面的时区删除"></a>坑二、切记不要将自动部署配置文件里面的时区删除</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br></pre></td></tr></table></figure>
+
+<p>如果不添加这个，在国内的人发布文章的时候，显示出来的文章时间会和你<code>date</code>的时间正好差8个小时</p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/%E5%AE%8C%E7%BE%8E%E7%9A%84Hexo%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>完美的Hexo多语言解决方案</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/Hexo%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%9C%B0%E5%9D%80%E9%94%99%E8%AF%AF/" target="_self">
+                <span>Hexo全文搜索地址错误</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5"><span class="toc-text">生成密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-%E9%85%8D%E7%BD%AE%E7%A7%98%E9%92%A5"><span class="toc-text">GitHub 配置秘钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%A7%81%E9%92%A5"><span class="toc-text">配置私钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%AC%E9%92%A5"><span class="toc-text">添加公钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-Workflow"><span class="toc-text">创建 Workflow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E8%AE%AE%E5%8A%A0%E8%BD%BD%E4%BE%9D%E8%B5%96%E5%8C%85%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%AE%8C%E6%88%90"><span class="toc-text">建议加载依赖包在本地完成</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%B8%80%E3%80%81%E5%B0%86deploy%E9%85%8D%E7%BD%AE%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80%E6%94%B9%E4%B8%BAgit%E6%96%B9%E5%BC%8F"><span class="toc-text">坑一、将deploy配置仓库地址改为git方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%BA%8C%E3%80%81%E5%88%87%E8%AE%B0%E4%B8%8D%E8%A6%81%E5%B0%86%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%87%8C%E9%9D%A2%E7%9A%84%E6%97%B6%E5%8C%BA%E5%88%A0%E9%99%A4"><span class="toc-text">坑二、切记不要将自动部署配置文件里面的时区删除</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>

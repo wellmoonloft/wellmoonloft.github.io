@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>利用Hexo、GitHub Page、Typora写文章 | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">利用Hexo、GitHub Page、Typora写文章</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2021-03-30 16:28
+      </span>
+      <span class="post-count">≈ 1.3k字</span>
+      <span class="post-count">≈ 5分钟</span>
+    </div>
+    <div class="markdown-body"><p>之前分享过一篇利用 <a href="https://www.igerm.ee/experience/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Typora%E5%86%99%E6%96%87%E7%AB%A0/">Typora写文章并上传到微信公众号的文章</a></p>
+<p>同时分享过一篇 <a href="https://www.igerm.ee/experience/%E6%8E%A8%E8%8D%90%E4%B8%80%E5%A5%97%E5%9F%BA%E4%BA%8E%E5%86%85%E5%AE%B9%E5%8F%91%E5%B8%83%E7%9A%84%E9%AB%98%E9%A2%9C%E5%80%BC%E5%85%A8%E5%AE%B6%E6%A1%B6/">Halo这个基于Spring的博客系统</a></p>
+<p>近期由于服务器要求公安备案，海外的服务器访问速度过慢，Cloudflare的IP现在也被封的差不多了，被逼无奈计划使用Hexo+Github Page搭一套博客，两天下来感觉使用良好，未来可能会成为我长期使用的内容平台。</p>
+<h2 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p><strong>1. 安装最新版的node</strong></p>
+<p>没有的话自己安装一下，此外记得添加国内的镜像源头</p>
+<p><code>npm config set registry https://registry.npm.taobao.org</code></p>
+<p><strong>2. 安装Git</strong></p>
+<p>没有的话自己安装一下，不过最近由于众所周知的原因，需要挂代理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:7890&#x27;</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:7890&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 注册GitHub账号</strong></p>
+<p>打开<a target="_blank" rel="noopener" href="https://github.com/">Github官网</a>，新建一个仓库，输入自己的项目名字，后面一定要加<code>.github.io</code>后缀，README初始化也要勾上。*<em>名称一定要和你的github名字完全一样，比如你github名字叫<code>abc</code>，那么仓库名字一定要是<code>abc.github.io</code></em> Description空着就可以，记得要选public</p>
+<p><strong>4. 建立GitHub Pages</strong></p>
+<p>项目建好后，点击<code>Settings</code>，向下拉到最后有个<code>GitHub Pages</code>，点击<code>Choose a theme</code>选择一个主题。等待系统自动生成页面后，再回到<code>GitHub Pages</code>，可以修改自定义域名了，这里我们先不做操作，因为要生成一个CNAME的文件，等会我们在Hexo里面创建，这样比较简单。</p>
+<p><strong>5. 更改DNS解析</strong></p>
+<p>在DNS解析的地方添加一条CNAME记录，把你想要的域名指向你的仓库名（这就是为什么前面说项目名字加<code>.github.io</code>的原因）</p>
+<p><img src="https://s2.loli.net/2022/12/30/iEKQCrdebMvWsTa.png"></p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p><strong>1. 安装程序</strong></p>
+<p>在合适的地方新建一个文件夹，用来放置自己的博客文件，比如我因为有两台电脑，相互间使用<code>iCloud</code>的进行同步，因此我就放在了<code>/Users/xxx/Documents/blog</code>目录里面</p>
+<p>目录建好之后用终端打开该目录，在该目录下输入<code>npm i hexo-cli -g</code>安装Hexo</p>
+<p>安装完后输入<code>hexo -v</code>验证是否安装成功。</p>
+<p><img src="https://s2.loli.net/2022/12/30/N1KHkBG48q2Lwnu.png"></p>
+<p>然后就要初始化我们的网站，输入<code>hexo init</code>初始化文件夹，接着输入<code>npm install</code>安装必备的组件</p>
+<p>这样本地的网站配置也弄好啦，输入<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>打开本地服务器，然后浏览器打开<code>http://localhost:4000/</code>，就可以看到我们的博客啦，按<code>ctrl+c</code>关闭本地服务器，准备上传</p>
+<p>github的配置应该不用赘述，唯一需要提醒的是，现在<strong>需要挂代理，需要挂代理，需要挂代理，</strong>不要抱着侥幸的心理，不然同步博客的时候你会想死</p>
+<p><strong>2. 修改hexo配置</strong></p>
+<p>在不熟悉的情况下只要记得修改一个地方，其他的看一看也就会了，这里需要注意的是，你需要把<code>_config.yml</code>这个<strong>文件编码改成UTF-8</strong>，以避免中文标题乱码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/wellmoonloft/wellmoonloft.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+
+<p>注意brach里面你写什么，在Github Pages里面设置的源要对应起来，设置main就选main，设置master就选master，这个无所谓的</p>
+<p><strong>3. 修改文章模版</strong></p>
+<p>在开始新建文章之前最好是改一下文章模版，位置就在你选择的目录下面<code>scaffolds</code>文件夹里面，改<code>post.md</code>	就可以了，这样你新建文章他会自动加一个你想要的标题，你就不用再每个手动去写了</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line"><span class="section">categories: default</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 新建一个文章以及文章迁移</strong></p>
+<p>首先在博客根目录下，安装一个扩展<code>npm i hexo-deployer-git</code>。</p>
+<p>然后输入<code>hexo new post &quot;new article title&quot;</code>，新建一篇文章。</p>
+<p>然后打开<code>/Users/xxx/Documents/blog/source/_posts</code>的目录，可以发现下面多了一个<code>new article title.md</code>文件，就是你的文章文件，你可以直接用Typora打开进行文章编写，也可以直接把你之前所有的文章复制到这个目录当中。<strong>但需要注意的是，你不通过命令新建的话，就需要手动给每一篇文章加个头，而且不能直接输入，需要使用源码模式进行复制，或者用Sublime Text或者Xcode打开进行复制</strong></p>
+<p><strong>非源码模式</strong></p>
+<p><img src="https://s2.loli.net/2022/12/30/VKZwlqPanAbji6J.png"></p>
+<p><strong>源码模式</strong></p>
+<p><img src="https://s2.loli.net/2022/12/30/b2VFQRw4qUHCWIz.png"></p>
+<p><strong>5. 上传并同步博客</strong></p>
+<p>编写完markdown文件后，blog目录下输入<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>可以本地预览效果，最后输入<code>hexo d</code>上传到github上，这时打开你的github.io主页就能看到效果了</p>
+<p><strong>6. 绑定域名</strong></p>
+<p>等了这么久，DNS解析应该已经生效了，这时候访问这个域名，会发现已经到了github的页面，只是因为没有链接关系报错。现在在本地博客<code>/source</code>目录，我的是<code>/Users/xxx/Documents/blog/source </code>，新建<code>CNAME</code>文件，注意没有后缀。然后在里面写上你的域名，保存。最后运行<code>hexo g</code>、<code>hexo d</code>上传到github，刷新几下，就可以看到你的博客页面了</p>
+<p><img src="https://s2.loli.net/2022/12/30/mJiTdea4WovEzPA.png"></p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/Hexo%E7%BE%8E%E5%8C%96%E4%BC%98%E5%8C%96%E6%9E%81%E8%87%B4%E8%BF%BD%E5%88%86/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>Hexo的美化、优化以及Lighthouse极致追分</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/peerberry%E6%9D%A5%E8%87%AA%E4%B8%9C%E6%AC%A7%E7%9A%84%E6%8A%95%E8%B5%84%E5%B9%B3%E5%8F%B0/" target="_self">
+                <span>peerberry来自东欧的投资平台</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo%E5%AE%89%E8%A3%85"><span class="toc-text">Hexo安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Hexo"><span class="toc-text">安装Hexo</span></a></li></ol></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>
