@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>给hexo添加utterances评论 | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">给hexo添加utterances评论</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2022-12-05 20:29
+      </span>
+      <span class="post-count">≈ 888字</span>
+      <span class="post-count">≈ 3分钟</span>
+    </div>
+    <div class="markdown-body"><p>距离把文章转移到hexo已经一年多了，使用起来非常丝滑，只是这个评论系统一直不是很满意。本来想着吧，我这点东西，恐怕几年也不会有人看，因为随笔里面写了很多”你懂得”的东西，所以也没有动力做SEO，就，随缘吧</p>
+<p>不过经验分享里面还是有些东西，可能会对一些人有帮助的，就算没有。万一哪天我要重新搞一些东西也可以回来翻翻看，毕竟好多配置时间一长自己都忘了，还要去搜索，就很麻烦</p>
+<p>上来看到有一两个人按照我的操作搭起来了，挺好的。可是前一段时间，我把网站结构改了一下，把主页的代码改掉了，导致经验分享文章的路径变化，以前的评论就没了，有点对不住人家。而且用什么gitalk、valine、qisqus都不是很满意。既然已经把github白嫖到底了，那说不定弄一个仓库也能实现评论的功能，想到这里就去搜了一下，果然发现了好东西<a target="_blank" rel="noopener" href="https://utteranc.es/">utteranc</a></p>
+<p>这是一个基于github仓库issues的评论功能，原理很简单，就是把每篇文章挂在issues里面作为一个问题，然后后面的人就可以针对这个问题评论，也支持表情什么的，功能很完善。</p>
+<p>至于有些人没有github账号？那些人可能也不太会有评论的需求了，哈哈哈</p>
+<h4 id="1、建立一个Github仓库"><a href="#1、建立一个Github仓库" class="headerlink" title="1、建立一个Github仓库"></a>1、建立一个Github仓库</h4><h4 id="2、添加Github-App"><a href="#2、添加Github-App" class="headerlink" title="2、添加Github App"></a>2、添加Github App</h4><p>这个主要是用于在别人评论的时候，自动的创建一条Issue并且根据规则和文章地址关联起来的。当然如果你不放心的话可以自己建设一套自动添加的程序，只是略微麻烦就是了，也没必要</p>
+<p>地址：<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">https://github.com/apps/utterances</a></p>
+<p>访问地址，进入安装页面，单击 <code>Install</code> 按钮</p>
+<p><img src="https://s2.loli.net/2022/12/30/Tm9tgsrRMLnu5FC.png" alt="安装"></p>
+<p>然后选择刚刚建好的仓库再点 <code>Install</code> </p>
+<h4 id="3、获取网页代码"><a href="#3、获取网页代码" class="headerlink" title="3、获取网页代码"></a>3、获取网页代码</h4><p>进入这里<a target="_blank" rel="noopener" href="https://utteranc.es/">utteranc</a>，按说明填入<strong>Repository</strong>、选择文章和Issue的<strong>对应方法</strong>（建议使用默认）、<strong>Issue Label</strong>如果是新建仓库留空就可以了，如果想用原本的那个仓库可以加上标签（不加也没啥问题，因为那个仓库应该也不太会有Issue），<strong>Theme</strong>选择一下，最后就会在<strong>Enable Utterances</strong>的地方看到插入代码了，复制出来</p>
+<p><img src="https://s2.loli.net/2022/12/30/FMfSVsnTocI83kb.jpg" alt="1671016771605"></p>
+<h4 id="4、插入主题对应区域"><a href="#4、插入主题对应区域" class="headerlink" title="4、插入主题对应区域"></a>4、插入主题对应区域</h4><p>目前很多主题应该已经开始支持utterances了，不支持也没关系，就找原本的文章评论区，Oranges主题插入评论的位置有一个单独的<code>comments.ejs</code>来管理，里面集成了很多主题，在配置里面添加一个开启按钮，然后把上面的代码复制进去即可，传参什么的就算了吧，主要是我这个主题你看了代码可能都已经看不出原本Oranges的样子了，被一通魔改…</p>
+<h4 id="5、使用原理"><a href="#5、使用原理" class="headerlink" title="5、使用原理"></a>5、使用原理</h4><p>部署之后在每篇文章文章下面都会看到一个utterances的评论区了，需要注意的是，此时在评论库里面是还没有Issue跟这篇文章关联的，只有第一个评论发起的时候utterances的github app才会帮助你新建一个Issue跟这篇文章关联。这是后台逻辑，对于实际使用体验来讲，是看不到这个步骤的，enjoy.</p>
+<p><img src="https://s2.loli.net/2022/12/30/F3L8AHW9gKhT5Gf.jpg" alt="1671017518617"></p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/%E4%BD%BF%E7%94%A8ipv6%E5%92%8Cddns%E7%BB%99%E7%BE%A4%E6%99%96%E5%81%9A%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>使用ipv6和ddns给群晖做外部访问</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/%E5%AE%8C%E7%BE%8E%E7%9A%84Hexo%E5%A4%9A%E8%AF%AD%E8%A8%80%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+                <span>完美的Hexo多语言解决方案</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAGithub%E4%BB%93%E5%BA%93"><span class="toc-text">1、建立一个Github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%B7%BB%E5%8A%A0Github-App"><span class="toc-text">2、添加Github App</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%8E%B7%E5%8F%96%E7%BD%91%E9%A1%B5%E4%BB%A3%E7%A0%81"><span class="toc-text">3、获取网页代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%8F%92%E5%85%A5%E4%B8%BB%E9%A2%98%E5%AF%B9%E5%BA%94%E5%8C%BA%E5%9F%9F"><span class="toc-text">4、插入主题对应区域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%90%86"><span class="toc-text">5、使用原理</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>

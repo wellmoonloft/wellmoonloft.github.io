@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>DS418player装docker | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">DS418player装docker</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2022-12-14 13:35
+      </span>
+      <span class="post-pubtime">
+        <i class="iconfont icon-updatetime" title="更新时间"></i> 2022-12-29 23:06
+      </span>
+      <span class="post-count">≈ 2k字</span>
+      <span class="post-count">≈ 7分钟</span>
+    </div>
+    <div class="markdown-body"><blockquote>
+<p><strong>2022.12.29更新，记录了音乐获取、分轨、整理、欣赏的方案</strong></p>
+</blockquote>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>由于群晖的产品线调整，DS418player这条线被砍掉了，其实我觉得性价比挺高的，因为CPU跟DS220+是一样的，处于入门和PLUS的中间，关键是支持硬解呀！</p>
+<p>自己加一根1.35v的DDL3L内存就好了，官方说最大支持6G，不过我看网上有人直接加了根8G的撑到了10G并且识别出来了，对我来说目前6G已经足够用了，Docker这种东西，如果不能把内存用到70%，总觉得心里不平衡，目前安装的镜像除了Jellyfin是真的内存大户，其他都还好。</p>
+<p>群晖的Docker套件在418player的页面是下载不到的，直接去<a target="_blank" rel="noopener" href="https://www.synology.cn/zh-cn/support/download/DS220+?version=7.1#packages">220+的页面下载</a>，然后在套件中心里面手动安装，一点问题都没有。</p>
+<p><img src="https://s2.loli.net/2022/12/30/hu5ODE6sYbe2o7q.jpg" alt="1670993560602"></p>
+<p>我目前常用的就这么六个：</p>
+<h4 id="Calibre-Web"><a href="#Calibre-Web" class="headerlink" title="Calibre-Web:"></a>Calibre-Web:</h4><p>Calibre的网页版，可以随时随地的在线看书，不过其实管理起来就还好，我还是在用mac版本的Calibre进行管理，然后用网页版看书，不能说鸡肋，反正也在用，手机上用网页下载，然后推给番茄小说打开就蛮好的</p>
+<p><img src="https://s2.loli.net/2022/12/30/Ly7GFZg31rNOeqj.jpg" alt="1670995353324"></p>
+<h4 id="Bililive-Go"><a href="#Bililive-Go" class="headerlink" title="Bililive-Go:"></a>Bililive-Go:</h4><p>这是一个开源的直播流录制平台，指定保存地址之后就可以打开一个网页，支持斗鱼、虎牙、B站等主流直播平台的直播流录制，感觉对于直播运营蛮好用的吧，可以事后进行视频编辑，或者就给一些老色痞录一些舞蹈视频。装这个一定记得不要选宿主host模式，不然你配了ipv6在外网就可以访问了，而这玩意是没有密码的，虽然不太可能被人发现，被发现了也不太会有人手欠去给你录一堆视频，塞满了硬盘你还得说谢谢，哈哈哈</p>
+<h4 id="Home-assitant"><a href="#Home-assitant" class="headerlink" title="Home assitant:"></a>Home assitant:</h4><p>大名鼎鼎的智能家居管理平台，可以把各个厂家的智能设备、网关等产品集成进去，并且可以把米家和Home Kit集成到一起，我还在摸索，买的好多东西都因为疫情停发了</p>
+<h4 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin:"></a>Jellyfin:</h4><p>用的最多的了，在淘宝买了个片源然后搞了很多1080+的电影来看，照片墙刷出来的时候，满满的成就感。尤其是挂搜出来的影视海报和演员、剧情介绍，解锁了新的观影体验</p>
+<p><img src="https://s2.loli.net/2022/12/30/b2RciOv1NejFn4K.jpg" alt="1670995521948"></p>
+<h4 id="Navidrome"><a href="#Navidrome" class="headerlink" title="Navidrome:"></a>Navidrome:</h4><p> <a target="_blank" rel="noopener" href="https://github.com/navidrome/navidrome/">Navidrome</a>是用Golang写的开源音乐服务器，内存占用及其小，支持硬解码，配合<a target="_blank" rel="noopener" href="https://picard.musicbrainz.org/">MusicBrainz Picard</a>进行搜刮，在Mac上用<a target="_blank" rel="noopener" href="https://github.com/jeffvli/sonixd">Sonixd</a>连接服务器，每天都在用，手机上装<a target="_blank" rel="noopener" href="https://substreamerapp.com/">substreamer</a>来连接使用，只是目前还找不到歌词的好办法</p>
+<p><a href="https://www.igerm.ee/experience/%E7%AE%A1%E7%90%86%E7%BC%96%E8%BE%91%E5%88%86%E8%BD%A8%E6%AC%A3%E8%B5%8F%E6%9C%AC%E5%9C%B0%E9%9F%B3%E4%B9%90%E4%B8%80%E6%9D%A1%E9%BE%99/">这里补充了详细用法</a></p>
+<p><img src="https://s2.loli.net/2022/12/30/DqrNVXI9ZkiOjBv.jpg" alt="1670995707381"></p>
+<h4 id="TMM"><a href="#TMM" class="headerlink" title="TMM:"></a>TMM:</h4><p>用来挂搜影视资源的，配合Jellyfin来用，美滋滋，就是因为dns污染的原因比较倒胃口，需要经常用<a target="_blank" rel="noopener" href="https://dnschecker.org/">DNS Chercker</a>来查一下能用的节点，然后改hosts。装这个一定记得不要选宿主host模式，不然你配了ipv6在外网就可以访问了，而这玩意是没有密码的，虽然不太可能被人发现，被发现了也不太会有人手欠去改你的文件名，不过毕竟等于赤裸裸地打开大门，不太好</p>
+<h3 id="搞一个自己的导航页"><a href="#搞一个自己的导航页" class="headerlink" title="搞一个自己的导航页"></a>搞一个自己的导航页</h3><p>有了这么多应用，每个都要开不同的端口号，访问起来还挺费劲的，当然可以用域名指向再加上反向代理，不过每一个域名都要申请一个SSL证书，虽然群晖申请很方便，不过咱也不是给别人看，就懒得折腾了，自己做个导航页就好了</p>
+<p>我常用的Chrome浏览器新开页是自带8个快捷入口可以设置，手机上用Safari似乎也可以设置，而且也有同步的方法，只是搞一个吧，搞一个挺好，在浏览器上设置为首页就相当于一个新开页了</p>
+<p>根据这个需求，动态的页面首先排除掉，一定要快，打开速度一定要在一秒以内才能达到我的要求，正常用<strong>Lighthouse打开性能必须在99分以上</strong>，所以选择静态页面，去掉所有图片就用，减少各种元素的加载，用纯CSS来实现简单的效果</p>
+<p>由于我写文章用的就是hexo，所以我第一反应就是使用hexo来生成一个导航页，然后在全球最大的同性交友平台搜索，果然有所收获。已经有人写好了轮子<a target="_blank" rel="noopener" href="https://github.com/HCLonely/hexo-theme-webstack">hexo-theme-webstack</a>，不过他这个还是有很多图片，有侧边栏，虽然作者已经做了很强的优化，不过对于我来说很多是不必要的元素，因此我保留了最核心的生成页面部分代码，把其他的都去掉了（仅满足个人需求，其他人还是建议直接用原本的吧，蛮好用的）</p>
+<h4 id="开始折腾"><a href="#开始折腾" class="headerlink" title="开始折腾"></a>开始折腾</h4><p>这里假设你已经有了一个hexo了，并且做好了CNAME的指向，没有的话可以看这篇文章<a href="https://www.igerm.ee/experience/Hexo-Github-Page/">利用Hexo、GitHub Page、Typora写文章</a></p>
+<h5 id="1、新做一个域名解析"><a href="#1、新做一个域名解析" class="headerlink" title="1、新做一个域名解析"></a>1、新做一个域名解析</h5><p>将域名用CNAME指向你之前的那个仓库<code>xxx.github.io</code>，对，是的，<strong>之前的那个仓库</strong></p>
+<p>比如<code>portal.igerm.ee</code> CNAME TO <code>xxx.github.io</code></p>
+<h5 id="2、新开仓库"><a href="#2、新开仓库" class="headerlink" title="2、新开仓库"></a>2、新开仓库</h5><p>在github上新开一个仓库，名字就叫做<code>portal</code></p>
+<h5 id="3、初始化hexo"><a href="#3、初始化hexo" class="headerlink" title="3、初始化hexo"></a>3、初始化hexo</h5><p>在电脑里新建一个文件夹<code>hexo-portal</code>，在终端里面进到文件夹内执行<code>hexo init</code>来初始化hexo</p>
+<p>然后用vs code打开项目，修改<code>_config.yml</code>配置，因为不需要生成文章，所以改的只有几个选项：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Private</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">Portal</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">private</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">navigation</span></span><br><span class="line"><span class="attr">author:</span> </span><br><span class="line"><span class="attr">language:</span> <span class="string">cn</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## 这里注意，这里的域名填写你在dns解析的域名前缀</span></span><br><span class="line"><span class="comment">## 比如你原本在github的域名是www.igerm.ee用CNAME指向的xxx.github.io</span></span><br><span class="line"><span class="comment">## 在域名解析的时候使用portal.igerm.ee还是要用CNAME指向xxx.github.io，而不是指向新的仓库地址</span></span><br><span class="line"><span class="comment">## github的自定义域名是根据仓库里面的CNAME文件来识别的</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://portal.igerm.ee/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">webstack</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://xxxxxxxxxxxx</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="4、新建CNAME和robots文件"><a href="#4、新建CNAME和robots文件" class="headerlink" title="4、新建CNAME和robots文件"></a>4、新建CNAME和robots文件</h5><p>仔细看上面代码的注释，github一个人只有一个主域名可以解析到，自定义的子域名是根据仓库里面的CNAME文件来进行区分的，所以要在<code>source</code>文件夹里面创建两个文件</p>
+<p><strong>CNAME</strong></p>
+<p><code>portal.igerm.ee</code></p>
+<p>告诉github配置要用这个子域名指向这个库的Pages</p>
+<p><strong>robots.txt</strong></p>
+<figure class="highlight plaintext"><figcaption><span>*</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /</span><br></pre></td></tr></table></figure>
+
+<p>告诉所有搜索引擎，别特么爬我，我不想被人看到</p>
+<p><strong>5、下载主题</strong></p>
+<p>可以直接npm下载，也可以直接在git上下载ZIP包，然后将<code>_config.webstack.yml</code>文件放到根路径，把包放到<code>themes</code>里面</p>
+<p>这个时候已经可以<code>hexo g</code>来生成静态导航页面了，我几乎把所有效果全都删除掉了，最后只保留了两个css和四个ejs文件，达到的效果就是这个样子，你说丑吧…确实没有带图片带颜色的好看，但是很快，而且能用，哈哈哈</p>
+<p><img src="https://s2.loli.net/2022/12/30/7wgNYk14t8OCJDn.jpg" alt="1671587363100"></p>
+<h5 id="6、hexo-d"><a href="#6、hexo-d" class="headerlink" title="6、hexo d"></a>6、hexo d</h5><p>效果在本地调好之后，执行<code>hexo d</code>提交到仓库里面，前提是你前面配置好了deloy的信息</p>
+<h5 id="7、开启SSL"><a href="#7、开启SSL" class="headerlink" title="7、开启SSL"></a>7、开启SSL</h5><p>提交完毕之后，在github上点Settings，左边找到Pages打开，折腾这么久理论上域名解析已经好了，等待github进行ssl证书的申请</p>
+<p>当<code>Enforce HTTPS </code>选项可以选择的时候，就是证书已经生效了，这个时候带https访问即可（有可能证书已经生效但是还没有到中国，所以官方提示等待30分钟左右，我就等了5分钟就可以了）</p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/hexo%E5%8D%87%E7%BA%A7%E5%88%B0v6-3-0/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>hexo升级到v6.3.0</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/%E4%BD%BF%E7%94%A8ipv6%E5%92%8Cddns%E7%BB%99%E7%BE%A4%E6%99%96%E5%81%9A%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE/" target="_self">
+                <span>使用ipv6和ddns给群晖做外部访问</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="toc-text">安装Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Calibre-Web"><span class="toc-text">Calibre-Web:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bililive-Go"><span class="toc-text">Bililive-Go:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Home-assitant"><span class="toc-text">Home assitant:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Jellyfin"><span class="toc-text">Jellyfin:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Navidrome"><span class="toc-text">Navidrome:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TMM"><span class="toc-text">TMM:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9E%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5"><span class="toc-text">搞一个自己的导航页</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%8A%98%E8%85%BE"><span class="toc-text">开始折腾</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%96%B0%E5%81%9A%E4%B8%80%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="toc-text">1、新做一个域名解析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E6%96%B0%E5%BC%80%E4%BB%93%E5%BA%93"><span class="toc-text">2、新开仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96hexo"><span class="toc-text">3、初始化hexo</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E6%96%B0%E5%BB%BACNAME%E5%92%8Crobots%E6%96%87%E4%BB%B6"><span class="toc-text">4、新建CNAME和robots文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81hexo-d"><span class="toc-text">6、hexo d</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E5%BC%80%E5%90%AFSSL"><span class="toc-text">7、开启SSL</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>
