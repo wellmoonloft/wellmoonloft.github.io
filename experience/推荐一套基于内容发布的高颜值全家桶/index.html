@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>推荐一套基于内容发布的高颜值全家桶 | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">推荐一套基于内容发布的高颜值全家桶</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2019-03-02 17:10
+      </span>
+      <span class="post-count">≈ 3.5k字</span>
+      <span class="post-count">≈ 13分钟</span>
+    </div>
+    <div class="markdown-body"><h2 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h2><p>去年的时候，因为工作需要重新把代码捡起来。不过并不是开发企业级管理系统，而是<strong>面向客户的内容发布平台</strong>，用来<strong>拼凑我的整套泛会员框架的1&#x2F;50</strong>，目前核心业务已经对外发布，所以这个图也终于不用保密了。</p>
+<p><img src="https://s2.loli.net/2022/12/30/7ghr4xc96PpijBZ.png"></p>
+<p>这张图等到下半年可以找一个机会详细再写一篇文章，说回正题，由于是面向客户的系统，颜值是第一位的，寻寻觅觅很久，也试用了很多款开源框架以及一些云存储平台，下面罗列一下，<strong>需要注意的是</strong>，也许<strong>这些开源产品原本的用途并不是我所应用的用途</strong>，在我<strong>组合的框架里面可能定位有些偏颇</strong>：</p>
+<h2 id="小程序UI库："><a href="#小程序UI库：" class="headerlink" title="小程序UI库："></a>小程序UI库：</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Tencent/weui-wxss">WeUI</a>是腾讯官方UI组件库WeUI的小程序版，提供了跟微信界面风格一致的用户体验，也是众多UI中，最像微信的那一款</p>
+<p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/Tencent/weui-wxss">https://github.com/Tencent/weui-wxss</a></p>
+<p><img src="https://s2.loli.net/2022/12/30/VxTi5RvFB83uCUf.png"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/TalkingData/iview-weapp">iView</a>是TalkingData发布的一款高质量的基于Vue.js组件库，而iView weapp则是它们的小程序版本。</p>
+<p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/TalkingData/iview-weapp">https://github.com/TalkingData/iview-weapp</a></p>
+<p><img src="https://s2.loli.net/2022/12/30/RZNyVEl8funiMXQ.png"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/meili/minui">MinUI</a>是蘑菇街前端开发团队开发的基于微信小程序自定义组件特性开发而成的一套简洁、易用、高效的组件库，适用场景广，覆盖小程序原生框架，各种小程序组件主流框架等，并且提供了专门的命令行工具。</p>
+<p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/meili/minui">https://github.com/meili/minui</a></p>
+<p><img src="https://s2.loli.net/2022/12/30/Q5HgPzIxVApoEsN.png"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/weilanwl/ColorUI">ColorUI</a><strong>是一个Css类的UI组件库，不是一个Js框架。相比于同类小程序组件库，ColorUI更注重于视觉交互！</strong></p>
+<p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/weilanwl/ColorUI">https://github.com/weilanwl/ColorUI</a></p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/12/30/aXKRuvrk7o5chyd.png"></p>
+<p><strong>最终我选择使用ColorUI主要是两个方面：</strong></p>
+<ol>
+<li><p>颜值，ColorUI的颜值非常高，可以看一下我用Mock做的这张图</p>
+<p><img src="https://s2.loli.net/2022/12/30/sXgqRAwIMloChvj.png"></p>
+</li>
+<li><p>ColorUI<strong>使用的是传统的css引用</strong>，这就避免了上面那些UI的组件注入，很大程度的节省了代码空间，要知道小程序的包大小限制在4M，最近群里很多人都在劝说作者封装组件，我想说的是，还是要保持初心，你最早做UI就是面向小程序的，完全没必要去封装，如果是要适应uni-app，改一个参数不就好了，也是没必要封装组件。</p>
+</li>
+</ol>
+<h2 id="内容管理系统："><a href="#内容管理系统：" class="headerlink" title="内容管理系统："></a>内容管理系统：</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ruibaby/halo">Halo</a>是轻快，简洁，功能强大，使用 Java 开发的博客系统，通过Spring Boot构建，其实选择它的主要原因倒不是他使用标准Spring Boot，而是以下两个方面：</p>
+<ol>
+<li>嗯，是因为颜值。</li>
+<li>同时，它的模块拆分比较合理，可能也是定位比较清晰，就是博客应用，因此部署简单，因为对于应用整合来说，引入一个开源系统就是直接应用加轻度开发，开发完毕后打成docker镜像直接扔到宿主机上启动就可以了，方便快捷。</li>
+</ol>
+<p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/ruibaby/halo">https://github.com/ruibaby/halo</a></p>
+<p><img src="https://s2.loli.net/2022/12/30/QcyBidP8rGMva43.png"></p>
+<p>当然，Halo还是有自己的问题，<strong>Api太少了！！！！</strong>，目前仅有三个接口，一个获取全部文章、一个获取评论是否开启、还有一个获取标签分类，<strong>但没有获取标签分类下的文章</strong>，实际上加一个Api很简单，<strong>而且看源码里面service里面已经有了根据tags查找文章的方法</strong>，但不知道作者为什么一直没有把Api抛出来，我猜测作者的心理可能仅仅想要做博客应用，不希望把Halo变成内容管理平台吧？</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://gitee.com/fuhai/jpress">JPress</a>是一个类似 WordPress 的产品，使用Java开发，依赖 <a target="_blank" rel="noopener" href="https://gitee.com/jfinal/jfinal">JFinal</a> 和 <a target="_blank" rel="noopener" href="https://gitee.com/fuhai/jboot">Jboot</a> 。</p>
+<blockquote>
+<p>这里插一个题外话，在开源界，JFinal应该不用再过多介绍，<strong>谁不知道JFinal都不好意思说混开源圈</strong>，JFinal 是基于 Java 语言的极速 WEB + ORM 框架，其核心设计目标是开发迅速、代码量少、学习简单、功能强大、轻量级、易扩展、Restful。在拥有Java语言所有优势的同时再拥有ruby、python等动态语言的开发效率！尤其是jfinal-undertow的出现，<strong>直接影响到一部分已经转IDEA的开发者回到了eclipse！</strong></p>
+<p>Jboot是一个开源的分布式、商业级的微服务架构，基于JFinal的MVC，其实应该这样介绍，<strong>JFinal+jboot面向的竞手就是Spring Boot + Spring Cloud</strong>，当然，以目前的体量可以说是蚂蚁吞大象，但是将来，谁知道呢，做人嘛，总要有理想。</p>
+</blockquote>
+<p>Gitee地址：<a target="_blank" rel="noopener" href="https://gitee.com/fuhai/jpress">https://gitee.com/fuhai/jpress</a></p>
+<p><strong>你会看到我对于上面的UI部分，没有选择的就没有直接评价，但是这里却说了很多，因为Jpress真的是一套非常好的开源框架：</strong></p>
+<ol>
+<li>继承JFinal的轻量级，基础代码非常少，很容易理解和二次开发</li>
+<li>写好了最基本的后台管理，并配套对接了各种云存储、微信公众号、腾讯邮箱、阿里云短信等本地化服务</li>
+<li>模块化做的非常好，新增模块相对非常容易，通过基本模块可以变化成博客、论坛、问答、商城等各式各样的web应用</li>
+</ol>
+<p><strong>说了那么多优点，是为什么原因让我放弃使用呢？主要有两点：</strong></p>
+<ol>
+<li><p>docker hub上的镜像版本太低了，还是1.05的（刚刚上去看，终于更新了），所以只能自己下源码封装最新版，这就带来的第二个问题</p>
+<p><img src="https://s2.loli.net/2022/12/30/vrxEUb5XBPod4Lq.png"></p>
+</li>
+<li><p>作者不知道出于什么目的，可能是为了<strong>极致的拆分服务吧？</strong>将JPress拆成非常多的模块，大概十几个，同时引用了非常多的maven类库，直接导致我的本地maven库变成了1.95G，我想说微服务的概念在服务拆分这部分，颗粒度还是有争议的，文章|页面|附件|用户|微信|模版|系统，这些应用拆成了十几个模块可能是有些太细了。</p>
+<p><strong>当然我相信这都是过程，无论如何Jpress都是非常优秀的开源平台，并且目前正在不断调整作品的定位，作者的更新速度还是非常快。从上面的tags大小也能看出来，作者应该是意识到了jar包引用的问题，并且已经修复了，同时看到最新的版本里面添加了代码生成器，不过短时间我暂时没时间深入研究了，也许后期等做SNS应用的时候可以再深入研究一下</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="云存储："><a href="#云存储：" class="headerlink" title="云存储："></a>云存储：</h2><p>其实云存储没什么好选的，阿里的虽然流量免费但是存储空间按月收费，费用不高，但，收费。又拍云的CDN很不错，但是收费。七牛云做完实名认证之后<strong>有10G的免费空间</strong>可以使用，下载流量也是10G之内免费，唯一需要付费的就是Https的流量。<strong>嗯，怎么看都像一个个人开发者的思考逻辑，而不是公司行为，啧啧。</strong></p>
+<h2 id="开始组装"><a href="#开始组装" class="headerlink" title="开始组装"></a>开始组装</h2><p>系统都选好了，那么接下来就是组装了，组装非常简单：</p>
+<p><img src="https://s2.loli.net/2022/12/30/VW2yPTYmnG95dUR.png"></p>
+<h3 id="对Halo进行二次开发"><a href="#对Halo进行二次开发" class="headerlink" title="对Halo进行二次开发"></a>对Halo进行二次开发</h3><p>首先clone最新的Halo源码，然后抛出我们所需要的API，这里主要是根据分类和根据标签查询文章，在<code>package cc.ryanc.halo.web.controller.api.ApiPostController;</code>里面添加一个方法：通过文章分类查找文章</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(value = &quot;/categories/&#123;categorieName&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> JsonResult <span class="title function_">posts</span><span class="params">(<span class="meta">@PathVariable(value = &quot;categorieName&quot;)</span> String categorieName)</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> Page&lt;Post&gt; posts = postService.findPostByCategories(categoryService.findByCateName(categorieName));</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">null</span> == posts) &#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">JsonResult</span>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">JsonResult</span>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), posts);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，这里的<code>findPostByCategories</code>方法需要传入<code>Categories</code>，categoryService里面有一个写好的方法<code>findByCateName</code>，在因此需要在类上面<code>categoryService</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> CategoryService categoryService;</span><br></pre></td></tr></table></figure>
+
+<p>OK了，就这么简单，接下来直接用源码里面的dockerfile打包成镜像扔到服务器上就可以了。</p>
+<p>作者还非常贴心的整合了个docker-compose文件，也可以用，不过我是直接敲命令的。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;2&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">443</span><span class="string">:443</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/nginx/conf.d:/etc/nginx/conf.d</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/nginx/vhost.d:/etc/nginx/vhost.d</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/usr/share/nginx/html:/usr/share/nginx/html</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/nginx/certs:/etc/nginx/certs:ro</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">halo:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ruibaby/halo</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">halo</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8090</span><span class="string">:8090</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VIRTUAL_PORT=8090</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VIRTUAL_HOST=localhost</span>  <span class="comment"># 监听的地址（务必修改）</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">LETSENCRYPT_HOST=localhost</span> <span class="comment"># 证书的域名 （务必修改）</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">LETSENCRYPT_EMAIL=i@example.com</span> <span class="comment"># 证书所有者的邮箱，快过期时会提醒（务必修改）</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DB_USER=admin</span> <span class="comment"># h2数据库用户名，自定义（务必修改）</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DB_PASSWORD=123456</span> <span class="comment"># h2数据库密码，自定义（务必修改）</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">~/halo:/root/halo</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">docker-gen:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jwilder/docker-gen</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">docker-gen</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/tmp/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/nginx/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro</span></span><br><span class="line">    <span class="attr">volumes_from:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">entrypoint:</span> <span class="string">/usr/local/bin/docker-gen</span> <span class="string">-notify-sighup</span> <span class="string">nginx</span> <span class="string">-watch</span> <span class="string">-wait</span> <span class="string">5s:30s</span></span><br><span class="line">      <span class="string">/etc/docker-gen/templates/nginx.tmpl</span> <span class="string">/etc/nginx/conf.d/default.conf</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">letsencrypt-nginx-proxy-companion:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jrcs/letsencrypt-nginx-proxy-companion</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">letsencrypt-nginx-proxy-companion</span></span><br><span class="line">    <span class="attr">volumes_from:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/nginx/certs:/etc/nginx/certs:rw</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NGINX_DOCKER_GEN_CONTAINER=docker-gen</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置Halo后台多媒体文件保存在七牛云"><a href="#配置Halo后台多媒体文件保存在七牛云" class="headerlink" title="配置Halo后台多媒体文件保存在七牛云"></a>配置Halo后台多媒体文件保存在七牛云</h3><p>这个操作比较简单，直接在后台设置-博客设置-附件设置里面选择，并填写入对应申请的信息即可，<strong>Bucket</strong>就是你对象存储空间的名字，一开始我也是懵逼半天。</p>
+<p><img src="https://s2.loli.net/2022/12/30/hgzsuybkAjvldWX.png"></p>
+<h3 id="用ColorUI开发小程序展示页面"><a href="#用ColorUI开发小程序展示页面" class="headerlink" title="用ColorUI开发小程序展示页面"></a>用ColorUI开发小程序展示页面</h3><p>ColorUI的使用方法异常简单，Demo就在源码里面，所以虽然群里面一直有人喊让作者写文档，我觉得除了自定义tabBar之外应该都不太用写吧？整个源码就两个文件夹<strong>template</strong>和<strong>demo</strong></p>
+<p><img src="https://s2.loli.net/2022/12/30/XkTiNVMe3RrI2m4.png"></p>
+<p><strong>查看demo的方法：</strong>先自己建一个空的小程序，把路径里面除了<strong>project.config.json</strong>其他的文件全都删掉，然后把demo文件夹里面除了project.config.json的所有内容复制小程序路径里面，直接微信开发者工具打开就可以了，所有的实现都在里面，喜欢那个样式直接复制即可。</p>
+<p><strong>如果需要在现有小程序里面引用：</strong></p>
+<ol>
+<li>需要复制<strong>colorui.wxss</strong>和<strong>icon.wxss</strong>两个文件到你的小程序根目录，如果你开启了云开发的话，就是在<strong>miniprogram</strong>下</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/12/30/v1w6pSEcU4MeTjR.png"></p>
+<ol start="2">
+<li><p>在<strong>app.wxss</strong>里面加入引用</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&quot;icon.wxss&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;colorui.wxss&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>view {<br>  overflow: initial;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">3. **喜欢哪个就复制哪个wxml就可以了，page里面的wxss不用管**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 自定义tabBar的说明</span><br><span class="line"></span><br><span class="line">  需要多说一句的是**自定义tabBar**，作者在2.0.5版本里面加入了自定义tabBar，不过微信官方支持自定义的基础库版本是2.5以上，所以设置自定义tabBar需要考虑清楚，如果确定要用，那么也是分两步：</span><br><span class="line"></span><br><span class="line">  - 首先，需要把**demo**包里面的**custom-tab-bar文件夹**复制进小程序根目录，就是跟**app.json**的同级目录</span><br><span class="line">  - 然后在app.json里面的**&quot;tabBar&quot;**部分加入**&quot;custom&quot;: true**</span><br><span class="line"></span><br><span class="line">  此时就可以开启自定义的tarBar了，之后的tarBar维护和更改都应该在**custom-tab-bar文件夹**内进行配置，而不是在app.json里面配置，这里在安利一点，由于使用了自定义tarBar，我们的tarBar可以实现透明效果了，同时icon可以直接用字体图标而不是81px的图片，demo当中仍然使用的是图片，可以参考我下面这两个文件的写法。</span><br><span class="line"></span><br><span class="line">  `index.js`</span><br><span class="line"></span><br><span class="line">  ```javascript</span><br><span class="line">  Component(&#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">      addGlobalClass: true,</span><br><span class="line">    &#125;,</span><br><span class="line">    data: &#123;</span><br><span class="line">      selected: 0,</span><br><span class="line">      color: &quot;#808080&quot;,</span><br><span class="line">      selectedColor: &quot;#FFFFFF&quot;,</span><br><span class="line">      backroundColor: &quot;#000&quot;,</span><br><span class="line">      modalName:false,</span><br><span class="line">      list: [&#123;</span><br><span class="line">        pagePath: &quot;/pages/index/index&quot;,</span><br><span class="line">        icon:&quot;icon-repeal&quot;,</span><br><span class="line">        text: &quot;来往&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &quot;/pages/halo/index&quot;,</span><br><span class="line">          icon: &quot;icon-comment&quot;,</span><br><span class="line">          text: &quot;课堂&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &quot;/pages/translator/translator&quot;,</span><br><span class="line">          icon: &quot;icon-cart&quot;,</span><br><span class="line">          text: &quot;翻译&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &quot;/pages/walk/walk&quot;,</span><br><span class="line">          icon: &quot;icon-footprint&quot;,</span><br><span class="line">          text: &quot;漫步&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          pagePath: &quot;/pages/halo/index&quot;,</span><br><span class="line">          icon: &quot;icon-list&quot;,</span><br><span class="line">          text: &quot;生活&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      switchTab(e) &#123;      </span><br><span class="line">        const url = e.currentTarget.dataset.path</span><br><span class="line">        console.log(e)   </span><br><span class="line">        wx.switchTab(&#123;</span><br><span class="line">          url</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    pageLifetimes: &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>   <code>index.wxml</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;cu-bar tabbar bg-black shadow padding-tb-sm&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&#x27;action &#123;&#123;index == 2 ? &quot;add-action&quot; : &quot;&quot;&#125;&#125;&#x27;</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;index&quot;</span> <span class="attr">data-path</span>=<span class="string">&quot;&#123;&#123;item.pagePath&#125;&#125;&quot;</span> <span class="attr">data-index</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;switchTab&quot;</span> <span class="attr">style</span>=<span class="string">&#x27;color: &#123;&#123;selected === index ? selectedColor : color&#125;&#125;&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;index != 2&#125;&#125;&quot;</span> <span class="attr">class</span>=<span class="string">&#x27;&#123;&#123;item.icon&#125;&#125;&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;index == 2&#125;&#125;&quot;</span> <span class="attr">class</span>=<span class="string">&#x27;cu-btn icon-order bg-bjfunred shadow&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    &#123;&#123;item.text&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用html2wxml插件进行html页面渲染"><a href="#使用html2wxml插件进行html页面渲染" class="headerlink" title="使用html2wxml插件进行html页面渲染"></a>使用html2wxml插件进行html页面渲染</h3><p>因为我们是用小程序来展现API的文章内容，因此传过来的内容为html格式，这时候就需要html2wxml插件来将html文件转为wxml文件格式，并呈现出来，直接在小程序后台可以搜索<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/wxopen/pluginbasicprofile?action=intro&appid=wxa51b9c855ae38f3c">html2wxml富文本组件</a>并在小程序后台开通<br><img src="https://s2.loli.net/2022/12/30/aoubPVZ2OMHmUDs.png"></p>
+<p>在app.json里面进行插件声明：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;plugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;htmltowxml&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.3.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;provider&quot;</span><span class="punctuation">:</span> <span class="string">&quot;wxa51b9c855ae38f3c&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在需要页面的json文件中进行如下注册：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;usingComponents&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;htmltowxml&quot;</span><span class="punctuation">:</span> <span class="string">&quot;plugin://htmltowxml/view&quot;</span></span><br><span class="line"> <span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>最后在需要页面的wxml文件里面直接使用，将html文件内容注入标签即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&#x27;margin-lrji solid-top padding-top&#x27;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">htmltowxml</span> <span class="attr">text</span>=<span class="string">&quot;&#123;&#123;post.postContent&#125;&#125;&quot;</span> <span class="attr">highlightStyle</span>=<span class="string">&quot;&#123;&#123;style&#125;&#125;&quot;</span> <span class="attr">linenums</span>=<span class="string">&quot;&#123;&#123;false&#125;&#125;&quot;</span> <span class="attr">showLoading</span>=<span class="string">&quot;&#123;&#123;false&#125;&#125;&quot;</span> <span class="attr">bindWxmlTagATap</span>=<span class="string">&quot;wxmlTagATap&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">htmltowxml</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>最后看一下呈现效果：</p>
+<p><img src="https://s2.loli.net/2022/12/30/74Mutmh8DJWdUaf.png"></p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/%E8%B0%88%E4%B8%80%E8%B0%88%E5%B1%B1%E6%B5%B7%E7%BB%8F/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>谈一谈山海经</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Typora%E5%86%99%E6%96%87%E7%AB%A0/" target="_self">
+                <span>如何使用Typora写文章</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A5%94%E5%AD%90"><span class="toc-text">楔子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8FUI%E5%BA%93%EF%BC%9A"><span class="toc-text">小程序UI库：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%9A"><span class="toc-text">内容管理系统：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E5%AD%98%E5%82%A8%EF%BC%9A"><span class="toc-text">云存储：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E7%BB%84%E8%A3%85"><span class="toc-text">开始组装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9Halo%E8%BF%9B%E8%A1%8C%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91"><span class="toc-text">对Halo进行二次开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHalo%E5%90%8E%E5%8F%B0%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E5%9C%A8%E4%B8%83%E7%89%9B%E4%BA%91"><span class="toc-text">配置Halo后台多媒体文件保存在七牛云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8ColorUI%E5%BC%80%E5%8F%91%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2"><span class="toc-text">用ColorUI开发小程序展示页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8html2wxml%E6%8F%92%E4%BB%B6%E8%BF%9B%E8%A1%8Chtml%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93"><span class="toc-text">使用html2wxml插件进行html页面渲染</span></a></li></ol></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>Flutter写个Nas音乐播放器(四) | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">Flutter写个Nas音乐播放器(四)</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2023-01-14 16:50
+      </span>
+      <span class="post-pubtime">
+        <i class="iconfont icon-updatetime" title="更新时间"></i> 2023-01-15 15:54
+      </span>
+      <span class="post-count">≈ 2.9k字</span>
+      <span class="post-count">≈ 11分钟</span>
+    </div>
+    <div class="markdown-body"><p>今天把拖了好久的首页写完了，包括了三个：随机专辑、最多播放歌曲列表以及最近添加专辑</p>
+<p>其实这个APP和网易云最大的不同就是这些歌都是你自己收集起来听的，所以那些推荐的算法都不需要了</p>
+<h3 id="CustomScrollView"><a href="#CustomScrollView" class="headerlink" title="CustomScrollView"></a>CustomScrollView</h3><p>首页最麻烦的是横向列表和纵向列表混排，不过也不是很复杂，主要是一定记得给固定高度和宽度，或者是最大宽度最大高度什么的，不然非常容易报错</p>
+<p>首先就是让人又爱又恨的<strong>Sliver</strong>，自带的动画省却了好多事情，不过为了这些自动化的功能，导致只有少部分控件支持当他的<strong>child</strong>。但是好在官方给了个<strong>SliverToBoxAdapter</strong>组件，让不是他<strong>child</strong>的组件可以套层皮，这就很nice</p>
+<p>布局嘛，就是一个横向滚动的10张随机专辑，下面是一个10首最多播放的纵向歌曲列表，再下面是最近添加的横向的10张专辑，可能把最多播放歌曲改成5个更好看一点？</p>
+<p><img src="https://s2.loli.net/2023/01/13/OHhjqkunaQwzP4p.png" alt="WechatIMG650"></p>
+<p>实现也比较简单，除了亲儿子<strong>SliverList</strong>控件之外，比如标题部分要用<strong>SliverToBoxAdapter</strong>套一下就可以了，直接看代码吧</p>
+<p>因为我要兼容桌面端，桌面除了苹果的魔术鼠标可以左右滑动，一般的鼠标是没有这个功能的，所以需要加一个左右滑动的按钮，给桌面端来点击</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> CustomScrollView(</span><br><span class="line">      slivers: &lt;Widget&gt;[</span><br><span class="line">        <span class="comment">//这个是套首页文本的</span></span><br><span class="line">        SliverToBoxAdapter(</span><br><span class="line">          child: Container(</span><br><span class="line">              padding: leftrightPadding,</span><br><span class="line">              child: Text(indexLocal, style: titleText1)),</span><br><span class="line">        ),</span><br><span class="line">        <span class="keyword">if</span> (_albums != <span class="keyword">null</span> &amp;&amp; _albums!.length &gt; <span class="number">0</span>)</span><br><span class="line">          SliverToBoxAdapter(</span><br><span class="line">            <span class="comment">//这个套横向的标题栏，包括文本和左右按钮，我写了个公共文件方便套用</span></span><br><span class="line">              child: MySliverControlBar(</span><br><span class="line">            title: <span class="string">&quot;随机专辑&quot;</span>,</span><br><span class="line">            controller: _randomAlbumcontroller,</span><br><span class="line">          )),</span><br><span class="line">        <span class="keyword">if</span> (_albums != <span class="keyword">null</span> &amp;&amp; _albums!.length &gt; <span class="number">0</span>)</span><br><span class="line">          SliverToBoxAdapter(</span><br><span class="line">            <span class="comment">//这个套横向的滚动图片，我写了个公共文件方便套用</span></span><br><span class="line">              child: MySliverControlList(</span><br><span class="line">            controller: _randomAlbumcontroller,</span><br><span class="line">            albums: _albums!,</span><br><span class="line">            url: _imageURL!,</span><br><span class="line">          ))</span><br><span class="line">        ]</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+
+<p>这是首页build里面的内容，然后<strong>MySliverControlBar</strong>里面就很简单，就是一个Row套一个Row这样布局</p>
+<p><strong>MySliverControlList</strong>里面其实就是一个横向的<strong>ListView</strong></p>
+<p>这里注意如果没有桌面端的需求，就是你不用手动控制滚动的话，是不需要写控制器的，但是我需要控制滚动，就要注入一个控制器，控制方法比较简单，点击按钮触发即可</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">controller.animateTo(controller.offset - _size.width / <span class="number">2</span>,</span><br><span class="line">                        duration: <span class="built_in">Duration</span>(milliseconds: <span class="number">200</span>),</span><br><span class="line">                        curve: Curves.ease);</span><br></pre></td></tr></table></figure>
+
+<p>offset就是位移，大气点，点一次直接移动半屏，省的点半天都不带动的</p>
+<p>这样首页就做完了，后面想往上面再加什么内容，那都是分分钟的，目前就这样吧。</p>
+<p>另外今天把布局又做了一次调整，把下面的控制部分彻底拿到<strong>bottomNavigationBar</strong>里面去了，这样布局看起来简单的多了，后面可能还要再做一次调整就是中间的部分，准备直接把<strong>LeftScreen</strong>嵌到每个页面里面去，这样我就可以使用flutter整体路由了，可以去掉一个控制路由的全局变量</p>
+<p>最关键的是可以再做个判断，如果是桌面端就显示<strong>LeftScreen</strong>，如果是移动端就在<strong>bottomNavigationBar</strong>里面直接加导航，这样移动端顶部左侧的那个侧滑的按钮就可以去掉了。左侧空出来可以给Windows端留个位置，当客户端是Windows的时候，那个搜索和设置按钮可以贴到左边去，因为Windows的放大缩小和叉叉是在右边的，我为了好看设置了去掉标题栏，所以不能挡住叉叉</p>
+<h3 id="使用MediaQuery导致弹不出软键盘"><a href="#使用MediaQuery导致弹不出软键盘" class="headerlink" title="使用MediaQuery导致弹不出软键盘"></a>使用MediaQuery导致弹不出软键盘</h3><h4 id="移动端解决"><a href="#移动端解决" class="headerlink" title="移动端解决"></a>移动端解决</h4><p>这是多端开发的时候遇到的问题，因为<strong>Scaffold</strong>会根据不同设备去适配不同的窗体大小，而动态的取窗口大小的方法就是<strong>MediaQuery.of(context).size</strong>，这在桌面端开发的时候十分方便，但是在手机端遇到键盘弹出的时候就会出现问题</p>
+<p>如果你的panel高度用了size做强制定义，但是软键盘弹出其实窗体上滑的高度也是用这个计算的，所以上滑后你的panel又把键盘的位置顶下去了，就会导致软键盘频繁闪烁不会保持弹出的状态，而且页面不停的刷新</p>
+<p>如果想要做强制定位最好的方法还是使用<strong>window.physicalSize</strong>，，因为移动端的窗体大小是不会有变化的，然后为了做多端适应，最终使用的宽度应该是：<strong>window.physicalSize.width &#x2F; window.devicePixelRatio</strong>，同时在<strong>Scaffold</strong>里面加上<strong>resizeToAvoidBottomInset: false</strong>避免微小位移导致的报错</p>
+<h4 id="桌面端解决"><a href="#桌面端解决" class="headerlink" title="桌面端解决"></a>桌面端解决</h4><p>移动端设置好之后，桌面端会存在这样一个问题，<strong>window.physicalSize</strong>是调用一次的。但是，桌面端是可以拖动放大缩小的，如果我们在桌面端继续使用<strong>window.physicalSize</strong>就会导致放大缩小的时候panel还是原来定好的高度，这时候我们又希望它动态做出调整，有两个方法可以做到，一个是添加一个窗体的监听器，当窗体大小变化的时候重新获取window.physicalSize，还有一种最简单的方法是继续使用<strong>window.physicalSize</strong>，但是把它放到全局变量里面去</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ValueNotifier&lt;<span class="built_in">double</span>&gt; windowsWidth =</span><br><span class="line">    ValueNotifier&lt;<span class="built_in">double</span>&gt;(<span class="built_in">window</span>.physicalSize.width / <span class="built_in">window</span>.devicePixelRatio);</span><br><span class="line"></span><br><span class="line">ValueNotifier&lt;<span class="built_in">double</span>&gt; windowsHeight =</span><br><span class="line">    ValueNotifier&lt;<span class="built_in">double</span>&gt;(<span class="built_in">window</span>.physicalSize.height / <span class="built_in">window</span>.devicePixelRatio);</span><br></pre></td></tr></table></figure>
+
+<p>然后在最外层build的时候，就是<strong>Saffold</strong>外面，刚刚好可以获取到<strong>MediaQuery.of(context).size</strong>的地方做一次值的变化，然后其他地方是不需要做Value监听的，因为窗体变化的时候flutter会自动<strong>rebuild saffold</strong>，这个时候优先触发这两个数值的改变，然后才去渲染后面的，渲染的时候自然取的就是新值了，不需要再做监听了，能偷点懒就偷点懒吧，那个值监听又要套一层，各种套娃看着太难受了</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当不是移动端的时候使用这个可以动态监听窗体变化</span></span><br><span class="line">    <span class="comment">//如果是移动端的话，窗体不会变化</span></span><br><span class="line">    <span class="keyword">if</span> (!isMobile.value) &#123;</span><br><span class="line">      windowsWidth.value = MediaQuery.of(context).size.width;</span><br><span class="line">      windowsHeight.value = MediaQuery.of(context).size.height;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，就可以用最少的代码来完成移动端和桌面端的适配了</p>
+<h3 id="正在播放的磨砂效果"><a href="#正在播放的磨砂效果" class="headerlink" title="正在播放的磨砂效果"></a>正在播放的磨砂效果</h3><p>原本我是想“规矩”一点，把顶部和底部都拆到<strong>AppBar</strong>和<strong>bottomSheet</strong>里面去，但是在写正在播放页面的时候改变了想法，因为做底部弹窗的时候，我希望直接弹出一个整屏的页面，而不是卡在<strong>AppBar</strong>和<strong>bottomSheet</strong>中间的，这样即便做了磨砂玻璃的效果，看上去也…其实还挺好看，不过嗯，我有强迫症…</p>
+<p><img src="https://s2.loli.net/2023/01/14/4TIs16giHNxMPdm.png" alt="WechatIMG21777"></p>
+<p>这种正在播放的弹窗感觉就…不好看，所以还是延续我的暴力思路，直接把顶部和底部都写到自己的控件里面实现全屏的效果，同时在弹出的页面可以重新布局播放控制的按钮，这样给移动多放点按钮上去。</p>
+<p>这里设置的是**BoxDecoration(color: Colors.black.withOpacity(0.7))**，我觉得其实可以设置到0.8左右</p>
+<p>实现方法就是用Stack套一层，看代码</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Stack(</span><br><span class="line">        children: &lt;Widget&gt;[</span><br><span class="line">          ConstrainedBox(</span><br><span class="line">              constraints: <span class="keyword">const</span> BoxConstraints.expand(),</span><br><span class="line">              child: ValueListenableBuilder&lt;<span class="built_in">Map</span>&gt;(</span><br><span class="line">                  valueListenable: activeSong,</span><br><span class="line">                  builder: ((context, value, child) &#123;</span><br><span class="line">                    <span class="keyword">return</span> ClipRRect(</span><br><span class="line">                      <span class="comment">//这里设置背景图片，其实可以直接Image的，不需要做个圆角矩形，我是复制过来的，无所谓啦</span></span><br><span class="line">                      borderRadius: BorderRadius.circular(<span class="number">15</span>),</span><br><span class="line">                      child: (value.isEmpty)</span><br><span class="line">                          ? Image.asset(<span class="string">&quot;assets/images/logo.jpg&quot;</span>)</span><br><span class="line">                          : CachedNetworkImage(</span><br><span class="line">                              imageUrl: value[<span class="string">&quot;url&quot;</span>],</span><br><span class="line">                              fit: BoxFit.cover,</span><br><span class="line">                              placeholder: (context, url) &#123;</span><br><span class="line">                                <span class="keyword">return</span> AnimatedSwitcher(</span><br><span class="line">                                  child: Image.asset(<span class="string">&quot;assets/images/logo.jpg&quot;</span>),</span><br><span class="line">                                  duration:</span><br><span class="line">                                      <span class="keyword">const</span> <span class="built_in">Duration</span>(milliseconds: imageMilli),</span><br><span class="line">                                );</span><br><span class="line">                              &#125;,</span><br><span class="line">                            ),</span><br><span class="line">                    );</span><br><span class="line">                  &#125;))),</span><br><span class="line">          Center(</span><br><span class="line">            child: ClipRect(</span><br><span class="line">              child: BackdropFilter(</span><br><span class="line">                filter: ImageFilter.blur(sigmaX: <span class="number">10.0</span>, sigmaY: <span class="number">10.0</span>),</span><br><span class="line">                child: Container(</span><br><span class="line">                  width: windowsWidth.value,</span><br><span class="line">                  height: windowsHeight.value,</span><br><span class="line">                  decoration:</span><br><span class="line">                      BoxDecoration(color: Colors.black.withOpacity(<span class="number">0.8</span>)), <span class="comment">//这里是控制透明度的，然后前面的颜色设置成白色和黑色有不同的效果，都可以调整</span></span><br><span class="line">                  child:... <span class="comment">//放上层控件</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://s2.loli.net/2023/01/14/yVBtma79ERxfC82.jpg" alt="1673685301772"></p>
+<h3 id="歌词"><a href="#歌词" class="headerlink" title="歌词"></a>歌词</h3><p>歌词的实现使用的是pub上唯一的也是很不错的第三方组件<a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_lyric">flutter_lyric: ^2.0.4+6</a>，实现起来并不难作者写了个demo而且把它放到网上去了。可以把源码里面的example下载下来对应着看就好了，歌词本身是“画出来的”，所以相当稳定，由于我的播放控制和进度条都是用<strong>StreamBuilder</strong>获取的，所以需要定义的东西比作者的例子里面少了不少</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lyricModel =</span><br><span class="line">    LyricsModelBuilder.create().bindLyricToMain(normalLyric).getModel();  <span class="comment">//歌词文件normalLyric就是个字符串，照着抄就行</span></span><br><span class="line"><span class="keyword">var</span> lyricUI = UINetease();  <span class="comment">//拿到UI文件，这个后面也可以自己改，字体颜色等等</span></span><br><span class="line"><span class="keyword">var</span> lyricPadding = <span class="number">40.0</span>;    <span class="comment">//直接复制了，可以改</span></span><br><span class="line"><span class="keyword">var</span> playing = <span class="keyword">true</span>;         <span class="comment">//这个是控制歌词播放的，作者用来联动按钮控制歌词高亮，我不需要联动直接传了true，后面需要加到自己的暂停按钮里面去（其实不加好像也行...就一直true呗）</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在<strong>initState</strong>里面加两条</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lyricUI.highlight = <span class="keyword">true</span>;  <span class="comment">//设置高亮</span></span><br></pre></td></tr></table></figure>
+
+<p>然后构建歌词读取UI的Widget，并把它放到想要的位置</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">  Widget _buildReaderWidget() &#123;</span><br><span class="line">    <span class="keyword">return</span> StreamBuilder&lt;PositionData&gt;(</span><br><span class="line">        stream: _positionDataStream,</span><br><span class="line">        builder: (context, snapshot) &#123;</span><br><span class="line">          <span class="keyword">final</span> positionData = snapshot.data;</span><br><span class="line">          <span class="keyword">final</span> position = positionData?.position.inMilliseconds ?? <span class="number">0</span>;</span><br><span class="line">          <span class="comment">//我的定位信息是用StreamBuilder控制的，所以要套个头</span></span><br><span class="line">          <span class="keyword">return</span> LyricsReader(</span><br><span class="line">            padding: EdgeInsets.symmetric(horizontal: lyricPadding),</span><br><span class="line">            model: lyricModel,  <span class="comment">//这里需要注意的是，因为这个StreamBuilder是一直在跑的，这里面可不敢放变量赋值，不然会一直run，如果跟我一样做了歌词的全局变量来读的话，检测值一定要放到StreamBuilder的外层！！！否则字幕会一直闪烁</span></span><br><span class="line">            position: position,</span><br><span class="line">            lyricUi: lyricUI,</span><br><span class="line">            playing: playing,</span><br><span class="line">            <span class="comment">//设置大小</span></span><br><span class="line">            size: Size(windowsWidth.value / <span class="number">2</span>, windowsHeight.value / <span class="number">2</span>),</span><br><span class="line">            emptyBuilder: () =&gt; Center(</span><br><span class="line">              child: Text(</span><br><span class="line">                <span class="string">&quot;No lyrics&quot;</span>,</span><br><span class="line">                style: lyricUI.getOtherMainTextStyle(),</span><br><span class="line">              ),</span><br><span class="line">            ),</span><br><span class="line">            selectLineBuilder: (progress, confirm) &#123;</span><br><span class="line">              <span class="keyword">return</span> Row(</span><br><span class="line">                children: [</span><br><span class="line">                  IconButton(</span><br><span class="line">                      onPressed: () &#123;</span><br><span class="line">                        LyricsLog.logD(<span class="string">&quot;点击事件&quot;</span>);</span><br><span class="line">                        confirm.call();</span><br><span class="line">                        <span class="comment">//这里是更新seek的位置，不过我那个进度条做好了监听，所以不需要setState,直接改就可以了</span></span><br><span class="line">                        <span class="comment">//setState(() &#123;</span></span><br><span class="line">                        widget.player.seek(<span class="built_in">Duration</span>(milliseconds: progress));</span><br><span class="line">                        <span class="comment">// &#125;);</span></span><br><span class="line">                      &#125;,</span><br><span class="line">                      icon: Icon(Icons.play_arrow, color: kGrayColor)),</span><br><span class="line">                  Expanded(</span><br><span class="line">                    child: Container(</span><br><span class="line">                      decoration: BoxDecoration(color: kGrayColor),</span><br><span class="line">                      height: <span class="number">1</span>,</span><br><span class="line">                      width: <span class="built_in">double</span>.infinity,</span><br><span class="line">                    ),</span><br><span class="line">                  ),</span><br><span class="line">                  Text(</span><br><span class="line">                    <span class="comment">//这是自己写的方法，用于把Duration改成小时、分钟、秒这样的字符串</span></span><br><span class="line">                    formatDurationMilliseconds(progress),,</span><br><span class="line">                    style: TextStyle(color: kGrayColor),</span><br><span class="line">                  )</span><br><span class="line">                ],</span><br><span class="line">              );</span><br><span class="line">            &#125;,</span><br><span class="line">          );</span><br><span class="line">        &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span> formatDurationMilliseconds(<span class="built_in">int</span> _duration) &#123;</span><br><span class="line">  <span class="built_in">Duration</span> _dura = <span class="built_in">Duration</span>(milliseconds: _duration);</span><br><span class="line">  <span class="keyword">if</span> (_dura.inHours != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">String</span> hours = _dura.inHours.toString().padLeft(<span class="number">0</span>, <span class="string">&#x27;2&#x27;</span>);</span><br><span class="line">    <span class="built_in">String</span> minutes = _dura.inMinutes.remainder(<span class="number">60</span>).toString().padLeft(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    <span class="built_in">String</span> seconds = _dura.inSeconds.remainder(<span class="number">60</span>).toString().padLeft(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;<span class="subst">$hours</span>:<span class="subst">$minutes</span>:<span class="subst">$seconds</span>&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">String</span> minutes = _dura.inMinutes.remainder(<span class="number">60</span>).toString().padLeft(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    <span class="built_in">String</span> seconds = _dura.inSeconds.remainder(<span class="number">60</span>).toString().padLeft(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;<span class="subst">$minutes</span>:<span class="subst">$seconds</span>&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此歌词问题就解决了，后面只用传入不同的<strong>normalLyric</strong>就可以了，需要注意不要跑到进度条的值监控里面了，不然一直RUN的话歌词会不停的闪烁</p>
+<p>只是目前控件有一个问题，当你拖动歌词定位到某一句的时候，点击确定确实可以定位到想要的位置，但是歌词的滚动会被卡住。我看作者的demo里面也是这个样子，所以给作者提了个<a target="_blank" rel="noopener" href="https://github.com/ozyl/flutter_lyric/issues/23">issue</a>，看看后面怎么解决吧</p>
+<p><img src="https://s2.loli.net/2023/01/15/WCFZOToQYNlg47s.jpg" alt="1673766650968"></p>
+<p>然后关键的就是…怎么批量去找歌词…说不得可能还是要去用网易云的api了…</p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/Flutter%E5%86%99%E4%B8%AANas%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E4%BA%94/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>Flutter写个Nas音乐播放器(五)</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/Flutter%E5%86%99%E4%B8%AANas%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E4%B8%89/" target="_self">
+                <span>Flutter写个Nas音乐播放器(三)</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CustomScrollView"><span class="toc-text">CustomScrollView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8MediaQuery%E5%AF%BC%E8%87%B4%E5%BC%B9%E4%B8%8D%E5%87%BA%E8%BD%AF%E9%94%AE%E7%9B%98"><span class="toc-text">使用MediaQuery导致弹不出软键盘</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%A7%A3%E5%86%B3"><span class="toc-text">移动端解决</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%8C%E9%9D%A2%E7%AB%AF%E8%A7%A3%E5%86%B3"><span class="toc-text">桌面端解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%9C%A8%E6%92%AD%E6%94%BE%E7%9A%84%E7%A3%A8%E7%A0%82%E6%95%88%E6%9E%9C"><span class="toc-text">正在播放的磨砂效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%8C%E8%AF%8D"><span class="toc-text">歌词</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>

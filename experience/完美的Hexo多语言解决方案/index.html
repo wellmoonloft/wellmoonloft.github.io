@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>完美的Hexo多语言解决方案 | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">完美的Hexo多语言解决方案</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2021-04-07 14:35
+      </span>
+      <span class="post-pubtime">
+        <i class="iconfont icon-updatetime" title="更新时间"></i> 2022-12-17 23:19
+      </span>
+      <span class="post-count">≈ 1.6k字</span>
+      <span class="post-count">≈ 6分钟</span>
+    </div>
+    <div class="markdown-body"><blockquote>
+<p><strong>2022-12-17更新，这个方法可以安心服用，github page的新库域名就是原本的域名&#x2F;新库的库名，想用什么语言建议直接取对应语言的缩写，便于记忆和搜索，更关键的是相对于直接挂一个google翻译相比，最大的优势是google抓取</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>2022.11.30更新，node-version版本升级了，用12在管理后台会提示升级，虽然可以正常使用，不过代码里面checkout@v2改成v3、setup-node@v1改成v3、node-version改成16就可以了</strong></p>
+</blockquote>
+<h3 id="方案优点"><a href="#方案优点" class="headerlink" title="方案优点"></a>方案优点</h3><p>首先说一下我目前用的这套方案的优点：</p>
+<ul>
+<li>本地只部署一套Hexo，样式、文章都在一起维护（仅模版和配置文件几个不一样的地方）</li>
+<li>在访问的时候是独立的两套前台，完全沉浸式的阅读体验</li>
+<li>利用自动化部署，配置完毕之后可以专心写文章，不需要做额外的操作</li>
+<li>真正独立的分类、标签</li>
+<li>在Google analytics上会将两套前台视为一个网站集中进行数据呈现</li>
+<li>独立的站点地图，对Google抓链接更有效，便于进行SEO优化</li>
+</ul>
+<h3 id="有趣的发现"><a href="#有趣的发现" class="headerlink" title="有趣的发现"></a>有趣的发现</h3><p>Hexo的多语言方案是很多人都在考虑的问题，但是一直以来也没有特别完美的方案，目前主流的有两种：</p>
+<p>1、利用<code>hexo-generator-i18n</code>插件，在文章中加入<code>lang</code>标识来区分，然后在渲染的时候在利用模版程序判断生成</p>
+<p>2、直接部署两套Hexo，上传到不同的库当中，然后页面上添加手动切换</p>
+<p>我今天在采用第二种方案的时候，在配置Github Pages的地址时，发现一个有意思的事情，所以才有了我现在这个方案。</p>
+<p><img src="https://s2.loli.net/2022/12/30/Eg7U1NHxf4DMwzb.png" alt="image-20210407134200285"></p>
+<p>这是我创建的计划存放英文版Hexo的地址，你会发现，我并没有配置自定义域名，也没有开启强制Https，但是这个库<code>github.com/wellmoonloft/en</code>的地址自动变成了<code>https://www.igerm.ee/en/</code>，我猜测可能是我中文版Hexo配置了自定义域名，Github自动将<code>wellmoonloft.github.io</code>替换成了我的自定义域名，那么同一用户下创建的<code>en</code>仓库的地址就变成了这个样子，<strong>这简直太好了！</strong></p>
+<h3 id="多语言的方案"><a href="#多语言的方案" class="headerlink" title="多语言的方案"></a>多语言的方案</h3><p>下面说一下我思考的多语言方案：</p>
+<h4 id="1、采用多个配置文件（系统以及模版）"><a href="#1、采用多个配置文件（系统以及模版）" class="headerlink" title="1、采用多个配置文件（系统以及模版）"></a>1、采用多个配置文件（系统以及模版）</h4><p><img src="https://s2.loli.net/2022/12/30/XOWljJmfUvRGN3k.png" alt="image-20210407135116959"></p>
+<p>就我本身使用的主题，需要额外多配置三个文件：</p>
+<p>1、系统配置文件，用于区分不同的推送仓库</p>
+<p>2、主题配置文件，用于配置不同的按钮及风格（其实可以合并到系统配置的）</p>
+<p>3、模版文件，用于添加不同的页面切换（即中文版上面是<code>EN</code>，英文版上面是<code>中</code>）</p>
+<p>实际上我认为这三个文件可以再优化将区别全部放在系统配置文件当中，不过为了快速实现，因此先简单这样做</p>
+<h4 id="2、在自动部署的时候，进行多个库的推送"><a href="#2、在自动部署的时候，进行多个库的推送" class="headerlink" title="2、在自动部署的时候，进行多个库的推送"></a>2、在自动部署的时候，进行多个库的推送</h4><p>实现起来非常简单，可能很多人没想到，只需要在主库推送完毕后，<strong>把上面三个文件改一个名字，再次推送即可。</strong></p>
+<p>改文件名的代码我写的很生猛，就存放在根目录的<code>change_name.js</code>，如果有人帮忙改进一下不胜感激</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">rename</span>(<span class="string">&quot;_config.yml&quot;</span>, <span class="string">&quot;_config1.yml&quot;</span>, <span class="keyword">function</span>(<span class="params">err</span>)&#123;&#125;);</span><br><span class="line">fs.<span class="title function_">rename</span>(<span class="string">&quot;_config_en.yml&quot;</span>, <span class="string">&quot;_config.yml&quot;</span>, <span class="keyword">function</span>(<span class="params">err</span>)&#123;&#125;);</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">rename</span>(<span class="string">&quot;themes/oranges/_config.yml&quot;</span>, <span class="string">&quot;themes/oranges/_config1.yml&quot;</span>, <span class="keyword">function</span>(<span class="params">err</span>)&#123;&#125;);</span><br><span class="line">fs.<span class="title function_">rename</span>(<span class="string">&quot;themes/oranges/_config_en.yml&quot;</span>, <span class="string">&quot;themes/oranges/_config.yml&quot;</span>, <span class="keyword">function</span>(<span class="params">err</span>)&#123;&#125;);</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">rename</span>(<span class="string">&quot;source/CNAME&quot;</span>, <span class="string">&quot;source/NOUSE&quot;</span>, <span class="keyword">function</span>(<span class="params">err</span>)&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>简单解释一下（其实似乎不用），先将主文件改名，然后将英文版文件改成主文件即可，CNAME这个文件无法使用<code>skip_render</code>排除，因为我已经设置了主仓库的自定义域名，如果将这个文件也上传到英文版仓库，<strong>那么就会被频繁发邮件报错</strong>，像这样，所以也顺便给它改一个莫名其妙的名字就好了</p>
+<p><img src="https://s2.loli.net/2022/12/30/EDZTgi76bJSrFcB.png" alt="image-20210407135946670"></p>
+<h4 id="3、利用skip-render排除不同的文件"><a href="#3、利用skip-render排除不同的文件" class="headerlink" title="3、利用skip_render排除不同的文件"></a>3、利用skip_render排除不同的文件</h4><p>在<code>source/_posts</code>下面新建两个文件<code>cn</code>和<code>en</code>里面放中文和英文的文章，然后在系统配置文件当中利用<code>skip_render</code>来区分：</p>
+<p>在<code>_config.yml</code>里面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render</span>:</span><br><span class="line">  - _posts/en<span class="comment">/**</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>_config_en.yml</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render</span>:</span><br><span class="line">  - _posts/cn<span class="comment">/**</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4、在自动部署文件当中添加改名及部署"><a href="#4、在自动部署文件当中添加改名及部署" class="headerlink" title="4、在自动部署文件当中添加改名及部署"></a>4、在自动部署文件当中添加改名及部署</h4><p>在做这一步之前，记得在根目录添加改名的<code>js</code>文件，然后来修改自动部署配置文件，自动部署可以看我<a href="https://www.igerm.ee/experience/Hexo%E4%BD%BF%E7%94%A8GitHub%20Action%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">前面一篇文章</a>，然后这里看下新增部分的代码，即跟在<code>- name: Deploy</code>后面进行添加</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Hexo</span> <span class="string">Deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">if:</span> <span class="string">github.event.repository.owner.id</span> <span class="string">==</span> <span class="string">github.event.sender.id</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">source</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">ref:</span> <span class="string">master</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">Node.js</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&#x27;12&#x27;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">Hexo</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">ACTION_DEPLOY_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_DEPLOY_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$ACTION_DEPLOY_KEY&quot; &gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          chmod 700 ~/.ssh</span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          git config --global user.email &quot;wellmoonloft@gmail.com&quot;</span></span><br><span class="line"><span class="string">          git config --global user.name &quot;wellmoonloft&quot;</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g     </span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean</span></span><br><span class="line"><span class="string">          hexo generate</span></span><br><span class="line"><span class="string">          hexo deploy</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Change_Name</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          node change_name          </span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">Hexo</span> <span class="string">EN</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">ACTION_DEPLOY_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_DEPLOY_KEY_EN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$ACTION_DEPLOY_KEY&quot; &gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          chmod 700 ~/.ssh</span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts          </span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean</span></span><br><span class="line"><span class="string">          hexo generate</span></span><br><span class="line"><span class="string">          hexo deploy          </span></span><br></pre></td></tr></table></figure>
+
+<p>用于推送第二个仓库的代码从第45行开始<code>-name: Change_name</code></p>
+<p>1、首先运行改名的文件</p>
+<p>2、然后修改英文版仓库的私钥（这里有一点忘记说了，为了自动部署你需要给英文版仓库额外配置一对公私钥，私钥都放在这个仓库，公钥放在英文版仓库，这样源文件仓库就会有两个）</p>
+<p><img src="https://s2.loli.net/2022/12/30/bTYAwRGxKedoXrs.png" alt="image-20210407141134730"></p>
+<p>3、Hexo清、生、部三连</p>
+<p><strong>来看一下效果，Google翻译的，不要挑语病</strong></p>
+<p><img src="https://s2.loli.net/2022/12/30/LHrPBKe4aScAExF.png" alt="image-20210407140520848"></p>
+<p><img src="https://s2.loli.net/2022/12/30/q2XLOSJRKBnW4dx.png" alt="image-20210407140538753"></p>
+<h3 id="PS：后面有可能还有一个思路"><a href="#PS：后面有可能还有一个思路" class="headerlink" title="PS：后面有可能还有一个思路"></a>PS：后面有可能还有一个思路</h3><p>在部署的时候调用一个<code>NodeJS</code>程序，通过Google翻译的<code>API</code>自动将中文翻译成英文，保存在<code>en</code>文件夹里面</p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/%E7%BB%99hexo%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>给hexo添加utterances评论</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/Hexo%E4%BD%BF%E7%94%A8GitHub%20Action%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" target="_self">
+                <span>Hexo使用GitHub Action进行自动部署</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BC%98%E7%82%B9"><span class="toc-text">方案优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E8%B6%A3%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="toc-text">有趣的发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%AF%AD%E8%A8%80%E7%9A%84%E6%96%B9%E6%A1%88"><span class="toc-text">多语言的方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%87%87%E7%94%A8%E5%A4%9A%E4%B8%AA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E7%B3%BB%E7%BB%9F%E4%BB%A5%E5%8F%8A%E6%A8%A1%E7%89%88%EF%BC%89"><span class="toc-text">1、采用多个配置文件（系统以及模版）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%9C%A8%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E8%BF%9B%E8%A1%8C%E5%A4%9A%E4%B8%AA%E5%BA%93%E7%9A%84%E6%8E%A8%E9%80%81"><span class="toc-text">2、在自动部署的时候，进行多个库的推送</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%88%A9%E7%94%A8skip-render%E6%8E%92%E9%99%A4%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">3、利用skip_render排除不同的文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%9C%A8%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E6%96%87%E4%BB%B6%E5%BD%93%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%94%B9%E5%90%8D%E5%8F%8A%E9%83%A8%E7%BD%B2"><span class="toc-text">4、在自动部署文件当中添加改名及部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PS%EF%BC%9A%E5%90%8E%E9%9D%A2%E6%9C%89%E5%8F%AF%E8%83%BD%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AA%E6%80%9D%E8%B7%AF"><span class="toc-text">PS：后面有可能还有一个思路</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>如何使用Typora写文章 | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">如何使用Typora写文章</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2019-02-23 21:04
+      </span>
+      <span class="post-count">≈ 3.3k字</span>
+      <span class="post-count">≈ 11分钟</span>
+    </div>
+    <div class="markdown-body"><h2 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h2><p>工欲善其事必先利其器，作为一名<strong>编制外码农</strong>想要码文，是坚决不能用IDEA或者Sublime之类的IDE的，远古时期的印象笔记也可以弃之不用，长期不支持<strong>Markdown</strong>估计也确实流失了很多用户。</p>
+<blockquote>
+<p>Markdown 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式，语法格式非常简单，一般人对着列表把所有语法都尝试一遍大概十分钟左右就可以上手。</p>
+</blockquote>
+<p>至于为什么要用Markdown来进行码文？应该这样讲，码文最讨厌的事情其实就是格式排版，一般的写手在写作时一边要分心一边要拍版，不是说不能进行，只是效率非常低下。</p>
+<p>而作为有强迫症的人来讲，看到这段杂乱无章的排版，一定会分心，比如这里空两行、这段的间距要缩减，一直调整到满意的时候，你的灵感已经消失不见了。</p>
+<p>一边写内容，一边调格式，一心二用，非常分神，只想专注第写内容，应该怎么办？这时有两种选择：1、不管形式，写到一堆，写完再统一调整；2、在不影响写作的情况下，通过加几个简单的标记，让自己写的文章排版更清晰，并且以后可以生成编辑所需要的各种格式，第二种方法就诞生了Markdwon语法。</p>
+<h4 id="上面一段可以这样来写"><a href="#上面一段可以这样来写" class="headerlink" title="上面一段可以这样来写"></a>上面一段可以这样来写</h4><blockquote>
+<p>一边写内容，一边调格式，一心二用，非常分神，只想专注第写内容，应该怎么办？</p>
+</blockquote>
+<p>   <strong>这时有两种选择：</strong></p>
+<ul>
+<li>不管形式，写到一堆，写完再统一调整；</li>
+<li>在不影响写作的情况下，通过加几个简单的标记，让自己写的文章排版更清晰，并且以后可以生成编辑所需要的各种格式，第二种方法就诞生了<strong>Markdwon</strong>语法。</li>
+</ul>
+<p>以前的文章格式，并非生来如此，而是纸质印刷的需要。比如：段首要空两个字，段与段之间不留空行，直接引语都混在一段之中。这些并不是为了便于阅读，而是为了节约纸张。</p>
+<p>而电子阅读时代，屏幕的空间滚动起来，可以无限大，但是跟纸张比起来，屏幕伤眼睛，容易使我们疲劳，因此人们需要更为清晰的排版，这就是Markdown存在的意义。</p>
+<p><img src="https://s2.loli.net/2022/12/30/8aXTjpzPOxLI4Nt.png"></p>
+<h2 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h2><p>选择其实并不纠结，Mac OS下的Markdown工具虽然多，但好用的也就两款，<a target="_blank" rel="noopener" href="http://25.io/mou/">Mou</a>是最好用的而且是国人开发，但是因为非常受欢迎，以至于开发者动了小心思，提前预告了新版本，并且大范围开放预购，圈了一轮钱之后就没有然后了，目前还不支持最新版的Mac OS。</p>
+<p>后来有开源界的某人实在看不过去，仿照Mou的功能和UI开发了一个新的开源App，就是<a target="_blank" rel="noopener" href="https://macdown.uranusjr.com/">MacDown</a>，但是可能是技术还不成熟的原因，MacDown在一段时间内经常会假死，需要强制重启才可以恢复使用，这对码农来讲是致命性的，就在这个时候<a target="_blank" rel="noopener" href="https://www.typora.io/">Typora</a>出现了，就好像在黑暗中有人驾着七彩祥云来拯救众生一样。</p>
+<p><strong>Typora</strong>的颜值非常高，与传统Markdown编辑器不同的是它并非一边写作一边预览，而是所见即所得。上它官网看看就会立刻被吸引。</p>
+<blockquote>
+<p>顺便说一句，Typora的官网也非常的…苹果，光那个页面就真的值得一看</p>
+</blockquote>
+<p>除了Mou的基本功能以外，Typora而且还支持很多其他功能，如生成目录，语法快捷键等，满满充斥着收费气质的它然而现在是免费的！</p>
+<p>来看一下代码显示，它支持各种主流代码显示，下面的是javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过云函数绕过腾讯https的机制，请求http的APi</span></span><br><span class="line">wx.<span class="property">cloud</span>.<span class="title function_">callFunction</span>(&#123;</span><br><span class="line">   <span class="attr">name</span>: <span class="string">&#x27;get_Parking_SpotCount&#x27;</span>,</span><br><span class="line">   <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">   <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;        </span><br><span class="line">      <span class="keyword">var</span> xx = res.<span class="property">result</span>.<span class="property">getParkingSpotCount</span></span><br><span class="line">      <span class="keyword">var</span> yy = xx.<span class="title function_">split</span>(<span class="string">&quot;:&quot;</span>)[<span class="number">2</span>]</span><br><span class="line">      <span class="comment">//console.log(yy.split(&quot;&#125;&quot;)[0])</span></span><br><span class="line">      that.<span class="title function_">setData</span>(&#123;</span><br><span class="line">        <span class="attr">carnumber</span>: yy.<span class="title function_">split</span>(<span class="string">&quot;&#125;&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">      &#125;)</span><br><span class="line">   wx.<span class="title function_">hideLoading</span>()</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">fail</span>: <span class="variable language_">console</span>.<span class="property">error</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接下来就要说到重点了，在写文章的时候，尤其是需要将文章发布到博客、微信公众号、简书等地方，都会遇到一个问题，插入图片。</p>
+<h4 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h4><p>我们平常需要插入文章应该怎么办？</p>
+<ol>
+<li>直接从网络上获取图片的链接地址，作为自己的图片链接（万一链接改变，图片便显示不出）</li>
+<li>直接本地文件的相对路径（万一博客需要共享，自然别人看不到图片）</li>
+<li>先通过别的平台上传图片，然后拷贝链接地址（操作较为麻烦）</li>
+<li>当然可以直接在简书上直接拖拽文件到编辑界面（但是写到一半需要保存，在云端总是感觉不安心）</li>
+</ol>
+<p><strong>优化后的解决方案就是：</strong></p>
+<ol>
+<li>使用<strong>Typora</strong>进行码文</li>
+<li>使用<strong>图床</strong>进行图片保存</li>
+<li>将图床上的<strong>图片地址</strong>写入Typora里面</li>
+<li>等待文章完成后，直接<strong>复制粘贴</strong>到博客、微信公众号、简书等地方</li>
+</ol>
+<p>这样听起来似乎步骤也很繁琐，但是放心，已经有人想到了这些，所以开发出了图床神器，可以通过拖拽、快捷键等方式上传图片，支持微博、七牛、又拍、阿里云、Imgur、Flickr、Amazon S3 等图床，自动保存 Markdown 格式链接，给你前所未有的插图体验。</p>
+<h4 id="再次优化的解决方案"><a href="#再次优化的解决方案" class="headerlink" title="再次优化的解决方案"></a>再次优化的解决方案</h4><ol>
+<li>使用<strong>Typora</strong>进行码文</li>
+<li>复制图片到内容里</li>
+<li>等待文章完成后，直接复制粘贴到博客、微信公众号、简书等地方</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/12/30/M2reuAfkGpOgICW.png"></p>
+<p><strong>比如这样，设置好之后，我上面那张图片的插入只用了三秒钟而已，如何操作呢？</strong></p>
+<ol>
+<li><code>command + control shift + 4</code>  截屏</li>
+<li><code>command + u </code>  上传截图到七牛云的图床</li>
+<li><code>command + v</code>  粘贴Markdown的语法命令到文章中，搞定！</li>
+</ol>
+<h2 id="七牛云"><a href="#七牛云" class="headerlink" title="七牛云"></a>七牛云</h2><p>说起七牛云也算是业界良心的典范了，早期是做视频流云服务起家，当时在深圳的时候为了他们的流媒体服务，还差一点合作。</p>
+<p>目前七牛云的对象存储、融合CDN，只要是个人实名认证之后都是免费的，对象存储免费10GB、上传不限流量，CDN每个月10G的免费流量，其他的云端产品都有限时免费的试用，再次强调是业界良心。</p>
+<p>PS：企业认证的话有20G的免费空间哟，资金紧张的公司可以用。</p>
+<blockquote>
+<p>能够做到云服务行业前十，除了技术牛X以外，企业的眼界和心胸更加重要，吃亏不行占便宜没够、固步自封的企业就只能活在政策的保护中了。</p>
+</blockquote>
+<p>OK，回归正题。</p>
+<ol>
+<li>注册<a target="_blank" rel="noopener" href="https://www.qiniu.com/">七牛云</a>账号</li>
+<li>进行个人实名认证，使用个人认证的支付宝可以快速提交（阿里–一个富有社会责任感的技术大牛）</li>
+<li>新建存储空间</li>
+<li>分配一个融合CDN的域名（如果自己没有域名的话可以用临时的域名，30天会更新一次，所以还是建议自己申请一个域名吧，在阿里云注册的域名也可以用，只需要进行CNAME解析就可以了）</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/12/30/k3IOaGeJqjtngWH.png"></p>
+<h2 id="图床工具"><a href="#图床工具" class="headerlink" title="图床工具"></a>图床工具</h2><p>有了免费的云存储空间之后，就可以把图片保存进去了。但是如果每次都是在网页里面点击上传，再复制链接到文章里面，那未免也太麻烦了，所以这个时候我们需要一个工具，可以自动的把图片上传到我们的七牛云存储里面，并且把图片地址保存在剪贴板来简化我们的操作。</p>
+<p>又是国内的大神产品图床神器<a target="_blank" rel="noopener" href="https://toolinbox.net/iPic/">IPic</a>，不论屏幕截图、还是复制图片，都可以自动上传、保存 Markdown 格式的链接，直接粘贴插入，就像下面的动图，<strong>拖动图片，粘贴进文章</strong>，就这么简单，当然也支持上传剪贴板内的图片，就像我上面的两张图都是这样的操作，只需要配置一个上传的快捷键就可以了。</p>
+<p><img src="https://s2.loli.net/2022/12/30/4EA6sBcYKIXqOuH.png"></p>
+<p>但是！对，但是来了，这样好用的工具是免费的吗？</p>
+<p>当然不是，如果你只是为了图床功能，IPic默认使用微博图床，那是一个公用的图床，确实是可以使用的，如果你想要使用自己的私有云存储，比如上文提到的七牛云存储，那么就需要升级收费版，一年60块。</p>
+<p>不算贵，作为支持开源开发者这个钱也确实值得花，问题是如果是一次性买断60块，我认为是值得的，按年收费这个就有些不合理了，而且如果你有两台Mac，一台在家、一台在公司的话…你知道现在Steam上大热的独立游戏太吾绘卷也才68块永久使用，一个独立游戏的开发成本和一个swift小工具比当然不可同日而语，但无论如何，IPic确实是目前Mac OS上图床工具中最好的了。</p>
+<p>开源界确实是个风起云涌的江湖，既然有人认为你收费不合理，那么就会有人跳出来跟你叫板，至于值得不值得，江湖人管江湖事，<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">PicGo</a>就是这样孕育而生的，它是一个前端技术人员开发出来的，对Swift并不熟悉，因此PicGo是用Electron-vue作为开发脚手架实现的，完美的复制了IPic大部分的功能，但由于商业化的原因，有一点最便捷的功能<strong>PicGo</strong>无法实现，就是把图片直接拖动到Typora中，会触发<strong>IPic</strong>自动上传然后替换图片地址为图床地址，相信这是IPic作者和Typora开发团队沟通后的结果。</p>
+<p>瑕不掩瑜，就像PicGo的作者在自己的博客中写的那样：</p>
+<blockquote>
+<p>目前 PicGo 还是一个很年轻的项目，bug 肯定是不少的，功能方面也有所欠缺。所以还需要不断地完善。我希望大家在使用的过程中有什么意见或者建议都可以在项目仓库里的 <a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/issues">issues</a>里提出来~</p>
+</blockquote>
+<h2 id="把文章上传到微信公众号"><a href="#把文章上传到微信公众号" class="headerlink" title="把文章上传到微信公众号"></a>把文章上传到微信公众号</h2><p>目前Typora编辑的文章已经可以直接复制成MD的形式上传到简书等支持markdown语法的地方了，但是！微信公众号依然不支持markdwon语法，还好开源界有人已经完成了这个转化工具，使用起来也比较方便：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/barretlee/online-markdown">Online-markdown</a>这是作者为<a target="_blank" rel="noopener" href="https://www.barretlee.com/entry/">小胡子哥</a>的在线转换工具源码，可以直接clone下来然后<code>npm install</code>之后进行使用，也可以直接访问<a target="_blank" rel="noopener" href="http://md.barretlee.com/">在线地址</a>进行使用，我推荐clone下来在本机用，因为使用的人较多，有时候这个网页会很卡，我用electron封装了一个Mac OS的App可以直接双击使用，已经分享到<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1XiknlCOIHzo-ok1GOUfeow">百度网盘</a>，密码是：kjyh，欢迎下载使用。</p>
+<p><img src="https://s2.loli.net/2022/12/30/dIWfjDBwQP1nATr.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从2014年开始，自己总是希望能写点东西，但是每次翻一翻更早之前的文章，却又退却了，我的性格是有缺陷的，不够坚持，最近琐事太多，反而把代码开发捡回来之后，在开发的过程当中能够平静心情，所以很高兴能够把技术捡起来，就像初中的时候，第一次玩金庸群侠传、仙剑奇侠传，其他人的重点可能是游戏，而我的目光却在河洛工作室。</p>
+<p>什么样的大神才能做出这样的游戏，什么是计算机编程？</p>
+<p>时代在进步，当初我们做开发的时候，光配置一个Java web的开发环境就需要两个小时，再加上数据库，jar包的导入。</p>
+<p>而现在，前端有Vue、后端有Springboot、有模版引擎，移动端有各式各样的基座、也有小程序开发SDK和IDE，开发变得越来越简单，可以专心进行业务实现，就像码文，有了Markdown语法以及这一系列的工具，生活真的变得越来越美好。</p>
+<p>比很多人都幸福的事，我热爱的技术可以给我一口饭吃，这样很好。</p>
+<p><strong>OK，最后总结我用到的工具：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.typora.io/">Typora|Mac OS目前最好用的Markdown编辑器</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.qiniu.com/">七牛云|免费云存储的行业独角兽</a></li>
+<li><a target="_blank" rel="noopener" href="https://toolinbox.net/iPic/">IPic|目前业界最好用的图床工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">PicGo|IPic最好的免费替代品</a></li>
+</ul>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/%E6%8E%A8%E8%8D%90%E4%B8%80%E5%A5%97%E5%9F%BA%E4%BA%8E%E5%86%85%E5%AE%B9%E5%8F%91%E5%B8%83%E7%9A%84%E9%AB%98%E9%A2%9C%E5%80%BC%E5%85%A8%E5%AE%B6%E6%A1%B6/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>推荐一套基于内容发布的高颜值全家桶</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A5%94%E5%AD%90"><span class="toc-text">楔子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E9%9D%A2%E4%B8%80%E6%AE%B5%E5%8F%AF%E4%BB%A5%E8%BF%99%E6%A0%B7%E6%9D%A5%E5%86%99"><span class="toc-text">上面一段可以这样来写</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Typora"><span class="toc-text">Typora</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="toc-text">插入图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%8D%E6%AC%A1%E4%BC%98%E5%8C%96%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">再次优化的解决方案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E7%89%9B%E4%BA%91"><span class="toc-text">七牛云</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%BA%8A%E5%B7%A5%E5%85%B7"><span class="toc-text">图床工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%8A%E6%96%87%E7%AB%A0%E4%B8%8A%E4%BC%A0%E5%88%B0%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7"><span class="toc-text">把文章上传到微信公众号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>Flutter写个Nas音乐播放器(二) | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">Flutter写个Nas音乐播放器(二)</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2023-01-11 02:36
+      </span>
+      <span class="post-count">≈ 2.8k字</span>
+      <span class="post-count">≈ 11分钟</span>
+    </div>
+    <div class="markdown-body"><p><strong>呐喊！</strong>想要通过路由做局部刷新的，千万要自己写路由，不要用flutter自带的，会让你感受到崩溃。今天为了右侧部分的局部刷新切到全局路由，改了大部分代码之后发现，根本不能在保留左侧和底部<strong>Widget</strong>的前提下动态刷新，一气之下重新写了一个终于好用了，但是前后浪费了好久。没办法，为了到时候调移动端的时候，左边可以做为侧滑窗体独立出来，决定用<strong>ValueNotifier</strong>硬写路由，然后把左侧的当前页高亮显示去掉了，主要有<strong>Detail</strong>页面，虽然可以跟踪到上级，不过感觉要不要无所谓。我写了一个硕大的40号字体标题放在那，怎么也不会看不到</p>
+<p>目前已经算是可以使用了，歌手和专辑以及播放的全部逻辑都做完了，后面还有就是首页，无非就是查询点正在播放之类的方便使用。还有两个重头，搜索和歌词，不知道直接转码能不能实现繁简通查，不行的话还要用API，就浪费查询时间</p>
+<p><img src="https://s2.loli.net/2023/01/10/BCPjVHlazr2mK1R.jpg"></p>
+<h3 id="1-专辑瀑布流"><a href="#1-专辑瀑布流" class="headerlink" title="1. 专辑瀑布流"></a>1. 专辑瀑布流</h3><p>这个是我一直想要的，自从用了Jellyfin之后，感觉以前电影都白看了，这种电视幕墙是比较帅的，瀑布流有现成的轮子可以用<a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_staggered_grid_view">flutter_staggered_grid_view</a>实现起来非常简单，在<code>pubspec.yaml</code>里面添加然后<code>flutter pub get</code>即可</p>
+<p>它本身支持多种呈现方式详细可以去主页看，不过我选了最合适大量图片的<code>MasonryGridView</code>，和构建ListView一样的，这里有三个属性需要定义</p>
+<p><strong>crossAxisCount:</strong> 多少列</p>
+<p><strong>mainAxisSpacing:</strong> 行间距</p>
+<p><strong>crossAxisSpacing:</strong> 列间距</p>
+<p>我是建议做一个计算，因为你固定<strong>Count</strong>的话会导致一个问题，窗体拖大会让图片特别大，就很怪</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//取窗体大小</span></span><br><span class="line">Size _size = MediaQuery.of(context).size;</span><br><span class="line"><span class="comment">//右侧是我要展示的部分，先把这个宽度算出来，然后除以想要呈现的图片宽度</span></span><br><span class="line"><span class="built_in">double</span> _rightWidth = (_size.width - <span class="number">160</span>) / <span class="number">180</span>;</span><br><span class="line"><span class="comment">//然后向下取整</span></span><br><span class="line"><span class="built_in">int</span> _count = _rightWidth.truncate();</span><br></pre></td></tr></table></figure>
+
+<p>这样一来你怎么拖动窗体这个图片宽度只会在小范围内变化，不会特别夸张，构建也很简单</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MasonryGridView.count(</span><br><span class="line">              crossAxisCount: _count,</span><br><span class="line">              mainAxisSpacing: <span class="number">10</span>,</span><br><span class="line">              crossAxisSpacing: <span class="number">10</span>,</span><br><span class="line">              itemCount: _albums!.length,</span><br><span class="line">              itemBuilder: (context, index) &#123;</span><br><span class="line">                <span class="keyword">return</span> ...</span><br><span class="line">              &#125;</span><br></pre></td></tr></table></figure>
+
+<p>里面可以封一个<strong>Widget</strong>的组合，比如图片加两行文字这样，效果就出来了</p>
+<p>当然啦，可以做图片缓存，我本来也是想要做的，只是没想好到底是保存在文件夹里还是转base64存到数据库里面</p>
+<p>其实不做缓存也可以，图片懒加载的效果还是可以的，用<strong>frameBuilder</strong>套一下可以实现渐显效果</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ClipRRect(</span><br><span class="line">  borderRadius: BorderRadius.circular(<span class="number">15</span>),</span><br><span class="line">  child: Image.network(</span><br><span class="line">    _temURL,</span><br><span class="line">    fit: BoxFit.cover,</span><br><span class="line">    frameBuilder: (context, child, frame,wasSynchronouslyLoaded) &#123;</span><br><span class="line">      <span class="keyword">if</span> (wasSynchronouslyLoaded) &#123;</span><br><span class="line">        <span class="keyword">return</span> child;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> AnimatedSwitcher(</span><br><span class="line">        child: frame != <span class="keyword">null</span></span><br><span class="line">          ? child</span><br><span class="line">          : Image.asset(<span class="string">&quot;assets/images/logo.jpg&quot;</span>),</span><br><span class="line">        duration: <span class="keyword">const</span> <span class="built_in">Duration</span>(milliseconds: <span class="number">2000</span>),</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br><span class="line">  ),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-音乐播放"><a href="#2-音乐播放" class="headerlink" title="2. 音乐播放"></a>2. 音乐播放</h3><p>播放一首歌很简单，直接<code>setAudioSource</code>就可以了，麻烦的是播放列表，以及为了控制播放列表的按钮操作。比如前一首没有了，但是按钮没有置灰点了就会报错之类的，所有的控制都使用<code>ValueNotifier</code>来进行，我算是把它用明白了</p>
+<h4 id="2-1-设置监控变量"><a href="#2-1-设置监控变量" class="headerlink" title="2.1. 设置监控变量"></a>2.1. 设置监控变量</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听当前资源ID，这个不单用于音乐播放，也用于获取歌手图片啥的</span></span><br><span class="line">ValueNotifier&lt;<span class="built_in">String</span>&gt; activeSongValue = ValueNotifier&lt;<span class="built_in">String</span>&gt;(<span class="string">&quot;1&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听当前播放列表</span></span><br><span class="line">ValueNotifier&lt;<span class="built_in">List</span>&gt; activeList = ValueNotifier&lt;<span class="built_in">List</span>&gt;([]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听当前歌曲序列</span></span><br><span class="line">ValueNotifier&lt;<span class="built_in">int</span>&gt; activeIndex = ValueNotifier&lt;<span class="built_in">int</span>&gt;(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听当前歌曲，和上面的类似，传过去只是为了省一次数据库查询，因为要填歌曲名、歌手名和专辑名，不然这个不用传</span></span><br><span class="line">ValueNotifier&lt;<span class="built_in">Map</span>&gt; activeSong = ValueNotifier&lt;<span class="built_in">Map</span>&gt;(<span class="built_in">Map</span>());</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听是否乱序，这个是监听那个乱序按钮做触发用的</span></span><br><span class="line">ValueNotifier&lt;<span class="built_in">bool</span>&gt; isShuffleModeEnabledNotifier = ValueNotifier&lt;<span class="built_in">bool</span>&gt;(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听是否是第一首歌</span></span><br><span class="line">ValueNotifier&lt;<span class="built_in">bool</span>&gt; isFirstSongNotifier = ValueNotifier&lt;<span class="built_in">bool</span>&gt;(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听是否是最后一首歌，这都是为了封掉上一首下一首按钮避免报错用的</span></span><br><span class="line">ValueNotifier&lt;<span class="built_in">bool</span>&gt; isLastSongNotifier = ValueNotifier&lt;<span class="built_in">bool</span>&gt;(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-触发"><a href="#2-2-触发" class="headerlink" title="2.2. 触发"></a>2.2. 触发</h4><p>在歌曲列表里面点击歌曲之后，把id、歌曲List和当前歌曲在列表中的index传过去，然后封一个Map</p>
+<p>主要是为了拿歌曲的图片URL，这个在原本的Map里面没有，需要到后台拼一个带服务器地址和身份信息的URL出来，不然直接用Songs的实例更加方便</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">onTap: () <span class="keyword">async</span> &#123;</span><br><span class="line">  activeSongValue.value = _tem.id;</span><br><span class="line">  <span class="comment">//歌曲所在专辑歌曲List</span></span><br><span class="line">  activeList.value = _songs!;</span><br><span class="line">  <span class="comment">//当前歌曲队列</span></span><br><span class="line">  activeIndex.value = index;</span><br><span class="line">  <span class="comment">//拼装当前歌曲</span></span><br><span class="line">  <span class="built_in">Map</span> _activeSong = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">  <span class="built_in">String</span> _url = <span class="keyword">await</span> getCoverArt(_tem.id);</span><br><span class="line">  _activeSong[<span class="string">&quot;artist&quot;</span>] = _tem.artist;</span><br><span class="line">  _activeSong[<span class="string">&quot;url&quot;</span>] = _url;</span><br><span class="line">  _activeSong[<span class="string">&quot;title&quot;</span>] = _tem.title;</span><br><span class="line">  _activeSong[<span class="string">&quot;album&quot;</span>] = _tem.album;</span><br><span class="line">  activeSong.value = _activeSong;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-接收和生成播放列表"><a href="#2-3-接收和生成播放列表" class="headerlink" title="2.3. 接收和生成播放列表"></a>2.3. 接收和生成播放列表</h4><p>这里接收的是<code>activeSongValue</code>，为什么不直接用<code>activeList</code>呢，因为如果你接收<code>activeList</code>的话，在当前列表内点其他的歌，它默认值没有发生变化</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ValueListenableBuilder&lt;<span class="built_in">String</span>&gt;(</span><br><span class="line">   valueListenable: activeSongValue,</span><br><span class="line">   builder: ((context, value, child) &#123;</span><br><span class="line">   <span class="keyword">if</span> (value != <span class="string">&quot;1&quot;</span>) &#123;</span><br><span class="line">      setAudioSource();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> ...</span><br></pre></td></tr></table></figure>
+
+<p>如果是默认值<strong>1</strong>就说明你还没选择音乐</p>
+<p>值发生变化就开始生成播放列表</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="keyword">void</span>&gt; setAudioSource() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="comment">//1. 声明</span></span><br><span class="line">    <span class="keyword">final</span> playlist = ConcatenatingAudioSource(</span><br><span class="line">      useLazyPreparation: <span class="keyword">true</span>,</span><br><span class="line">      shuffleOrder: DefaultShuffleOrder(),</span><br><span class="line">      children: <span class="keyword">await</span> _getPlayList(),</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//3. 添加播放列表，顺便设置当前播放第几首歌</span></span><br><span class="line">    <span class="keyword">await</span> _player.setAudioSource(playlist,</span><br><span class="line">        initialIndex: activeIndex.value, initialPosition: <span class="built_in">Duration</span>.zero);</span><br><span class="line">    <span class="comment">//4. 开始播放</span></span><br><span class="line">    _player.play();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  _getPlayList() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="built_in">List</span>&lt;AudioSource&gt; children = [];</span><br><span class="line">    <span class="built_in">List</span> _songs = activeList.value;</span><br><span class="line">    把触发的时候传的值拿出来</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> element <span class="keyword">in</span> _songs) &#123;</span><br><span class="line">      Songs _song = element;</span><br><span class="line">      <span class="comment">//2. 去数据库拼音乐文件的地址</span></span><br><span class="line">      <span class="built_in">String</span> _url = <span class="keyword">await</span> getSongStreamUrl(_song.id);</span><br><span class="line">      children.add(AudioSource.uri(<span class="built_in">Uri</span>.parse(_url), tag: _song.id)); <span class="comment">//这里注意设置tag，后面的监听用得到</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> children;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-监听播放变化"><a href="#2-4-监听播放变化" class="headerlink" title="2.4. 监听播放变化"></a>2.4. 监听播放变化</h4><p>当播放到下一首的时候，需要把歌曲名字封面这些信息换掉，这时候就需要注入监听来进行操作</p>
+<p>Just Audio 有许多不同的事件流，都可以监听：</p>
+<ul>
+<li><strong>sequenceStream</strong>：这是添加的顺序的播放列表，每当播放列表更改时，这里将产生一个新列表</li>
+<li><strong>shuffleModeEnabledStream</strong>：乱序播放的监听，打开和关闭此模式，是个布尔值</li>
+<li><strong>shuffleIndicesStream</strong>：这是一个打乱的整数列表，指向播放列表中的项目<code>sequenceStream</code>（它本身不会打乱）。<code>shuffle</code>当音频播放器上调用该方法时，这里将产生一个新列表。</li>
+<li><strong>currentIndexStream</strong>：此流会在歌曲首次开始时通知当前歌曲的索引。这个整数指向播放列表中的一个音频源<code>sequenceStream</code></li>
+<li><strong>loopModeStream</strong>：默认播放列表中的所有歌曲一次。但是，也可以选择重复单首歌曲甚至重复播放列表，就是循环模式，<code>LoopMode</code>每次循环模式更改时，此流都会产生一个新的值</li>
+</ul>
+<p>好了，上面的看看就行了，监听嘛，用一个就能搞定，就是<strong>sequenceStateStream</strong>，这里只要上面的五个流之一产生一个新值，都会<code>sequenceStateStream</code>产生一个组合值 type <code>SequenceState</code>，一个顶五个，美滋滋</p>
+<p>首先在<strong>initState</strong>里面加入这个方法调用，然后..</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _listenForChangesInSequenceState() &#123;</span><br><span class="line">  <span class="comment">//当</span></span><br><span class="line">  <span class="comment">//播到下一首的时候触发</span></span><br><span class="line">  _player.sequenceStateStream.listen((sequenceState) <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="comment">//没东西的时候滚粗</span></span><br><span class="line">    <span class="keyword">if</span> (sequenceState == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新当前播放歌曲的信息</span></span><br><span class="line">    <span class="keyword">final</span> currentItem = sequenceState.currentSource;</span><br><span class="line">    <span class="comment">//拿到生成播放列表的时候放到tag里面的id</span></span><br><span class="line">    <span class="keyword">final</span> _title = currentItem?.tag <span class="keyword">as</span> <span class="built_in">String?</span>;</span><br><span class="line">    <span class="comment">//去数据库查资料拿到歌曲信息</span></span><br><span class="line">    <span class="keyword">final</span> _tem = <span class="keyword">await</span> getSong(_title.toString());</span><br><span class="line">    <span class="comment">//更新当前歌曲id</span></span><br><span class="line">    activeSongValue.value = _title.toString();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//拼装当前歌曲</span></span><br><span class="line">    <span class="built_in">Map</span> _activeSong = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="built_in">String</span> _url = <span class="keyword">await</span> getCoverArt(_tem[<span class="string">&quot;id&quot;</span>]);</span><br><span class="line">    _activeSong[<span class="string">&quot;artist&quot;</span>] = _tem[<span class="string">&quot;artist&quot;</span>];</span><br><span class="line">    _activeSong[<span class="string">&quot;url&quot;</span>] = _url;</span><br><span class="line">    _activeSong[<span class="string">&quot;title&quot;</span>] = _tem[<span class="string">&quot;title&quot;</span>];</span><br><span class="line">    _activeSong[<span class="string">&quot;album&quot;</span>] = _tem[<span class="string">&quot;album&quot;</span>];</span><br><span class="line">    activeSong.value = _activeSong;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里监控乱序的，我没用，自己写了一个（主要是先写了乱序的逻辑，后做的播放列表，懒得改了）</span></span><br><span class="line">    <span class="comment">// isShuffleModeEnabledNotifier.value = sequenceState.shuffleModeEnabled;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//拿到播放列表</span></span><br><span class="line">    <span class="keyword">final</span> playlist = sequenceState.effectiveSequence;</span><br><span class="line">    <span class="comment">//判断上一首下一首，然后把值传进去给按钮做状态判断</span></span><br><span class="line">    <span class="keyword">if</span> (playlist.isEmpty || currentItem == <span class="keyword">null</span>) &#123;</span><br><span class="line">      isFirstSongNotifier.value = <span class="keyword">true</span>;</span><br><span class="line">      isLastSongNotifier.value = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      isFirstSongNotifier.value = playlist.first == currentItem;</span><br><span class="line">      isLastSongNotifier.value = playlist.last == currentItem;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-快进快退"><a href="#2-5-快进快退" class="headerlink" title="2.5. 快进快退"></a>2.5. 快进快退</h4><p>其实这俩按钮现在很多人都已经取消掉了，因为有进度条啊，那个多方便，不过之前把按钮都写好了，那就写呗，删了多可惜</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">IconButton(</span><br><span class="line">  icon: <span class="keyword">const</span> Icon(</span><br><span class="line">    Icons.fast_rewind,</span><br><span class="line">    color: kTextColor,</span><br><span class="line">  ),</span><br><span class="line">  onPressed: () &#123;</span><br><span class="line">    <span class="keyword">if</span> (widget.player.position.inSeconds - <span class="number">15</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      widget.player.seek(</span><br><span class="line">          <span class="built_in">Duration</span>(seconds: widget.player.position.inSeconds - <span class="number">15</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p>这里需要做一个判断，如果你当前的位置减你想要退会的位置小于0，就不要操作，避免报错，前进倒无所谓，加多了直接转下一首了</p>
+<h4 id="2-6-上下首"><a href="#2-6-上下首" class="headerlink" title="2.6. 上下首"></a>2.6. 上下首</h4><p>这里就需要监听前面设置的值了<strong>isFirstSongNotifier</strong>和<strong>isLastSongNotifier</strong>，不做过滤的话，当在播放第一首的时候点上一首，和在最后一首的时候点下一首都会有问题</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ValueListenableBuilder&lt;<span class="built_in">bool</span>&gt;(</span><br><span class="line">            valueListenable: isLastSongNotifier,</span><br><span class="line">            builder: (_, isLast, __) &#123;</span><br><span class="line">              <span class="keyword">return</span> IconButton(</span><br><span class="line">                icon: Icon(</span><br><span class="line">                  Icons.skip_next,</span><br><span class="line">                  color: isLast ? badgeDark : kTextColor,</span><br><span class="line">                ),</span><br><span class="line">                onPressed: () &#123;</span><br><span class="line">                  (isLast) ? <span class="keyword">null</span> : widget.player.seekToNext();</span><br><span class="line">                &#125;,</span><br><span class="line">              );</span><br><span class="line">            &#125;),</span><br></pre></td></tr></table></figure>
+
+<p>做一个判断，如果有问题的话直接把按钮置灰，然后onPressed传一个null就可以了</p>
+<h4 id="2-7-单曲循环、全部循环、乱序播放、停止、暂停"><a href="#2-7-单曲循环、全部循环、乱序播放、停止、暂停" class="headerlink" title="2.7. 单曲循环、全部循环、乱序播放、停止、暂停"></a>2.7. 单曲循环、全部循环、乱序播放、停止、暂停</h4><p>难点在上面，全部都写好之后，按钮部分就比较简单</p>
+<p><strong>单曲循环：</strong><code>player.setLoopMode(LoopMode.one);</code></p>
+<p><strong>全部循环：</strong><code>player.setLoopMode(LoopMode.all);</code></p>
+<p><strong>乱序播放：</strong> <code>player.setShuffleModeEnabled(true);</code></p>
+<h3 id="3-等宽字体"><a href="#3-等宽字体" class="headerlink" title="3. 等宽字体"></a>3. 等宽字体</h3><p>由于在歌曲进度条前后加了数字，所以一个老生常谈的问题出现了，就是数字从1到0的时候会导致后面的进度条有位移，所以这里的数字需要用等宽字体。</p>
+<p>整个APP我用了两个字体，一个是<strong>NotoSansSC</strong>，这是支持中日韩英的字体，用起来贼happy，是从我当时设置的Jellyfin的备用字体里面拖过来的。当时也是为了显示中日韩英的字幕用的，这里一样可以用。</p>
+<p>不过这个字体有个问题，它有两个版本，正常的版本数字和英文都显示没问题的，但是Mono的版本，就是等宽字体会把英文和数字用半角显示，就会变细，看起来头很大，所以我又从Google Fonts里面找了一个小的等宽字体来用，专门用于进度条前面的数字，避免位移</p>
+<ol>
+<li><p>声明Asset</p>
+<p>还是在pubspec.yaml里面声明</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To add assets to your application, add an assets section, like this:</span></span><br><span class="line"><span class="attr">assets:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">assets/images/</span></span><br><span class="line"><span class="attr">fonts:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">family:</span> <span class="string">NotoSansSC</span></span><br><span class="line">    <span class="attr">fonts:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">asset:</span> <span class="string">assets/fonts/NotoSansSC-Regular.otf</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">family:</span> <span class="string">ChivoMono</span></span><br><span class="line">    <span class="attr">fonts:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">asset:</span> <span class="string">assets/fonts/ChivoMono-Regular.ttf</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>局部使用</li>
+</ol>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Text(</span><br><span class="line">        formatSongDuration(widget.position),</span><br><span class="line">        style: TextStyle(</span><br><span class="line">            color: borderColor, fontFamily: <span class="string">&#x27;ChivoMono&#x27;</span>, fontSize: <span class="number">12</span>),</span><br><span class="line">      )</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>全局使用</li>
+</ol>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> MaterialApp(</span><br><span class="line">      debugShowCheckedModeBanner: <span class="keyword">false</span>,</span><br><span class="line">      title: <span class="string">&#x27;XiuMusic&#x27;</span>,</span><br><span class="line">      theme: ThemeData(fontFamily: <span class="string">&#x27;NotoSansSC&#x27;</span>),</span><br><span class="line">      home: MainScreen(),</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-Todo-List"><a href="#4-Todo-List" class="headerlink" title="4. Todo List"></a>4. Todo List</h3><p>这东西已经玩了一周了，压力大的时候写写代码真心解压，所以我也不着急完成它，慢慢来吧</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/wellmoonloft/xiumusic#todo-list">Todo List</a>直接在Github上更新了</p>
+<p>其实目前已经可以用了，有兴趣的人可以下来玩一玩，<a target="_blank" rel="noopener" href="https://github.com/wellmoonloft/xiumusic">XiuMusic</a></p>
+<p><img src="https://s2.loli.net/2023/01/10/3Wj8w7QfbZJ9N4y.jpg"></p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/Flutter%E5%86%99%E4%B8%AANas%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E4%B8%89/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>Flutter写个Nas音乐播放器(三)</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/Flutter%E5%86%99%E4%B8%AANas%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E4%B8%80/" target="_self">
+                <span>Flutter写个Nas音乐播放器(一)</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%93%E8%BE%91%E7%80%91%E5%B8%83%E6%B5%81"><span class="toc-text">1. 专辑瀑布流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE"><span class="toc-text">2. 音乐播放</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E8%AE%BE%E7%BD%AE%E7%9B%91%E6%8E%A7%E5%8F%98%E9%87%8F"><span class="toc-text">2.1. 设置监控变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E8%A7%A6%E5%8F%91"><span class="toc-text">2.2. 触发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E6%8E%A5%E6%94%B6%E5%92%8C%E7%94%9F%E6%88%90%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8"><span class="toc-text">2.3. 接收和生成播放列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-%E7%9B%91%E5%90%AC%E6%92%AD%E6%94%BE%E5%8F%98%E5%8C%96"><span class="toc-text">2.4. 监听播放变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-%E5%BF%AB%E8%BF%9B%E5%BF%AB%E9%80%80"><span class="toc-text">2.5. 快进快退</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-%E4%B8%8A%E4%B8%8B%E9%A6%96"><span class="toc-text">2.6. 上下首</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7-%E5%8D%95%E6%9B%B2%E5%BE%AA%E7%8E%AF%E3%80%81%E5%85%A8%E9%83%A8%E5%BE%AA%E7%8E%AF%E3%80%81%E4%B9%B1%E5%BA%8F%E6%92%AD%E6%94%BE%E3%80%81%E5%81%9C%E6%AD%A2%E3%80%81%E6%9A%82%E5%81%9C"><span class="toc-text">2.7. 单曲循环、全部循环、乱序播放、停止、暂停</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AD%89%E5%AE%BD%E5%AD%97%E4%BD%93"><span class="toc-text">3. 等宽字体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Todo-List"><span class="toc-text">4. Todo List</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2024</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>
