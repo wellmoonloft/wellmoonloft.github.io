@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="技术,小说,随笔,Hexo" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <meta name="msvalidate.01" content="4504B006DB2A6062F644FCDD2FC0575B" />
+  <title>使用N8N实现不同内容且带附件的邮件群发 | 井说</title>
+  <link rel="apple-touch-icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <link rel="icon" href="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg">
+  <!-- jquery3.6 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/jquery.min-3.6.js"></script>
+  <!-- hexo site css -->
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.5/source/css/base-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/iconfont/iconfont-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/github-markdown-min.css" rel="stylesheet">
+  <link async href="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/css/highlight-min.css" rel="stylesheet">  
+  <!-- fancybox -->
+  <link async href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" rel="stylesheet">  
+  <script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/fancybox.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4XRTRGM56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R4XRTRGM56');
+    </script>  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="井说" type="application/atom+xml">
+</head>
+<body>
+  <div id="app">
+  <div class="header">
+  <div class="avatar">
+    <a href="https://www.igerm.ee"><img src="https://s2.loli.net/2022/12/30/lV2YzG9s86yK3OB.jpg" alt=""></a>
+  </div>
+  <div class="navbar">
+    <ul>
+      <li class="nav-item" data-path="/"><a href="/">经验</a></li>
+      <li class="nav-item" data-path="/categories/essay/"><a href="/categories/essay/">随笔</a></li>
+      <li class="nav-item" data-path="/categories/novel/"><a href="/categories/novel/">小说</a></li>
+      <li class="nav-item" data-path="/about/"><a href="/about/">关于</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let navs = document.querySelectorAll('.nav-item');
+  let pagePath = window.location.pathname;
+  for (let nav of navs) {
+    let navPath = nav.getAttribute("data-path");
+    if (navPath && navPath === pagePath) {
+      nav.className = "nav-item active";
+    }
+  }
+</script>       
+  <div class="flex-container">          
+  <!-- 同时引入 post.ejs 和 index.ejs -->
+  
+<div class="container post-details" id="post-details">
+  <div class="post-content">
+    <div class="post-title">使用N8N实现不同内容且带附件的邮件群发</div>
+    <div class="post-attach">
+      <span class="post-pubtime">
+        <i class="iconfont icon-edit" title="更新时间"></i> 2025-02-14 12:34
+      </span>
+      <span class="post-count">≈ 1.4k字</span>
+      <span class="post-count">≈ 4分钟</span>
+    </div>
+    <div class="markdown-body"><p>最近因为工作需要，希望能够做一个邮件群发，大概八万封邮件发给不同的人，修改部分内容，同时带附件。这个原理其实很简单，<a target="_blank" rel="noopener" href="https://github.com/">github</a>上也有一些现有的项目可以使用，不过项目都很老了需要调整代码，同时一些现有的群发工具都是云端的，而我要发的附件其实希望点对点发送，不愿意上传到云端。</p>
+<p>正好最近在研究<a target="_blank" rel="noopener" href="https://n8n.io/">N8N</a>，这是个开源的支持自部署，可以安装到本地服务器或者家用NAS上，所以这倒是一个很好的尝试，保证数据安全，而且后期可以通过大模型来进行邮件跟踪和修改。</p>
+<h4 id="N8N安装"><a href="#N8N安装" class="headerlink" title="N8N安装"></a>N8N安装</h4><h4 id="1-使用docker-compose安装"><a href="#1-使用docker-compose安装" class="headerlink" title="1. 使用docker compose安装"></a>1. 使用docker compose安装</h4><p>N8N安装可以选择云端、自托管，还可以以系统嵌入的方式部署，我就直接装在<a target="_blank" rel="noopener" href="https://docs.n8n.io/hosting/installation/docker/">我NAS的docker里面</a>了。</p>
+<p>可以选择PostgresDB来做备用数据库，也可以加Redis，不过由于我是一个人用，我感觉用自带的SQLite就足够了，这样安装起来非常简单</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">n8n:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">n8nio/n8n:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">n8n</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">&#x27;unless-stopped&#x27;</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">&#x27;host&#x27;</span>    </span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">N8N_PORT=1204</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">GENERIC_TIMEZONE=Asia/Shanghai</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NODE_OPTIONS=--max-old-space-size=2048</span> </span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/volume1/docker/n8n/data:/home/node/.n8n:rw</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/volume1/docker/n8n/binaryData1:/binaryData1:rw</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>你可以用网桥模式，也可以用host模式，用host的话端口号需要在环境变量里面声明。</p>
+<p>另外映射两个路径，一个是n8n的本地文件，包括配置信息以及数据库，另一个是二进制文件保存的路径。这个不设置也可以，但是后面你需要从excel里面读取邮件列表的话，就只能把他保存到类似google sheet里面才行，我不愿意把数据上传云端，所以映射一个地址，就可以把excel文件放到这里，让n8n节点去读取</p>
+<h4 id="2-端口转发"><a href="#2-端口转发" class="headerlink" title="2. 端口转发"></a>2. 端口转发</h4><p>在路由器里面，把想要绑ssl证书的那个端口做转发出去，不是这个1204，而是1201，这两个是你自己设置的，随便定义即可</p>
+<h4 id="3-nginx代理"><a href="#3-nginx代理" class="headerlink" title="3. nginx代理"></a>3. nginx代理</h4><p>端口转发生效之后，用群晖自带的反向代理服务器即可</p>
+<p>一定记得在自定义标题里面新增WebSocket，里面包含了Upgrade和Connection，我记得有篇文章说不添加会有些问题，但是我所有的反向代理都添加了</p>
+<p>用群晖自带的反向代理服务器有一个好处，就是不用再分别管理SSL证书了，如果你不用这个，自己起一个Nginx也可以实现，但是没必要，那还要导入证书，目前三个月一次。虽然可以用acme实现自动化，但是完全没有必要</p>
+<p><img src="https://images.igerm.ee/myimages/20250214170826164.png"></p>
+<h3 id="开始设置N8N流程"><a href="#开始设置N8N流程" class="headerlink" title="开始设置N8N流程"></a>开始设置N8N流程</h3><p>整个流程长这个样子，摸索了半天就搞定了，相对来讲比较简单吧。</p>
+<p>强烈建议不要看文档！不要看文档！不要看文档！</p>
+<p>因为你看文档你就会想放弃了….</p>
+<p>按照自己的逻辑来设计流程即可：</p>
+<ol>
+<li>首先需要一个启动节点，单击启动</li>
+<li>然后读取excel文件</li>
+<li>然后拆分excel文件</li>
+<li>然后进入循环</li>
+<li>然后读取附件文件</li>
+<li>然后发送邮件</li>
+<li>然后加一个延迟，我设置5秒，一分钟12封信，24小时17280封信，这个速度可以接受了，太快了担心封号</li>
+</ol>
+<p><img src="https://images.igerm.ee/myimages/20250214115924263.png"></p>
+<h4 id="1-Read-Binary-File节点"><a href="#1-Read-Binary-File节点" class="headerlink" title="1.Read Binary File节点"></a>1.Read Binary File节点</h4><p>左边是输入，右边是输出，这里面需要设置的就是File Path，在docker里面的环境变量我专门映射了一个位置到docker里面，因此把文件保存在主机的对应位置之后，就可以直接在根目录的映射位置读取这个文件了</p>
+<p><img src="https://images.igerm.ee/myimages/20250214120354799.png"></p>
+<h4 id="2-Spreadsheet-File节点"><a href="#2-Spreadsheet-File节点" class="headerlink" title="2. Spreadsheet File节点"></a>2. Spreadsheet File节点</h4><p>这里需要设置的就一个，是批量读还是批量写，我选择批量读取上一个节点传过来的excel，然后传到下一个节点</p>
+<p><img src="https://images.igerm.ee/myimages/20250214120614089.png"></p>
+<h4 id="3-Loop-Over-Items节点"><a href="#3-Loop-Over-Items节点" class="headerlink" title="3. Loop Over Items节点"></a>3. Loop Over Items节点</h4><p>这里设置拆分数量，我们一封一封的发即可，也可以5封5封的发，设置小一点安全</p>
+<p><img src="https://images.igerm.ee/myimages/20250214120755145.png"></p>
+<h4 id="4-Send-Email节点"><a href="#4-Send-Email节点" class="headerlink" title="4. Send Email节点"></a>4. Send Email节点</h4><p>在这个节点需要配置的有很多，首先需要配置邮箱开启STMP，我是使用GMAIL开启两步验证之后，申请一个应用密码就可以了，其他邮箱可以直接搜索或者问ChatGPT。</p>
+<p>发送邮件就是你设置的邮箱地址，接收邮件就是从前面excel传过来的邮件地址，这个不用自己写，可以直接在左边INPUT里面选择邮箱那一列，然后拖拽到To Email里面即可</p>
+<p>附件的部分，填写的是你读取那个节点设置的名称，不是你的文件名，这个不用担心，发送之后名称还是你原本的文件名，这里你可以理解为把这个变量写进去即可</p>
+<p>然后HTML邮件，为了更加稳妥，因为有些小公司的老板可能不用正经邮箱，也许不支持HTML邮件，所以选择两个都要，至于HTML邮件模版，可以在网上搜索HTML模版生成器，我是直接让ChatGPT帮我写了一个复制进去</p>
+<p><img src="https://images.igerm.ee/myimages/20250214121007789.png"></p>
+<h4 id="5-测试一下效果"><a href="#5-测试一下效果" class="headerlink" title="5. 测试一下效果"></a>5. 测试一下效果</h4><p>先给自己的邮箱发了10封邮件，成功，然后就可以正式使用了，反正我的NAS是24小时开机，慢慢发吧</p>
+<p><img src="https://images.igerm.ee/myimages/20250214121802339.png"></p>
+</div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-prev">
+              <a href="/experience/%E5%85%A8%E7%90%83%E6%8A%95%E8%B5%84%E4%BB%A5%E5%8F%8A%E4%BA%91%E7%A7%BB%E6%B0%91/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>  
+                <span>全球投资以及云移民</span> 
+              </a>
+          </div>
+          <div class="post-foot-next">
+              <a href="/experience/%E7%BE%A4%E6%99%96%E9%80%9A%E8%BF%87cloudflare%E7%9A%84API%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0DDNS/" target="_self">
+                <span>群晖通过cloudflare的API自动更新DDNS</span>
+                <i class="iconfont icon-chevronright"></i>             
+              </a> 
+          </div>
+        </div>
+      
+    </div>
+    
+<div class="post-catalog" id="catalog">
+  <div class="title">目录</div>
+  <div class="catalog-content">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#N8N%E5%AE%89%E8%A3%85"><span class="toc-text">N8N安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8docker-compose%E5%AE%89%E8%A3%85"><span class="toc-text">1. 使用docker compose安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">2. 端口转发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-nginx%E4%BB%A3%E7%90%86"><span class="toc-text">3. nginx代理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E8%AE%BE%E7%BD%AEN8N%E6%B5%81%E7%A8%8B"><span class="toc-text">开始设置N8N流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Read-Binary-File%E8%8A%82%E7%82%B9"><span class="toc-text">1.Read Binary File节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Spreadsheet-File%E8%8A%82%E7%82%B9"><span class="toc-text">2. Spreadsheet File节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Loop-Over-Items%E8%8A%82%E7%82%B9"><span class="toc-text">3. Loop Over Items节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Send-Email%E8%8A%82%E7%82%B9"><span class="toc-text">4. Send Email节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B%E6%95%88%E6%9E%9C"><span class="toc-text">5. 测试一下效果</span></a></li></ol>
+  </div>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/catalog.js"></script>
+
+
+    <div class="comments-container">
+  <script src="https://utteranc.es/client.js"
+        repo="wellmoonloft/repo_wellmoonloft"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+  </div>
+
+  <div class="footer">
+  <div class="social">
+    <ul>
+      <li><a title="rss" href="/atom.xml"><i class="iconfont icon-rss"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-more">
+      <a href="https://www.igerm.ee">Copyright © wellmoonloft 2025</a>  
+  </div><div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges ｜ Powered by Hexo</a>  
+  </div>
+</div>
+  </div>
+  <div style="position: fixed;right: 2.2rem;top: 2.2rem;font-weight: bold;font-size: 1.6rem;">
+  <a href="https://www.igerm.ee"> CN</a>
+  <a href="https://www.igerm.ee/jp"> JP</a>
+  <a href="https://www.igerm.ee/en"> EN</a>
+  </div><div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+<script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.4/source/js/backtoTop.js"></script>
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+  </div>
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)"><i class="iconfont icon-search"></i></a>
+        </span><input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)"><i class="iconfont icon-close"></i></a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+  <script async src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.1.6/source/js/search.js"></script>
+  </div>
+</body>
+</html>
