@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="HTML,CSS,Java,JQuery,Typora,Flutter,Spring,政治" />
+  <meta name="author" content="井月轩" />
+  <meta name="subtitle" content="内涵胖子 拒绝减肥" />  
+  <meta name="description" content="技术、随笔、吐槽" />
+  <title>404</title>
+
+<style type="text/css">
+.terminal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 60%;
+  padding: 0 20%;
+  color: #34495e;
+  font-family: consolas;
+  word-wrap: break-all;
+}
+.terminal #title {
+  text-align: center;
+  width: 100%;
+  font-size: 6em;
+}
+.terminal .text {
+  display: inline-block;
+}
+.terminal .cursor {
+  display: inline;
+  animation: blink 0.75s linear infinite;
+}
+.terminal .c {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+}
+.terminal .c .hearth {
+  display: inline !important;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+</style>
+<script>
+var text_1 = '很抱歉，该页面不存在或者已被删除，请返回首页或关闭这个页面',
+text_2 = 'Sorry, this page does not exist or has been deleted. Please return to the home page or close this page';
+repeat(text_1, 1);
+setTimeout(function () {
+  repeat(text_2, 2);
+}, text_1.length * 100 + 1000);
+
+function repeat(text, n) {
+  var i = 0,
+  repeatable = setInterval(function () {
+    $('#text_' + n).text($('#text_' + n).text() + text[i]);
+    i++;
+    if (i >= text.length) {
+      clearInterval(repeatable);
+    }
+  }, 100);
+}
+window.console = window.console || function(t) {};
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no" >
+  <div class='terminal'>
+  <h1 id='title'>404</h1>
+  <div class='text' id='text_1'></div>
+  <div class='text' id='text_2'></div>
+  <div class='cursor'>_</div>
+  <div class='c'>
+    <a href='https://www.igerm.ee'>
+     >>> 首页 Home Page
+    </a>
+  </div>
+</div>
+  <script src="https://cdn.jsdelivr.net/gh/wellmoonloft/peach@v0.0.7/source/js/jquery.min-3.6.js"></script>
+</body>
+</html>
+
