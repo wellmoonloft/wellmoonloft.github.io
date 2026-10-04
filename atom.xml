@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><id>https://www.igerm.ee/</id><title>井说</title><updated>2026-10-04T02:07:39Z</updated><link href="https://www.igerm.ee/"/><link rel="self" href="https://www.igerm.ee/atom.xml"/><author><name>井月轩</name></author><entry><id>https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/</id><title>人生有梦</title><link href="https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/"/><updated>2026-06-19T20:34:54+08:00</updated><summary type="html">&lt;p&gt;&lt;img src="https://images.igerm.ee/myimages/20250214172121883.png" alt=""&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><id>https://www.igerm.ee/</id><title>井说</title><updated>2026-10-04T03:14:22Z</updated><link href="https://www.igerm.ee/"/><link rel="self" href="https://www.igerm.ee/atom.xml"/><author><name>井月轩</name></author><entry><id>https://www.igerm.ee/experience/%E7%BB%88%E4%BA%8E%E5%86%B3%E5%AE%9A%E6%8A%8A%E5%8D%9A%E5%AE%A2%E4%BB%8Ehexo%E8%BF%81%E7%A7%BB%E5%88%B0hugo%E4%BA%86/</id><title>终于决定把博客从Hexo迁移到Hugo了</title><link href="https://www.igerm.ee/experience/%E7%BB%88%E4%BA%8E%E5%86%B3%E5%AE%9A%E6%8A%8A%E5%8D%9A%E5%AE%A2%E4%BB%8Ehexo%E8%BF%81%E7%A7%BB%E5%88%B0hugo%E4%BA%86/"/><updated>2026-10-04T10:30:00+08:00</updated><summary type="html">&lt;p&gt;这个博客用了很多年 Hexo。最初它简单、够用，主题也很好改。但这些年为了贴合自己的习惯，我不断加功能、改样式、补插件和脚本。回头看，网站能正常运行，却越来越依赖自己写下的那一层层“例外”。这次迁移的原因并不是 Hexo 不好，而是我改得太多，继续维护这些定制的成本开始超过它们带来的方便。&lt;/p&gt;
+&lt;h2 id="为什么决定迁移"&gt;为什么决定迁移&lt;/h2&gt;
+&lt;p&gt;需要维护的已经不只是文章页面。中、英、日三个站点各有配置，发布时要依次生成和部署；首页、随笔年份归档、小说分类、标签、语言切换、字数统计和关于页面，也都有各自的主题逻辑。每次想改一个小地方，都要先弄清它会不会影响另外两个语言站或其他页面。&lt;/p&gt;
+&lt;p&gt;部署流程也累积了不少历史包袱。原来的 GitHub Actions 需要为三个站点分别准备密钥、运行 Hexo，再通过脚本切换配置和生成结果。它一直能工作，但依赖版本、Node.js 运行环境和自定义脚本都需要继续照看。博客本来应该让我专心写东西，而不是每次更新都担心构建和发布流程。&lt;/p&gt;
+&lt;p&gt;所以我想把内容和展示逻辑重新理一遍，尽量回到 Hugo 已经提供的内容管理、Markdown 解析和代码高亮能力，把必须保留的个人设计放在少量清楚的模板里。&lt;/p&gt;
+&lt;h2 id="迁移是怎么做的"&gt;迁移是怎么做的&lt;/h2&gt;
+&lt;p&gt;为了不影响正在运行的 Hexo 站，我先把 Hugo 项目放在独立目录中迁移和验证，没有直接覆盖 Hexo 项目的文件。先检查旧站的配置、主题修改、插件、文章 front matter 和 GitHub 部署流程，再以旧站生成结果作为链接和页面结构的对照基准。&lt;/p&gt;
+&lt;p&gt;文章按中文、英文、日文分别放进 Hugo 的内容目录，并尽可能保留原有标题、分类、标签、日期和文章 URL。迁移时也重新整理了内容结构：首页只列经验文章，随笔按年份归档，小说按分类归档；关于页面不套用普通文章的字数和阅读时间信息。像字数、阅读时间这样的文章数据由 Hugo 根据内容生成，新文章不需要手工补数字。&lt;/p&gt;
+&lt;p&gt;界面和 Markdown 也逐项核对。多语言切换、目录、上一页和下一页等功能迁入 Hugo 模板；代码围栏交给 Hugo 自带的 Goldmark 和 Chroma 处理。之后只需要按代码语言标注围栏，例如 &lt;code&gt;sh&lt;/code&gt;、&lt;code&gt;yaml&lt;/code&gt;、&lt;code&gt;java&lt;/code&gt; 或 &lt;code&gt;js&lt;/code&gt;，就能使用对应的语法高亮，不必为每种语言另写一套 CSS。&lt;/p&gt;
+&lt;h2 id="链接和-google-收录会受什么影响"&gt;链接和 Google 收录会受什么影响&lt;/h2&gt;
+&lt;p&gt;我把迁移前后的三份 sitemap 做了对照：中文条目数是 243 对 243，英文是 90 对 92，日文是 217 对 219。按 URL 解码和 Unicode 规范化后，已有文章地址都能找到对应项：中文 176 篇、英文 42 篇、日文 162 篇；日文 sitemap 还多列出了一篇旧站 sitemap 中没有的文章。少数地址的百分号编码等字符串表现不同，但规范化后的路径一致。&lt;/p&gt;</summary></entry><entry><id>https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/</id><title>人生有梦</title><link href="https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/"/><updated>2026-06-19T20:34:54+08:00</updated><summary type="html">&lt;p&gt;&lt;img src="https://images.igerm.ee/myimages/20250214172121883.png" alt=""&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;花開花落，再璀璨的星光也會消亡。地球、太陽，甚至整個宇宙也會有死亡的那天，人生和這些相比不過是短短的一瞬間。在這一瞬間裡，微笑、哭泣、奮鬥、受傷、開心、悲傷、喜歡誰、憎恨誰，所有的一切都是那霎那間的邂逅，誰也不能逃避永恆的長眠。&lt;/p&gt;
 &lt;p&gt;相對於哭泣、受傷、悲傷、憎恨，我寧願選擇微笑、奮鬥、開心、喜歡。我們在這短短一瞬所遇到的一切事物，無論好的，或是不好的都不會因為我們的情緒而改變。因此，我選擇開心的去面對，盡情的享受這一瞬間，而當你開始享受著些的時候，你會發現，一切不好的事物，都改變了。&lt;/p&gt;
@@ -848,70 +858,4 @@ AI真正触碰的，是&lt;strong&gt;人类社会的底层结构&lt;/strong&gt;�
 大不了再把结果翻成中文来看
 对比着看，辩证着看，去找找不一样的声音
 毕竟毛主席也说过
-真理掌握在少数人手里&lt;/p&gt;</summary></entry><entry><id>https://www.igerm.ee/essay/%E9%AA%84%E5%82%B2%E7%9A%84%E5%B0%91%E5%B9%B4/</id><title>骄傲的少年</title><link href="https://www.igerm.ee/essay/%E9%AA%84%E5%82%B2%E7%9A%84%E5%B0%91%E5%B9%B4/"/><updated>2022-12-25T16:52:25+08:00</updated><summary type="html">&lt;p&gt;总有人跟我讲
-你就是个愤青
-哦不，现在已经属于愤中了
-再过几年就变成愤老了&lt;/p&gt;
-&lt;p&gt;那么多人都在好好过日子
-只有你天天在朋友圈发那些负能量的东西
-你发了又能怎么样
-好好的过自己的日子不好吗？&lt;/p&gt;
-&lt;p&gt;其实我很想问一句话
-这句话小粉红经常拿来问其他人的
-你爱国吗？
-你真的爱国吗？&lt;/p&gt;
-&lt;p&gt;小到一个家
-一个公司
-一个国家
-在发展的过程当中都会出现各式各样的问题&lt;/p&gt;
-&lt;p&gt;良性的发展是允许人质疑的
-为什么刘彻穷兵黩武即便老年发起巫蛊之乱
-为什么李世民软禁李渊并发起了玄武门之变
-后世依然评价他们是位明君？&lt;/p&gt;
-&lt;p&gt;因为他们广纳谏言及时认错
-并不因为你说了什么就惩罚你
-举国上下，言路通畅
-上不瞒下，下不欺上&lt;/p&gt;
-&lt;p&gt;各级官吏齐心
-百姓用劲
-才有开元盛世
-才有万国来朝&lt;/p&gt;
-&lt;p&gt;这和党派无关
-这也和意识形态无关
-中国是我们的
-是所有中国人民的
-不是一个党派的
-更不是一个人的&lt;/p&gt;
-&lt;p&gt;执政者出了问题
-就是要给他指出来
-他听也好
-不听也罢&lt;/p&gt;
-&lt;p&gt;不能因为他手里有枪
-你就不敢说
-大家都心里都默念那个大傻逼
-表面微笑说你万古长存
-长此以往损失的是整个国家&lt;/p&gt;
-&lt;p&gt;现在是个什么样子
-经济政策朝令夕改
-防疫政策一片混乱
-从上到下把头埋在土里不敢开眼看世界&lt;/p&gt;
-&lt;p&gt;现在的官员
-跟爷爷辈的那一批差远了
-那一批人心有信仰，眼里有光
-一生都在为了人民而奋斗&lt;/p&gt;
-&lt;p&gt;现在呢？
-敢于直言的官员都被打趴下了
-敢于直言的专家都被带节奏了
-剩下一群“御用专家”在那里吠
-这能搞好吗？
-你相信世界上有永远正确不会犯错的人吗？
-你相信世界上有所有领域都深入研究的人吗？&lt;/p&gt;
-&lt;p&gt;曾几何时
-你们都是少年
-都是有梦想的人
-都是想要为了祖国的发展而努力奋斗的人&lt;/p&gt;
-&lt;p&gt;不是满眼麻木的
-不是默不作声的
-不是被生活磨平了棱角的
-不是老婆孩子热炕头的
-更不是要把这些问题留给后代的&lt;/p&gt;</summary></entry></feed>
+真理掌握在少数人手里&lt;/p&gt;</summary></entry></feed>
