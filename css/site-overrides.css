@@ -1,6 +1,1 @@
 .language-switch{position:fixed;right:2.2rem;top:2.2rem;z-index:1000;display:flex;gap:.8rem;font-size:1.6rem;font-weight:700;line-height:1.4}.language-switch a{text-decoration:none}.language-switch a:hover{text-decoration:underline}@media(max-width:700px){.language-switch{top:1rem;right:1rem;font-size:1.1rem;gap:.5rem}}
-
-/* Restore compact table layout for Hugo Chroma line numbers. */
-.markdown-body .highlight .lntable { display: table; width: auto; max-width: 100%; border-collapse: collapse; }
-.markdown-body .highlight .lntable tr { display: table-row; background: transparent; }
-.markdown-body .highlight .lntd { display: table-cell; padding: 0; border: 0; vertical-align: top; }
