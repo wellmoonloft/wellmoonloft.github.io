@@ -1,1 +1,10 @@
 .language-switch{position:fixed;right:2.2rem;top:2.2rem;z-index:1000;display:flex;gap:.8rem;font-size:1.6rem;font-weight:700;line-height:1.4}.language-switch a{text-decoration:none}.language-switch a:hover{text-decoration:underline}@media(max-width:700px){.language-switch{top:1rem;right:1rem;font-size:1.1rem;gap:.5rem}}
+.moments-list .moment-item{display:block;margin:0 0 2.4rem 3rem;align-items:stretch}
+.moments-list .moment-item .title{margin:0;width:100%;max-width:100%}
+.moments-list .moment-item .moment-time{margin-top:.6rem;text-align:right;font-size:1.3rem;line-height:1.4;color:#666;white-space:nowrap}
+.moment-details .moment-attach{margin-bottom:1.6rem}
+.moment-details .post-content{padding-top:2rem}
+.prev-or-next{width:100%}
+.prev-or-next .post-foot-prev{flex:0 1 auto;margin-right:auto;text-align:left}
+.prev-or-next .post-foot-next{flex:0 1 auto;margin-left:auto;text-align:right}
+@media(max-width:888px){.moments-list .moment-item{margin-left:0}}
