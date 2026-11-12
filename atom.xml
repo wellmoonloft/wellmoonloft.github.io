@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><id>https://www.igerm.ee/</id><title>井说</title><updated>2026-11-12T08:09:16Z</updated><link href="https://www.igerm.ee/"/><link rel="self" href="https://www.igerm.ee/atom.xml"/><author><name>井月轩</name></author><entry><id>https://www.igerm.ee/essay/essay-20261112160854-d435454f/</id><title>这个妹子是真好看</title><link href="https://www.igerm.ee/essay/essay-20261112160854-d435454f/"/><updated>2026-11-12T16:08:54+08:00</updated><summary type="html">&lt;p&gt;不过当年忘了加微信&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://images.igerm.ee/myimages/essay/essay-20261112160854-6c84ed0a.jpg" alt=""&gt;&lt;/p&gt;</summary></entry><entry><id>https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/</id><title>验证以前的一些想法</title><link href="https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/"/><updated>2026-11-11T19:08:54+08:00</updated><summary type="html">&lt;h2 id="对这条-2015-年朋友圈的评价"&gt;对这条 2015 年朋友圈的评价&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><id>https://www.igerm.ee/</id><title>井说</title><updated>2026-11-12T08:28:18Z</updated><link href="https://www.igerm.ee/"/><link rel="self" href="https://www.igerm.ee/atom.xml"/><author><name>井月轩</name></author><entry><id>https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/</id><title>验证以前的一些想法</title><link href="https://www.igerm.ee/essay/%E4%BA%BA%E7%94%9F%E6%9C%89%E6%A2%A6/"/><updated>2026-11-11T19:08:54+08:00</updated><summary type="html">&lt;h2 id="对这条-2015-年朋友圈的评价"&gt;对这条 2015 年朋友圈的评价&lt;/h2&gt;
 &lt;p&gt;我给它一个相对高的评价。&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -981,4 +980,31 @@ AI真正触碰的，是&lt;strong&gt;人类社会的底层结构&lt;/strong&gt;�
 &lt;p&gt;根据中华人民共和国宪法，我们的最高国家机构是由全国人大选举而成，而全国人大是由省、自治区、直辖市、特别行政区和军队选出，而省、自治区、直辖市、特别行政区和军队的代表是由县、不设区的市、市辖区、乡、民族乡、镇的人民代表大会代表由选民直接选举。那么理论上，如果各级人大机构运转正常，是可以做到自下而上的选举人大代表的。&lt;/p&gt;
 &lt;p&gt;但是在实际操作当中，全中国14亿人（如果还有14亿的话），有多少人见过选票长什么样，有多少人知道是谁代表了自己？&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;在这种情况下，我为什么还要纳税给一个不认识的人来决定我交的钱怎么花？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;希望代表我的人，看到这篇文章之后，主动联系一下我哈，我有些意见需要你代表我传达给上面。&lt;/strong&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;希望代表我的人，看到这篇文章之后，主动联系一下我哈，我有些意见需要你代表我传达给上面。&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><id>https://www.igerm.ee/essay/%E7%99%BE%E5%BA%A6%E6%8C%87%E6%95%B0%E8%AE%A3%E5%91%8A/</id><title>百度指数讣告</title><link href="https://www.igerm.ee/essay/%E7%99%BE%E5%BA%A6%E6%8C%87%E6%95%B0%E8%AE%A3%E5%91%8A/"/><updated>2023-01-02T02:37:54+08:00</updated><summary type="html">&lt;p&gt;快要睡觉了
+突发奇想
+因为跨年的时候外面的人还挺多的
+有戴口罩的，也有不戴口罩的&lt;/p&gt;
+&lt;p&gt;感觉这一波高峰终于要过去了
+下一波可能会在春节前后了
+可是这种大撒把式的放开
+到底死了多少人呢？&lt;/p&gt;
+&lt;p&gt;官媒肯定不会说实话了
+百度这家公司挺有意思的
+首先肯定也是听话的
+不然也不会给他们那么多资源&lt;/p&gt;
+&lt;p&gt;但是搜索指数这种事情是骗不了人的
+只要政府没有注意到
+要求百度特别去做假（比如针对关键词屏蔽指数数据啊，或者针对关键词把指数数据作假之类的）
+那么相对来讲还是准确的&lt;/p&gt;
+&lt;p&gt;所以就
+搜了一下
+&lt;a href="https://index.baidu.com/v2/index.html#/"&gt;百度指数&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;注意这里的数字并不一定代表一次点击
+极大程度是根据公示算出的一个值来构建趋势用的
+比如: &lt;code&gt;日均值 = 日均实际搜索数/1000&lt;/code&gt; ，只是举个例子，统一做乘除法的话这个趋势是准的&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;搜索指数:&lt;/strong&gt; 主动搜索关键词&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://images.igerm.ee/myimages/20250214172941239.png" alt="WechatIMG627"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;咨询指数:&lt;/strong&gt; 搜索引擎找到的关键词&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://images.igerm.ee/myimages/20250214172947620.png" alt="WechatIMG628"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;地区分布:&lt;/strong&gt; 搜素地区占比&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://images.igerm.ee/myimages/20250214172954282.png" alt="WechatIMG629"&gt;&lt;/p&gt;</summary></entry></feed>
