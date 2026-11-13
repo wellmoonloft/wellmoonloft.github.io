@@ -1,7 +1,11 @@
 .language-switch{position:fixed;right:2.2rem;top:2.2rem;z-index:1000;display:flex;gap:.8rem;font-size:1.6rem;font-weight:700;line-height:1.4}.language-switch a{text-decoration:none}.language-switch a:hover{text-decoration:underline}@media(max-width:700px){.language-switch{top:1rem;right:1rem;font-size:1.1rem;gap:.5rem}}
 .moments-list .moment-item{display:block;margin:0 0 2.4rem 3rem;align-items:stretch}
-.moments-list .moment-item .title{margin:0;width:100%;max-width:100%}
-.moments-list .moment-item .moment-time{margin-top:.6rem;text-align:right;font-size:1.3rem;line-height:1.4;color:#666;white-space:nowrap}
+.moments-list .moment-item .moment-time{margin:0 0 .6rem;text-align:left;font-size:1.4rem;font-weight:700;line-height:1.4;color:#666;white-space:nowrap}
+.moments-list .moment-item .moment-body{margin:0;width:100%;max-width:100%;display:block;overflow:visible;-webkit-line-clamp:unset;-webkit-box-orient:unset;text-overflow:unset;word-wrap:break-word}
+.moments-list .moment-item .markdown-body{font-size:1.5rem;line-height:1.65;color:#333}
+.moments-list .moment-item .markdown-body p{margin:0}
+.moments-list .moment-item .markdown-body p+p{margin-top:.9em}
+.moments-list .moment-item .markdown-body img,.moments-list .moment-item .markdown-body video{display:none!important}
 .moment-details .moment-attach{margin-bottom:1.6rem}
 .moment-details .post-content{padding-top:2rem}
 .prev-or-next{width:100%}
