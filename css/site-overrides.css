@@ -1,4 +1,17 @@
-.language-switch{position:fixed;right:2.2rem;top:2.2rem;z-index:1000;display:flex;gap:.8rem;font-size:1.6rem;font-weight:700;line-height:1.4}.language-switch a{text-decoration:none}.language-switch a:hover{text-decoration:underline}@media(max-width:700px){.language-switch{top:1rem;right:1rem;font-size:1.1rem;gap:.5rem}}
+.top-tools{position:fixed;top:2.2rem;right:2.2rem;z-index:1000;display:flex;align-items:center;gap:.9rem}
+.top-tools .search-icon{position:static;right:auto;bottom:auto;margin:0;padding:0;border:none;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer;line-height:1;color:#666;font-weight:normal}
+.top-tools .search-icon .iconfont{font-size:1.65rem;font-weight:400}
+.language-switch{position:relative;display:block;margin:0;padding:0}
+.lang-trigger{margin:0;padding:0;border:none;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer;line-height:1;display:flex;align-items:center}
+.lang-flag{display:block;font-size:2.2rem;line-height:1}
+.lang-menu{position:absolute;top:calc(100% + .35rem);right:0;margin:0;padding:.25rem 0;list-style:none;min-width:3.2rem;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.lang-menu.hidden{display:none}
+.lang-menu a{display:flex;align-items:center;justify-content:center;padding:.45rem .65rem;text-decoration:none}
+.lang-menu a:hover{background:rgba(0,0,0,.04)}
+.back-to-top{right:2.2rem;bottom:2.2rem;margin:0;padding:0;border:none;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer;line-height:1;color:#666;font-weight:normal;display:flex;align-items:center;justify-content:center}
+.back-to-top.hidden{display:none!important}
+.back-to-top-icon{width:1.65rem;height:1.65rem;display:block}
+@media(max-width:700px){.top-tools{top:1rem;right:1rem;gap:.65rem}.top-tools .search-icon .iconfont{font-size:1.45rem}.back-to-top{right:1rem;bottom:1rem}.back-to-top-icon{width:1.45rem;height:1.45rem}.lang-flag{font-size:1.9rem}}
 .moments-list .moment-item{display:block;margin:0 0 2.4rem 3rem;align-items:stretch}
 .moments-list .moment-item .moment-time{margin:0 0 .6rem;text-align:left;font-size:1.5rem;font-weight:700;line-height:1.4;color:#666;white-space:nowrap}
 .moments-list .moment-item .moment-body{margin:0;width:100%;max-width:100%;display:block;overflow:visible;-webkit-line-clamp:unset;-webkit-box-orient:unset;text-overflow:unset;word-wrap:break-word}
