@@ -20,7 +20,12 @@
 .moments-list .moment-item .markdown-body{font-size:1.5rem;line-height:1.65;color:#333}
 .moments-list .moment-item .markdown-body p{margin:0}
 .moments-list .moment-item .markdown-body p+p{margin-top:.9em}
-.moments-list .moment-item .markdown-body img,.moments-list .moment-item .markdown-body video{display:none!important}
+.moments-list .moment-item .markdown-body video{display:none!important}
+.moments-list .moment-item .markdown-body img{display:block;height:auto;max-width:100%;margin:0;margin-top:.9em;box-sizing:border-box}
+.moments-list .moment-item .markdown-body img.moment-img--landscape{width:100%}
+.moments-list .moment-item .markdown-body img.moment-img--portrait{width:auto;margin-left:0;margin-right:auto;max-height:480px}
+@media(min-width:889px){.moments-list .moment-item .markdown-body img.moment-img--portrait{max-height:720px}}
+.moments-list .moment-item .markdown-body img~img{display:none!important}
 .moment-details .moment-attach{margin-bottom:1.6rem}
 .moment-details .post-content{padding-top:2rem}
 .prev-or-next{width:100%}
